@@ -9,7 +9,7 @@ function App() {
 	let displayAnswer, displayReason;
 
 	const makeRequest = async() => {
-		if(input === "" || input.trim().length === 0) return;
+		if(status === "fetching" || input.trim() === "") return;
 		setStatus("fetching");
 		const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
 			method: 'POST',
