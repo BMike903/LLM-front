@@ -49,10 +49,12 @@ function App() {
 	return (
 		<>
 			<input value={input} onChange={e => setInput(e.target.value)}/>
-			<button disabled={status === "fetching"} onClick={() => makeRequest()}>Send request</button>
+			<button disabled={status === "fetching"} onClick={() => makeRequest()}>
+				Send request
+			</button>
 			<hr/>
 			<div>{displayAnswer}</div>
-			<hr style={{borderTop: "3px dashed #bbb"}}/>
+			<hr className="border-dashed border-b-black"/>
 			<div>{displayReason}</div>
 		</>
 	)
