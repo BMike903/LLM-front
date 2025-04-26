@@ -5,33 +5,28 @@ function App() {
     const [input, setInput] = useState("");
     const [answer, setAnswer] = useState("");
     const [reasoning, setReasoning] = useState("");
-    const [status, setStatus] = useState<"idle" | "fetching" | "fetched">(
-        "idle",
-    );
+    const [status, setStatus] = useState<"idle" | "fetching" | "fetched">("idle");
     let displayAnswer, displayReason;
 
     const makeRequest = async () => {
         if (status === "fetching" || input.trim() === "") return;
         setStatus("fetching");
-        const response = await fetch(
-            "https://openrouter.ai/api/v1/chat/completions",
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    model: "microsoft/mai-ds-r1:free",
-                    messages: [
-                        {
-                            role: "user",
-                            content: input,
-                        },
-                    ],
-                }),
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+                "Content-Type": "application/json",
             },
-        );
+            body: JSON.stringify({
+                model: "microsoft/mai-ds-r1:free",
+                messages: [
+                    {
+                        role: "user",
+                        content: input,
+                    },
+                ],
+            }),
+        });
 
         const data = await response.json();
         console.log("RESPONSE:", data);
