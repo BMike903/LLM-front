@@ -43,18 +43,16 @@ function App() {
     }
 
     return (
-        <div className="main-box">
-            {/* after rounded-s-md rounded-b-lg border-2 border-solid */}
-            <div className="answer">{displayAnswer}</div>
+        <div className="mt-15 mr-auto ml-auto flex w-4/5 flex-col items-center gap-15 border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
+            <div className="border-2 border-solid border-gray-300 p-8">{displayAnswer}</div>
 
-            <div className="chat-wrapper">
-                {/* className="border-rad w-90 resize-none rounded-2xl border-2 border-solid border-gray-400 p-3" */}
+            <div className="mb-15 box-border flex h-1/12 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4">
                 <input
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
-                    className="type-box"
+                    className="mt-0 mr-auto w-4/5"
                 />
-                <button disabled={status === "fetching"} onClick={() => makeRequest()} className="">
+                <button disabled={status === "fetching"} onClick={() => makeRequest()}>
                     <img src="../public/send-button.svg" />
                 </button>
             </div>
