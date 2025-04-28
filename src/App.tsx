@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "./tailwind.css";
+import "./temp.css";
 
 function App() {
-    const [input, setInput] = useState("");
+    const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
-    const [reasoning, setReasoning] = useState("");
     const [status, setStatus] = useState<"idle" | "fetching" | "fetched">("idle");
-    let displayAnswer, displayReason;
+    let displayAnswer;
 
     const makeRequest = async () => {
-        if (status === "fetching" || input.trim() === "") return;
+        if (status === "fetching" || question.trim() === "") return;
         setStatus("fetching");
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
@@ -22,7 +22,7 @@ function App() {
                 messages: [
                     {
                         role: "user",
-                        content: input,
+                        content: question,
                     },
                 ],
             }),
@@ -31,36 +31,34 @@ function App() {
         const data = await response.json();
         console.log("RESPONSE:", data);
         setAnswer(data.choices[0].message.content);
-        setReasoning(data.choices[0].message.reasoning);
         setStatus("fetched");
     };
 
     if (status === "idle") {
-        displayAnswer = "Make a request";
-        displayReason = "Make a request";
+        displayAnswer = "Response will be here";
     } else if (status === "fetching") {
         displayAnswer = "Loading answer";
-        displayReason = "loading reason";
     } else {
         displayAnswer = answer;
-        displayReason = reasoning;
     }
 
     return (
-        <>
-            <input value={input} onChange={(e) => setInput(e.target.value)} />
-            <button
-                disabled={status === "fetching"}
-                onClick={() => makeRequest()}
-                className="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3"
-            >
-                Send request
-            </button>
-            <hr />
-            <div>{displayAnswer}</div>
-            <hr className="border-dashed border-b-black" />
-            <div>{displayReason}</div>
-        </>
+        <div className="main-box">
+            {/* after rounded-s-md rounded-b-lg border-2 border-solid */}
+            <div className="answer">{displayAnswer}</div>
+
+            <div className="chat-wrapper">
+                {/* className="border-rad w-90 resize-none rounded-2xl border-2 border-solid border-gray-400 p-3" */}
+                <input
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    className="type-box"
+                />
+                <button disabled={status === "fetching"} onClick={() => makeRequest()} className="">
+                    <img src="../public/send-button.svg" />
+                </button>
+            </div>
+        </div>
     );
 }
 
