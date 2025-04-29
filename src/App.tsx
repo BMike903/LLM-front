@@ -40,7 +40,7 @@ function App() {
     } else if (status === "fetching") {
         displayAnswer = "Loading answer";
     } else {
-        displayAnswer = <div dangerouslySetInnerHTML={{ __html: asterisksToBold(answer) }}></div>;
+        displayAnswer = asterisksToBold(answer);
     }
 
     return (
