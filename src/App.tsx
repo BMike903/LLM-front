@@ -38,7 +38,7 @@ function App() {
     } else if (status === "fetching") {
         displayAnswer = "Loading answer";
     } else {
-        displayAnswer = answer;
+        displayAnswer = answer.replaceAll("*", "");
     }
 
     return (
