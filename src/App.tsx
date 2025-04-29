@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./tailwind.css";
 
+import { asterisksToBold } from "./utils/stringUtils";
+
 function App() {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
@@ -38,7 +40,7 @@ function App() {
     } else if (status === "fetching") {
         displayAnswer = "Loading answer";
     } else {
-        displayAnswer = answer.replaceAll("*", "");
+        displayAnswer = <div dangerouslySetInnerHTML={{ __html: asterisksToBold(answer) }}></div>;
     }
 
     return (
