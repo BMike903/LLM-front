@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./tailwind.css";
-import "./temp.css";
 
 function App() {
     const [question, setQuestion] = useState("");
@@ -50,7 +49,7 @@ function App() {
                 <input
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
-                    className="mt-0 mr-auto w-4/5"
+                    className="mt-0 mr-auto w-full"
                 />
                 <button disabled={status === "fetching"} onClick={() => makeRequest()}>
                     <img src="../public/send-button.svg" />
