@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./tailwind.css";
 
+import { FiSend } from "react-icons/fi";
+import { FiLoader } from "react-icons/fi";
+
 import { asterisksToBold } from "./utils/stringUtils";
 
 function App() {
@@ -53,8 +56,18 @@ function App() {
                     onChange={(e) => setQuestion(e.target.value)}
                     className="mt-0 mr-auto w-full"
                 />
-                <button disabled={status === "fetching"} onClick={() => makeRequest()}>
-                    <img src="../public/send-button.svg" />
+                <button
+                    disabled={status === "fetching"}
+                    onClick={() => makeRequest()}
+                    className="flex h-12 w-12 items-center justify-center border-2 border-solid border-gray-400"
+                >
+                    {status === "fetching" ? (
+                        <FiLoader className="animate-spin" size={30}>
+                            fetchng
+                        </FiLoader>
+                    ) : (
+                        <FiSend size={30} />
+                    )}
                 </button>
             </div>
         </div>
