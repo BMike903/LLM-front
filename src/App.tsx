@@ -7,6 +7,7 @@ import { FiLoader } from "react-icons/fi";
 type message = {
     role: "user" | "assistant";
     content: string;
+    id: number;
 };
 
 function App() {
@@ -18,7 +19,10 @@ function App() {
         if (status === "fetching" || question.trim() === "") return;
 
         setStatus("fetching");
-        setMessages((messages) => [...messages, { role: "user", content: question }]);
+        setMessages((messages) => [
+            ...messages,
+            { role: "user", content: question, id: Date.now() },
+        ]);
         setQuestion("");
 
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -45,7 +49,7 @@ function App() {
         console.log("RESPONSE:", data);
         setMessages((messages) => [
             ...messages,
-            { role: "assistant", content: data.choices[0].message.content },
+            { role: "assistant", content: data.choices[0].message.content, id: Date.now() },
         ]);
         setStatus("fetched");
     };
@@ -54,11 +58,14 @@ function App() {
         <div className="mt-15 mr-auto ml-auto flex w-4/5 flex-col items-center gap-15 border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
             {/* <div className="border-2 border-solid border-gray-300 p-8">{displayAnswer}</div> */}
             {status === "error" ? (
-                <div>Error occured</div>
+                <div key="error">Error occured</div>
             ) : (
-                messages.map((message) => <div>{message.content}</div>)
+                messages.map((message) => <div key={message.id}>{message.content}</div>)
             )}
-            <div className="mb-15 box-border flex h-1/12 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4">
+            <div
+                key="input-field"
+                className="mb-15 box-border flex h-1/12 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
+            >
                 <input
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
