@@ -11,7 +11,7 @@ type message = {
 
 function App() {
     const [question, setQuestion] = useState("");
-    const [status, setStatus] = useState<"idle" | "fetching" | "fetched">("idle");
+    const [status, setStatus] = useState<"idle" | "fetching" | "fetched" | "error">("idle");
     const [messages, setMessages] = useState<Array<message>>([]);
 
     const makeRequest = async () => {
@@ -20,8 +20,6 @@ function App() {
         setStatus("fetching");
         setMessages((messages) => [...messages, { role: "user", content: question }]);
         setQuestion("");
-
-        console.log([messages.map((message) => JSON.stringify(message))]);
 
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
@@ -36,6 +34,14 @@ function App() {
         });
 
         const data = await response.json();
+
+        if (data.error) {
+            setStatus("error");
+            console.log(response);
+            setMessages((messages) => messages.splice(-1));
+            return;
+        }
+
         console.log("RESPONSE:", data);
         setMessages((messages) => [
             ...messages,
@@ -47,9 +53,11 @@ function App() {
     return (
         <div className="mt-15 mr-auto ml-auto flex w-4/5 flex-col items-center gap-15 border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
             {/* <div className="border-2 border-solid border-gray-300 p-8">{displayAnswer}</div> */}
-            {messages.map((message) => (
-                <div>{message.content}</div>
-            ))}
+            {status === "error" ? (
+                <div>Error occured</div>
+            ) : (
+                messages.map((message) => <div>{message.content}</div>)
+            )}
             <div className="mb-15 box-border flex h-1/12 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4">
                 <input
                     value={question}
