@@ -55,8 +55,7 @@ function App() {
     };
 
     return (
-        <div className="mt-15 mr-auto ml-auto flex w-4/5 flex-col items-center gap-15 border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
-            {/* <div className="border-2 border-solid border-gray-300 p-8">{displayAnswer}</div> */}
+        <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
             {status === "error" ? (
                 <div key="error">Error occured</div>
             ) : (
@@ -64,7 +63,7 @@ function App() {
             )}
             <div
                 key="input-field"
-                className="mb-15 box-border flex h-1/12 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
+                className="relative bottom-0 mb-15 box-border flex h-24 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
             >
                 <input
                     value={question}
