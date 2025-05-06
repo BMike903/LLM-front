@@ -88,7 +88,7 @@ function App() {
                 <button
                     disabled={status === "fetching"}
                     onClick={() => makeRequest()}
-                    className="flex h-12 w-12 items-center justify-center border-2 border-solid border-gray-400"
+                    className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
                 >
                     {status === "fetching" ? (
                         <FiLoader className="animate-spin" size={30}>
