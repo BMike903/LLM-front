@@ -62,6 +62,12 @@ function App() {
         setStatus("fetched");
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            makeRequest();
+        }
+    };
+
     return (
         <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
             {status === "error" ? (
@@ -90,6 +96,7 @@ function App() {
                 <input
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="mt-0 mr-auto w-full focus:outline-none"
                 />
                 <button
