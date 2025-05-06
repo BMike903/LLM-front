@@ -1,4 +1,4 @@
-export function asterisksToBold(str: string) {
+export function asterisksToBoldMarkup(str: string) {
     const splitted = str.split("**");
     const result = splitted.map((item, index) => {
         if (index % 2 === 0) {

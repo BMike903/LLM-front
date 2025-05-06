@@ -4,7 +4,7 @@ import "./tailwind.css";
 import { FiSend } from "react-icons/fi";
 import { FiLoader } from "react-icons/fi";
 
-import { asterisksToBold } from "./utils/stringUtils";
+import { asterisksToBoldMarkup } from "./utils/stringUtils";
 
 type message = {
     role: "user" | "assistant";
@@ -72,13 +72,13 @@ function App() {
                             </div>
                         );
                     } else {
-                        return <div key={message.id}>{asterisksToBold(message.content)}</div>;
+                        return <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>;
                     }
                 })
             )}
             <div
                 key="input-field"
-                className="relative bottom-0 mb-15 box-border flex h-24 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
+                className="relative bottom-0 mb-15 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
             >
                 <input
                     value={question}
