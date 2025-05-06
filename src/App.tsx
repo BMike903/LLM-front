@@ -4,6 +4,8 @@ import "./tailwind.css";
 import { FiSend } from "react-icons/fi";
 import { FiLoader } from "react-icons/fi";
 
+import { asterisksToBold } from "./utils/stringUtils";
+
 type message = {
     role: "user" | "assistant";
     content: string;
@@ -70,7 +72,7 @@ function App() {
                             </div>
                         );
                     } else {
-                        return <div key={message.id}>{message.content}</div>;
+                        return <div key={message.id}>{asterisksToBold(message.content)}</div>;
                     }
                 })
             )}
