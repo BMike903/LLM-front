@@ -59,7 +59,20 @@ function App() {
             {status === "error" ? (
                 <div key="error">Error occured</div>
             ) : (
-                messages.map((message) => <div key={message.id}>{message.content}</div>)
+                messages.map((message) => {
+                    if (message.role === "user") {
+                        return (
+                            <div
+                                className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
+                                key={message.id}
+                            >
+                                {message.content}
+                            </div>
+                        );
+                    } else {
+                        return <div key={message.id}>{message.content}</div>;
+                    }
+                })
             )}
             <div
                 key="input-field"
