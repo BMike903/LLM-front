@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./tailwind.css";
 
 import { FiSend } from "react-icons/fi";
@@ -16,6 +16,12 @@ function App() {
     const [question, setQuestion] = useState("");
     const [status, setStatus] = useState<"idle" | "fetching" | "fetched" | "error">("idle");
     const [messages, setMessages] = useState<Array<message>>([]);
+
+    const inputContainer = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        inputContainer.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const makeRequest = async () => {
         if (status === "fetching" || question.trim() === "") return;
@@ -77,7 +83,8 @@ function App() {
                 })
             )}
             <div
-                key="input-field"
+                key="input-container"
+                ref={inputContainer}
                 className="relative bottom-0 mb-15 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
             >
                 <input
