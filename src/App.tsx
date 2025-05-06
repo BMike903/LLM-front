@@ -68,7 +68,7 @@ function App() {
                 <input
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
-                    className="mt-0 mr-auto w-full"
+                    className="mt-0 mr-auto w-full focus:outline-none"
                 />
                 <button
                     disabled={status === "fetching"}
