@@ -91,7 +91,7 @@ function App() {
             <div
                 key="input-container"
                 ref={inputContainer}
-                className="relative bottom-0 mt-auto mb-15 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
+                className="relative bottom-0 mt-auto mb-5 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
             >
                 <input
                     value={question}
