@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./tailwind.css";
 
+import { nanoid } from "nanoid";
 import { FiSend } from "react-icons/fi";
 import { FiLoader } from "react-icons/fi";
 
@@ -9,7 +10,7 @@ import { asterisksToBoldMarkup } from "./utils/stringUtils";
 type message = {
     role: "user" | "assistant";
     content: string;
-    id: number;
+    id: string;
 };
 
 const models = ["meta-llama/llama-4-scout:free", "microsoft/mai-ds-r1:free"] as const;
@@ -41,10 +42,7 @@ function App() {
         setChat((chat) => ({
             ...chat,
             status: "fetching",
-            messages: [...chat.messages, { role: "user", content: question, id: Date.now() }],
         }));
-
-        setQuestion("");
 
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
@@ -61,10 +59,6 @@ function App() {
         if (!response.ok) {
             console.log("ERROR: ", response);
             setChat((chat) => ({ ...chat, status: "error" }));
-            setChat((chat) => ({
-                ...chat,
-                messages: [...chat.messages.splice(-1)],
-            }));
             return;
         }
 
@@ -75,9 +69,11 @@ function App() {
             status: "fetched",
             messages: [
                 ...chat.messages,
-                { role: "assistant", content: data.choices[0].message.content, id: Date.now() },
+                { role: "user", content: question, id: nanoid() },
+                { role: "assistant", content: data.choices[0].message.content, id: nanoid() },
             ],
         }));
+        setQuestion("");
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -121,6 +117,7 @@ function App() {
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
                         onKeyDown={handleKeyDown}
+                        disabled={chat.status === "fetching"}
                         className="mt-0 mr-auto w-full focus:outline-none"
                     />
                     <button
