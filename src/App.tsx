@@ -46,7 +46,7 @@ function App() {
 
         setQuestion("");
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completion", {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
