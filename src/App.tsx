@@ -18,14 +18,15 @@ type modelsTypes = (typeof models)[number];
 type chat = {
     model: modelsTypes;
     messages: Array<message>;
+    status: "idle" | "fetching" | "fetched" | "error";
 };
 
 function App() {
     const [question, setQuestion] = useState("");
-    const [status, setStatus] = useState<"idle" | "fetching" | "fetched" | "error">("idle");
     const [chat, setChat] = useState<chat>({
         model: "meta-llama/llama-4-scout:free",
         messages: [],
+        status: "idle",
     });
 
     const inputContainer = useRef<HTMLDivElement | null>(null);
@@ -35,11 +36,13 @@ function App() {
     }, [chat.messages]);
 
     const makeRequest = async () => {
-        if (status === "fetching" || question.trim() === "") return;
+        if (chat.status === "fetching" || question.trim() === "") return;
 
-        setStatus("fetching");
+        /* setStatus("fetching"); */
+
         setChat((chat) => ({
             ...chat,
+            status: "fetching",
             messages: [...chat.messages, { role: "user", content: question, id: Date.now() }],
         }));
 
@@ -60,7 +63,8 @@ function App() {
         const data = await response.json();
 
         if (data.error) {
-            setStatus("error");
+            /* setStatus("error"); */
+            setChat((chat) => ({ ...chat, status: "error" }));
             console.log("ERROR: ", response);
             // FIX later
             setChat((chat) => ({
@@ -73,12 +77,13 @@ function App() {
         console.log("RESPONSE:", data);
         setChat((chat) => ({
             ...chat,
+            status: "fetched",
             messages: [
                 ...chat.messages,
                 { role: "assistant", content: data.choices[0].message.content, id: Date.now() },
             ],
         }));
-        setStatus("fetched");
+        /* setStatus("fetched"); */
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -93,7 +98,7 @@ function App() {
                 Model: <b>{chat.model}</b>
             </header>
             <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
-                {status === "error" ? (
+                {chat.status === "error" ? (
                     <div key="error">Error occurred</div>
                 ) : (
                     chat.messages.map((message) => {
