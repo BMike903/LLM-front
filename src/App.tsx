@@ -69,51 +69,58 @@ function App() {
     };
 
     return (
-        <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
-            {status === "error" ? (
-                <div key="error">Error occured</div>
-            ) : (
-                messages.map((message) => {
-                    if (message.role === "user") {
-                        return (
-                            <div
-                                className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
-                                key={message.id}
-                            >
-                                {message.content}
-                            </div>
-                        );
-                    } else {
-                        return <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>;
-                    }
-                })
-            )}
-            <div
-                key="input-container"
-                ref={inputContainer}
-                className="relative bottom-0 mt-auto mb-5 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
-            >
-                <input
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    className="mt-0 mr-auto w-full focus:outline-none"
-                />
-                <button
-                    disabled={status === "fetching"}
-                    onClick={() => makeRequest()}
-                    className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
+        <>
+            <header className="m-1.5 pl-6">
+                Model: <b>MAI-DS-R1</b>
+            </header>
+            <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
+                {status === "error" ? (
+                    <div key="error">Error occurred</div>
+                ) : (
+                    messages.map((message) => {
+                        if (message.role === "user") {
+                            return (
+                                <div
+                                    className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
+                                    key={message.id}
+                                >
+                                    {message.content}
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>
+                            );
+                        }
+                    })
+                )}
+                <div
+                    key="input-container"
+                    ref={inputContainer}
+                    className="relative bottom-0 mt-auto mb-5 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
                 >
-                    {status === "fetching" ? (
-                        <FiLoader className="animate-spin" size={30}>
-                            fetchng
-                        </FiLoader>
-                    ) : (
-                        <FiSend size={30} />
-                    )}
-                </button>
+                    <input
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        className="mt-0 mr-auto w-full focus:outline-none"
+                    />
+                    <button
+                        disabled={status === "fetching"}
+                        onClick={() => makeRequest()}
+                        className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
+                    >
+                        {status === "fetching" ? (
+                            <FiLoader className="animate-spin" size={30}>
+                                fetching
+                            </FiLoader>
+                        ) : (
+                            <FiSend size={30} />
+                        )}
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
