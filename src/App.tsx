@@ -12,8 +12,12 @@ type message = {
     id: number;
 };
 
+const models = ["meta-llama/llama-4-scout:free", "microsoft/mai-ds-r1:free"] as const;
+type modelsTypes = (typeof models)[number];
+
 function App() {
     const [question, setQuestion] = useState("");
+    const [model, setModel] = useState<modelsTypes>("meta-llama/llama-4-scout:free");
     const [status, setStatus] = useState<"idle" | "fetching" | "fetched" | "error">("idle");
     const [messages, setMessages] = useState<Array<message>>([]);
 
@@ -40,7 +44,7 @@ function App() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                model: "microsoft/mai-ds-r1:free",
+                model: model,
                 messages: [...messages, { "role": "user", "content": String(question) }],
             }),
         });
@@ -71,7 +75,7 @@ function App() {
     return (
         <>
             <header className="m-1.5 pl-6">
-                Model: <b>MAI-DS-R1</b>
+                Model: <b>{model}</b>
             </header>
             <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
                 {status === "error" ? (
