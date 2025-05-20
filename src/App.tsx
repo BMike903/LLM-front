@@ -38,8 +38,6 @@ function App() {
     const makeRequest = async () => {
         if (chat.status === "fetching" || question.trim() === "") return;
 
-        /* setStatus("fetching"); */
-
         setChat((chat) => ({
             ...chat,
             status: "fetching",
@@ -48,7 +46,7 @@ function App() {
 
         setQuestion("");
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completion", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
@@ -60,13 +58,9 @@ function App() {
             }),
         });
 
-        const data = await response.json();
-
-        if (data.error) {
-            /* setStatus("error"); */
-            setChat((chat) => ({ ...chat, status: "error" }));
+        if (!response.ok) {
             console.log("ERROR: ", response);
-            // FIX later
+            setChat((chat) => ({ ...chat, status: "error" }));
             setChat((chat) => ({
                 ...chat,
                 messages: [...chat.messages.splice(-1)],
@@ -74,6 +68,7 @@ function App() {
             return;
         }
 
+        const data = await response.json();
         console.log("RESPONSE:", data);
         setChat((chat) => ({
             ...chat,
@@ -83,7 +78,6 @@ function App() {
                 { role: "assistant", content: data.choices[0].message.content, id: Date.now() },
             ],
         }));
-        /* setStatus("fetched"); */
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -130,11 +124,11 @@ function App() {
                         className="mt-0 mr-auto w-full focus:outline-none"
                     />
                     <button
-                        disabled={status === "fetching"}
+                        disabled={chat.status === "fetching"}
                         onClick={() => makeRequest()}
                         className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
                     >
-                        {status === "fetching" ? (
+                        {chat.status === "fetching" ? (
                             <FiLoader className="animate-spin" size={30}>
                                 fetching
                             </FiLoader>
