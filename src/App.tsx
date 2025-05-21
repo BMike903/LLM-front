@@ -2,30 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import "./tailwind.css";
 
 import { nanoid } from "nanoid";
-import { FiSend } from "react-icons/fi";
-import { FiLoader } from "react-icons/fi";
-import { FiRotateCcw } from "react-icons/fi";
+import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 
+import { Chat } from "./types/chat";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
-
-type message = {
-    role: "user" | "assistant";
-    content: string;
-    id: string;
-};
-
-const models = ["meta-llama/llama-4-scout:free", "microsoft/mai-ds-r1:free"] as const;
-type modelsTypes = (typeof models)[number];
-
-type chat = {
-    model: modelsTypes;
-    messages: Array<message>;
-    status: "idle" | "fetching" | "fetched" | "error";
-};
 
 function App() {
     const [question, setQuestion] = useState("");
-    const [chat, setChat] = useState<chat>({
+    const [chat, setChat] = useState<Chat>({
         model: "meta-llama/llama-4-scout:free",
         messages: [],
         status: "idle",
