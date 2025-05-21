@@ -102,29 +102,29 @@ function App() {
             <header className="m-1.5 pl-6">
                 Model: <b>{chat.model}</b>
             </header>
+
             <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
-                {chat.status === "error" ? (
-                    <div key="error" className="rounded-4xl bg-red-400 p-4">
-                        Error occurred
+                {chat.messages.map((message) => {
+                    if (message.role === "user") {
+                        return (
+                            <div
+                                className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
+                                key={message.id}
+                            >
+                                {message.content}
+                            </div>
+                        );
+                    } else {
+                        return <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>;
+                    }
+                })}
+
+                {chat.status === "error" && (
+                    <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold">
+                        Error occurred. Try to resend request later.
                     </div>
-                ) : (
-                    chat.messages.map((message) => {
-                        if (message.role === "user") {
-                            return (
-                                <div
-                                    className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
-                                    key={message.id}
-                                >
-                                    {message.content}
-                                </div>
-                            );
-                        } else {
-                            return (
-                                <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>
-                            );
-                        }
-                    })
                 )}
+
                 <div
                     key="input-container"
                     ref={inputContainer}
@@ -137,6 +137,7 @@ function App() {
                         disabled={chat.status === "fetching"}
                         className="mt-0 mr-auto w-full focus:outline-none"
                     />
+
                     <button
                         disabled={chat.status === "fetching"}
                         onClick={() => makeRequest()}
