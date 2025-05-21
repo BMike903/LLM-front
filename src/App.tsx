@@ -48,7 +48,6 @@ function App() {
         }
 
         const data = await response.json();
-        console.log("RESPONSE:", data);
         setChat((chat) => ({
             ...chat,
             status: "fetched",
@@ -69,13 +68,9 @@ function App() {
 
     const renderSendButton = () => {
         if (chat.status === "fetching") {
-            return (
-                <FiLoader className="animate-spin" size={30}>
-                    fetching
-                </FiLoader>
-            );
+            return <FiLoader className="animate-spin" size={30} />;
         } else if (chat.status === "error") {
-            return <FiRotateCcw size={30}>retry</FiRotateCcw>;
+            return <FiRotateCcw size={30} />;
         } else {
             return <FiSend size={30} />;
         }
