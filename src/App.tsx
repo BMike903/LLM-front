@@ -4,6 +4,7 @@ import "./tailwind.css";
 import { nanoid } from "nanoid";
 import { FiSend } from "react-icons/fi";
 import { FiLoader } from "react-icons/fi";
+import { FiRotateCcw } from "react-icons/fi";
 
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
 
@@ -82,6 +83,20 @@ function App() {
         }
     };
 
+    const renderSendButton = () => {
+        if (chat.status === "fetching") {
+            return (
+                <FiLoader className="animate-spin" size={30}>
+                    fetching
+                </FiLoader>
+            );
+        } else if (chat.status === "error") {
+            return <FiRotateCcw size={30}>retry</FiRotateCcw>;
+        } else {
+            return <FiSend size={30} />;
+        }
+    };
+
     return (
         <>
             <header className="m-1.5 pl-6">
@@ -89,7 +104,9 @@ function App() {
             </header>
             <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
                 {chat.status === "error" ? (
-                    <div key="error">Error occurred</div>
+                    <div key="error" className="rounded-4xl bg-red-400 p-4">
+                        Error occurred
+                    </div>
                 ) : (
                     chat.messages.map((message) => {
                         if (message.role === "user") {
@@ -125,13 +142,7 @@ function App() {
                         onClick={() => makeRequest()}
                         className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
                     >
-                        {chat.status === "fetching" ? (
-                            <FiLoader className="animate-spin" size={30}>
-                                fetching
-                            </FiLoader>
-                        ) : (
-                            <FiSend size={30} />
-                        )}
+                        {renderSendButton()}
                     </button>
                 </div>
             </div>
