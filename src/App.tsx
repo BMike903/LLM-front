@@ -87,19 +87,19 @@ function App() {
     };
 
     return (
-        <div className="flex h-screen w-screen flex-row">
+        <div className="flex h-screen w-screen flex-row dark:text-white">
             <div
                 id="chatList"
-                className="flex h-full border-4 border-solid border-gray-300 bg-gray-50"
+                className="flex h-full border-4 border-solid border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-black"
             >
                 <ul className="flex flex-col gap-6 px-1 py-6">
-                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
                         First chat and its content
                     </li>
-                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Second chat and its content
                     </li>
-                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Third chat and its content
                     </li>
                 </ul>
@@ -107,18 +107,18 @@ function App() {
 
             <div
                 id="chatBox"
-                className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100"
+                className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
             >
-                <div className="border-2 border-solid border-gray-400 bg-gray-200 p-1 pl-6">
+                <div className="border-2 border-solid border-gray-400 bg-gray-200 p-1 pl-6 dark:border-gray-600 dark:bg-black">
                     Model: <b>{chat.model}</b>
                 </div>
 
-                <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5">
+                <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
                     {chat.messages.map((message) => {
                         if (message.role === "user") {
                             return (
                                 <div
-                                    className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-300 p-4"
+                                    className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-300 p-4 dark:bg-gray-800"
                                     key={message.id}
                                 >
                                     {message.content}
@@ -134,7 +134,7 @@ function App() {
                     })}
 
                     {chat.status === "error" && (
-                        <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold">
+                        <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold dark:bg-red-900">
                             Error occurred. Try to resend request later.
                         </div>
                     )}
@@ -142,7 +142,7 @@ function App() {
                     <div
                         key="input-container"
                         ref={inputContainer}
-                        className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4"
+                        className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-800"
                     >
                         <input
                             value={question}
@@ -155,7 +155,7 @@ function App() {
                         <button
                             disabled={chat.status === "fetching"}
                             onClick={() => makeRequest()}
-                            className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400"
+                            className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 dark:border-gray-600"
                         >
                             {renderSendButton()}
                         </button>
