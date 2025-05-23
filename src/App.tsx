@@ -29,17 +29,23 @@ function App() {
             status: "fetching",
         }));
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
-                "Content-Type": "application/json",
+        const response = await fetch(
+            "https://openrouter.ai/api/v1/chat/completions",
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    model: chat.model,
+                    messages: [
+                        ...chat.messages,
+                        { "role": "user", "content": String(question) },
+                    ],
+                }),
             },
-            body: JSON.stringify({
-                model: chat.model,
-                messages: [...chat.messages, { "role": "user", "content": String(question) }],
-            }),
-        });
+        );
 
         if (!response.ok) {
             console.log("ERROR: ", response);
@@ -54,7 +60,11 @@ function App() {
             messages: [
                 ...chat.messages,
                 { role: "user", content: question, id: nanoid() },
-                { role: "assistant", content: data.choices[0].message.content, id: nanoid() },
+                {
+                    role: "assistant",
+                    content: data.choices[0].message.content,
+                    id: nanoid(),
+                },
             ],
         }));
         setQuestion("");
@@ -77,56 +87,82 @@ function App() {
     };
 
     return (
-        <>
-            <header className="m-1.5 pl-6">
-                Model: <b>{chat.model}</b>
-            </header>
+        <div className="flex h-screen w-screen flex-row">
+            <div
+                id="chatList"
+                className="flex h-full border-4 border-solid border-gray-300 bg-gray-50"
+            >
+                <ul className="flex flex-col gap-6 px-1 py-6">
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                        First chat and its content
+                    </li>
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                        Second chat and its content
+                    </li>
+                    <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100">
+                        Third chat and its content
+                    </li>
+                </ul>
+            </div>
 
-            <div className="relative mt-15 mr-auto ml-auto flex h-160 w-4/5 flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 pt-15 pr-15 pl-15">
-                {chat.messages.map((message) => {
-                    if (message.role === "user") {
-                        return (
-                            <div
-                                className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-100 p-4 dark:bg-gray-700"
-                                key={message.id}
-                            >
-                                {message.content}
-                            </div>
-                        );
-                    } else {
-                        return <div key={message.id}>{asterisksToBoldMarkup(message.content)}</div>;
-                    }
-                })}
+            <div
+                id="chatBox"
+                className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100"
+            >
+                <div className="border-2 border-solid border-gray-400 bg-gray-200 p-1 pl-6">
+                    Model: <b>{chat.model}</b>
+                </div>
 
-                {chat.status === "error" && (
-                    <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold">
-                        Error occurred. Try to resend request later.
-                    </div>
-                )}
+                <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5">
+                    {chat.messages.map((message) => {
+                        if (message.role === "user") {
+                            return (
+                                <div
+                                    className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-300 p-4"
+                                    key={message.id}
+                                >
+                                    {message.content}
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={message.id}>
+                                    {asterisksToBoldMarkup(message.content)}
+                                </div>
+                            );
+                        }
+                    })}
 
-                <div
-                    key="input-container"
-                    ref={inputContainer}
-                    className="relative bottom-0 mt-auto mb-5 box-border flex h-18 w-3/5 flex-row self-end border-2 border-solid border-gray-300 p-4"
-                >
-                    <input
-                        value={question}
-                        onChange={(e) => setQuestion(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        disabled={chat.status === "fetching"}
-                        className="mt-0 mr-auto w-full focus:outline-none"
-                    />
+                    {chat.status === "error" && (
+                        <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold">
+                            Error occurred. Try to resend request later.
+                        </div>
+                    )}
 
-                    <button
-                        disabled={chat.status === "fetching"}
-                        onClick={() => makeRequest()}
-                        className="flex h-10 w-10 items-center justify-center border-2 border-solid border-gray-400"
+                    <div
+                        key="input-container"
+                        ref={inputContainer}
+                        className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4"
                     >
-                        {renderSendButton()}
-                    </button>
+                        <input
+                            value={question}
+                            onChange={(e) => setQuestion(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            disabled={chat.status === "fetching"}
+                            className="mt-0 mr-auto w-full focus:outline-none"
+                        />
+
+                        <button
+                            disabled={chat.status === "fetching"}
+                            onClick={() => makeRequest()}
+                            className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400"
+                        >
+                            {renderSendButton()}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
