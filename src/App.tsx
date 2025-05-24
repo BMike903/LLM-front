@@ -13,6 +13,7 @@ function App() {
         model: "meta-llama/llama-4-scout:free",
         messages: [],
         status: "idle",
+        startDate: new Date(),
     });
 
     const inputContainer = useRef<HTMLDivElement | null>(null);
@@ -109,8 +110,13 @@ function App() {
                 id="chatBox"
                 className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
             >
-                <div className="border-2 border-solid border-gray-400 bg-gray-200 p-1 pl-6 dark:border-gray-600 dark:bg-black">
-                    Model: <b>{chat.model}</b>
+                <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
+                    <div>
+                        Model: <b>{chat.model}</b>
+                    </div>
+                    <div>
+                        Chat started at: {chat.startDate.toLocaleString()}
+                    </div>
                 </div>
 
                 <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
