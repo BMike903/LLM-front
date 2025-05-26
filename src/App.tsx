@@ -20,7 +20,7 @@ function App() {
 
     useEffect(() => {
         inputContainer.current?.scrollIntoView({ behavior: "smooth" });
-    }, [chat]);
+    }, [chat.status, chat.messages]);
 
     const makeRequest = async () => {
         if (chat.status === "fetching" || question.trim() === "") return;
