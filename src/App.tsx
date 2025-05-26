@@ -17,6 +17,8 @@ function App() {
         startDate: new Date(),
     });
 
+    const isInputEmpty = () => question.trim() === "";
+
     const inputContainer = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -24,7 +26,7 @@ function App() {
     }, [chat.status, chat.messages]);
 
     const makeRequest = async () => {
-        if (chat.status === "fetching" || question.trim() === "") return;
+        if (chat.status === "fetching" || isInputEmpty()) return;
 
         setChat((chat) => ({
             ...chat,
@@ -168,9 +170,11 @@ function App() {
                         />
 
                         <button
-                            disabled={chat.status === "fetching"}
+                            disabled={
+                                chat.status === "fetching" || isInputEmpty()
+                            }
                             onClick={() => makeRequest()}
-                            className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 dark:border-gray-600"
+                            className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
                         >
                             {renderSendButton()}
                         </button>
