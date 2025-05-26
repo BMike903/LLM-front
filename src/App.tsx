@@ -3,6 +3,7 @@ import "./tailwind.css";
 
 import { nanoid } from "nanoid";
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
+import { motion, AnimatePresence } from "motion/react";
 
 import { Chat } from "./types/chat";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
@@ -140,9 +141,17 @@ function App() {
                     })}
 
                     {chat.status === "error" && (
-                        <div className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold dark:bg-red-900">
-                            Error occurred. Try to resend request later.
-                        </div>
+                        <AnimatePresence>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold dark:bg-red-900"
+                            >
+                                Error occurred. Try to resend request later.
+                            </motion.div>
+                        </AnimatePresence>
                     )}
 
                     <div
