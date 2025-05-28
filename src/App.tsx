@@ -1,21 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import "./tailwind.css";
 
-import { nanoid } from "nanoid";
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
 
-import { Chat } from "./types/chat";
+import useChatStore from "./store";
+/* import { Chat } from "./types/chat"; */
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
 
 function App() {
   const [question, setQuestion] = useState("");
-  const [chat, setChat] = useState<Chat>({
-    model: "meta-llama/llama-4-scout:free",
-    messages: [],
-    status: "idle",
-    startDate: new Date(),
-  });
+
+  const messages = useChatStore((state) => state.messages);
+  const status = useChatStore((state) => state.status);
+  const model = useChatStore((state) => state.model);
+  const startDate = useChatStore((state) => state.startDate);
+  const addMessage = useChatStore((state) => state.addMessage);
+  const setStatus = useChatStore((state) => state.setStatus);
 
   const isInputEmpty = () => question.trim() === "";
 
@@ -23,16 +24,12 @@ function App() {
 
   useEffect(() => {
     inputContainer.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat.status, chat.messages]);
+  }, [status, messages]);
 
   const makeRequest = async () => {
-    if (chat.status === "fetching" || isInputEmpty()) return;
+    if (status === "fetching" || isInputEmpty()) return;
 
-    setChat((chat) => ({
-      ...chat,
-      status: "fetching",
-    }));
-
+    setStatus("fetching");
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -42,9 +39,9 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: chat.model,
+          model: model,
           messages: [
-            ...chat.messages,
+            ...messages,
             { "role": "user", "content": String(question) },
           ],
         }),
@@ -53,24 +50,14 @@ function App() {
 
     if (!response.ok) {
       console.log("ERROR: ", response);
-      setChat((chat) => ({ ...chat, status: "error" }));
+      setStatus("error");
       return;
     }
 
     const data = await response.json();
-    setChat((chat) => ({
-      ...chat,
-      status: "fetched",
-      messages: [
-        ...chat.messages,
-        { role: "user", content: question, id: nanoid() },
-        {
-          role: "assistant",
-          content: data.choices[0].message.content,
-          id: nanoid(),
-        },
-      ],
-    }));
+    addMessage("user", question);
+    addMessage("assistant", data.choices[0].message.content);
+    setStatus("idle");
     setQuestion("");
   };
 
@@ -81,9 +68,9 @@ function App() {
   };
 
   const renderSendButton = () => {
-    if (chat.status === "fetching") {
+    if (status === "fetching") {
       return <FiLoader className="animate-spin" size={30} />;
-    } else if (chat.status === "error") {
+    } else if (status === "error") {
       return <FiRotateCcw size={30} />;
     } else {
       return <FiSend size={30} />;
@@ -115,13 +102,13 @@ function App() {
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div>
-            Model: <b>{chat.model}</b>
+            Model: <b>{model}</b>
           </div>
-          <div>Chat started at: {chat.startDate.toLocaleString()}</div>
+          <div>Chat started at: {startDate.toLocaleString()}</div>
         </div>
 
         <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
-          {chat.messages.map((message) => {
+          {messages.map((message) => {
             if (message.role === "user") {
               return (
                 <div
@@ -140,7 +127,7 @@ function App() {
             }
           })}
 
-          {chat.status === "error" && (
+          {status === "error" && (
             <AnimatePresence>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -163,12 +150,12 @@ function App() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={handleKeyDown}
-              disabled={chat.status === "fetching"}
+              disabled={status === "fetching"}
               className="mt-0 mr-auto w-full focus:outline-none"
             />
 
             <button
-              disabled={chat.status === "fetching" || isInputEmpty()}
+              disabled={status === "fetching" || isInputEmpty()}
               onClick={() => makeRequest()}
               className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
             >

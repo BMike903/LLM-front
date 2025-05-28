@@ -1,7 +1,9 @@
 import { modelsTypes } from "./models";
 
+export type Roles = "user" | "assistant";
+
 export type Message = {
-  role: "user" | "assistant";
+  role: Roles;
   content: string;
   id: string;
 };
@@ -12,3 +14,5 @@ export type Chat = {
   status: "idle" | "fetching" | "fetched" | "error";
   startDate: Date;
 };
+
+export type LoadingStatuses = "idle" | "fetching" | "error";
