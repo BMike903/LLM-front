@@ -4,19 +4,19 @@ import "./tailwind.css";
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
 
-import useChatStore from "./store";
-/* import { Chat } from "./types/chat"; */
+import useChatsStore from "./store";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
 
 function App() {
   const [question, setQuestion] = useState("");
 
-  const messages = useChatStore((state) => state.messages);
-  const status = useChatStore((state) => state.status);
-  const model = useChatStore((state) => state.model);
-  const startDate = useChatStore((state) => state.startDate);
-  const addMessage = useChatStore((state) => state.addMessage);
-  const setStatus = useChatStore((state) => state.setStatus);
+  const currentChatId = useChatsStore((state) => state.chats.currentChatId);
+  const currentChat = useChatsStore(
+    (state) => state.chats.allChats[currentChatId],
+  );
+  const { messages, status, model, startDate } = currentChat;
+  const addMessage = useChatsStore((state) => state.addMessage);
+  const setStatus = useChatsStore((state) => state.setStatus);
 
   const isInputEmpty = () => question.trim() === "";
 
@@ -29,7 +29,7 @@ function App() {
   const makeRequest = async () => {
     if (status === "fetching" || isInputEmpty()) return;
 
-    setStatus("fetching");
+    setStatus(currentChatId, "fetching");
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -50,14 +50,14 @@ function App() {
 
     if (!response.ok) {
       console.log("ERROR: ", response);
-      setStatus("error");
+      setStatus(currentChatId, "error");
       return;
     }
 
     const data = await response.json();
-    addMessage("user", question);
-    addMessage("assistant", data.choices[0].message.content);
-    setStatus("idle");
+    addMessage(currentChatId, "user", question);
+    addMessage(currentChatId, "assistant", data.choices[0].message.content);
+    setStatus(currentChatId, "idle");
     setQuestion("");
   };
 

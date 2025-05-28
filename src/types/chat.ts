@@ -15,4 +15,11 @@ export type Chat = {
   startDate: Date;
 };
 
+export type Chats = {
+  currentChatId: string;
+  allChats: {
+    [chatId: string]: Chat;
+  };
+};
+
 export type LoadingStatuses = "idle" | "fetching" | "error";
