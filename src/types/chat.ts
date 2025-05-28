@@ -11,7 +11,7 @@ export type Message = {
 export type Chat = {
   model: modelsTypes;
   messages: Array<Message>;
-  status: "idle" | "fetching" | "fetched" | "error";
+  status: LoadingStatuses;
   startDate: Date;
 };
 
