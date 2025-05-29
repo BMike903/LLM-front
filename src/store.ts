@@ -3,6 +3,10 @@ import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
 
 import { Roles, Chats, LoadingStatuses } from "./types/chat";
+import {
+  planetsChatMessages,
+  aircraftChatMessages,
+} from "./constants/preMadeChats";
 
 interface StoreState {
   chats: Chats;
@@ -17,8 +21,14 @@ const useChatsStore = create<StoreState>()(
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
           model: "meta-llama/llama-4-scout:free",
-          messages: [],
           startDate: new Date(),
+          messages: [...planetsChatMessages],
+        },
+        "fuhlDw1udJPnvznJB7tzN": {
+          status: "idle",
+          model: "meta-llama/llama-4-scout:free",
+          startDate: new Date(),
+          messages: [...aircraftChatMessages],
         },
       },
       currentChatId: "V1StGXR8_Z5jdHi6B-myT",
