@@ -4,6 +4,7 @@ import "./tailwind.css";
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
 
+import ChatList from "./components/chatList";
 import useChatsStore from "./store";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
 
@@ -14,6 +15,7 @@ function App() {
   const currentChat = useChatsStore(
     (state) => state.chats.allChats[currentChatId],
   );
+
   const { messages, status, model, startDate } = currentChat;
   const addMessage = useChatsStore((state) => state.addMessage);
   const setStatus = useChatsStore((state) => state.setStatus);
@@ -25,6 +27,10 @@ function App() {
   useEffect(() => {
     inputContainer.current?.scrollIntoView({ behavior: "smooth" });
   }, [status, messages]);
+
+  if (!currentChat) {
+    return <div>Loading....</div>;
+  }
 
   const makeRequest = async () => {
     if (status === "fetching" || isInputEmpty()) return;
@@ -79,23 +85,7 @@ function App() {
 
   return (
     <div className="flex h-screen w-screen flex-row dark:text-white">
-      <div
-        id="chatList"
-        className="flex h-full border-4 border-solid border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-black"
-      >
-        <ul className="flex flex-col gap-6 px-1 py-6">
-          <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
-            First chat and its content
-          </li>
-          <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
-            Second chat and its content
-          </li>
-          <li className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
-            Third chat and its content
-          </li>
-        </ul>
-      </div>
-
+      <ChatList />
       <div
         id="chatBox"
         className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
