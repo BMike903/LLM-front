@@ -7,15 +7,13 @@ import { motion, AnimatePresence } from "motion/react";
 import ChatList from "./components/chatList";
 import useChatsStore from "./store";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
+import { useCurrentChat, useCurrentChatId } from "./store";
 
 function App() {
   const [question, setQuestion] = useState("");
 
-  const currentChatId = useChatsStore((state) => state.chats.currentChatId);
-  const currentChat = useChatsStore(
-    (state) => state.chats.allChats[currentChatId],
-  );
-
+  const currentChatId = useCurrentChatId();
+  const currentChat = useCurrentChat();
   const { messages, status, model, startDate } = currentChat;
   const addMessage = useChatsStore((state) => state.addMessage);
   const setStatus = useChatsStore((state) => state.setStatus);

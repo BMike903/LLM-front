@@ -1,9 +1,9 @@
 import useChatsStore from "../store";
+import { useAllChats } from "../store";
 
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
-
-  const allChats = useChatsStore((state) => state.chats.allChats);
+  const allChats = useAllChats();
   const ChatsPreview = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
       chatID,
