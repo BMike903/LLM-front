@@ -14,7 +14,7 @@ function ChatList() {
   return (
     <div
       id="chatList"
-      className="flex h-full border-4 border-solid border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-black"
+      className="flex h-full flex-1/6 border-4 border-solid border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-black"
     >
       <ul className="flex flex-col gap-6 px-1 py-6">
         {ChatsPreview.map(({ chatID, firstMessage }) => (

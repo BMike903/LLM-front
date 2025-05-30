@@ -82,7 +82,7 @@ function App() {
       <ChatList />
       <div
         id="chatBox"
-        className="flex h-full flex-4/5 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
+        className="flex h-full flex-5/6 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div>
