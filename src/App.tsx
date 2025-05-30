@@ -26,10 +26,6 @@ function App() {
     inputContainer.current?.scrollIntoView({ behavior: "smooth" });
   }, [status, messages]);
 
-  if (!currentChat) {
-    return <div>Loading....</div>;
-  }
-
   const makeRequest = async () => {
     if (status === "fetching" || isInputEmpty()) return;
 
