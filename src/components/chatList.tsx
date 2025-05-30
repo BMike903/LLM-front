@@ -1,8 +1,9 @@
 import useChatsStore from "../store";
 
 function ChatList() {
-  const allChats = useChatsStore((state) => state.chats.allChats);
+  const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
 
+  const allChats = useChatsStore((state) => state.chats.allChats);
   const ChatsPreview = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
       chatID,
@@ -19,6 +20,7 @@ function ChatList() {
         {ChatsPreview.map(({ chatID, firstMessage }) => (
           <li
             key={chatID}
+            onClick={() => setCurrentChat(chatID)}
             className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             {firstMessage}

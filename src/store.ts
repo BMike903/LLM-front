@@ -12,6 +12,7 @@ interface StoreState {
   chats: Chats;
   addMessage: (chatID: string, role: Roles, message: string) => void;
   setStatus: (chatID: string, newStatus: LoadingStatuses) => void;
+  setCurrentChat: (chatID: string) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -44,6 +45,10 @@ const useChatsStore = create<StoreState>()(
     setStatus: (chatId, newStatus) =>
       set((state) => {
         state.chats.allChats[chatId].status = newStatus;
+      }),
+    setCurrentChat: (chatId) =>
+      set((state) => {
+        state.chats.currentChatId = chatId;
       }),
   })),
 );
