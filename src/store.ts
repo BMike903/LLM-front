@@ -13,6 +13,7 @@ interface StoreState {
   addMessage: (chatID: string, role: Roles, message: string) => void;
   setStatus: (chatID: string, newStatus: LoadingStatuses) => void;
   setCurrentChat: (chatID: string) => void;
+  addNewChat: () => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -50,6 +51,32 @@ const useChatsStore = create<StoreState>()(
       set((state) => {
         state.chats.currentChatId = chatId;
       }),
+    /* addNewChat: () =>
+      set((state) => {
+        state.chats.allChats[nanoid()] = {
+          status: "idle",
+          model: "meta-llama/llama-4-scout:free",
+          startDate: new Date(),
+          messages: [],
+        };
+      }), */
+
+    addNewChat: () => {
+      const newChatId = nanoid();
+
+      set((state) => {
+        state.chats.allChats[newChatId] = {
+          status: "idle",
+          model: "meta-llama/llama-4-scout:free",
+          messages: [],
+          startDate: new Date(),
+        };
+
+        state.chats.currentChatId = newChatId;
+      });
+
+      return newChatId;
+    },
   })),
 );
 

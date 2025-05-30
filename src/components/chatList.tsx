@@ -3,13 +3,15 @@ import { useAllChats } from "../store";
 
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
+  const addNewChat = useChatsStore((state) => state.addNewChat);
   const allChats = useAllChats();
   const ChatsPreview = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
       chatID,
-      firstMessage: chatContent.messages[0].content,
+      firstMessage: chatContent.messages[0]?.content,
     }),
   );
+  if (!ChatsPreview) return null;
 
   return (
     <div
@@ -17,6 +19,7 @@ function ChatList() {
       className="flex h-full flex-1/6 border-4 border-solid border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-black"
     >
       <ul className="flex flex-col gap-6 px-1 py-6">
+        <li onClick={() => addNewChat()}>Add new chat</li>
         {ChatsPreview.map(({ chatID, firstMessage }) => (
           <li
             key={chatID}
