@@ -22,13 +22,13 @@ const useChatsStore = create<StoreState>()(
       allChats: {
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
-          model: "meta-llama/llama-4-scout:free",
+          model: { name: "MAI-DS", APIName: "microsoft/mai-ds-r1:free" },
           startDate: new Date(),
           messages: [...planetsChatMessages],
         },
         "fuhlDw1udJPnvznJB7tzN": {
           status: "idle",
-          model: "meta-llama/llama-4-scout:free",
+          model: { name: "LLAMA-4", APIName: "meta-llama/llama-4-scout:free" },
           startDate: new Date(),
           messages: [...aircraftChatMessages],
         },
@@ -51,30 +51,17 @@ const useChatsStore = create<StoreState>()(
       set((state) => {
         state.chats.currentChatId = chatId;
       }),
-    /* addNewChat: () =>
-      set((state) => {
-        state.chats.allChats[nanoid()] = {
-          status: "idle",
-          model: "meta-llama/llama-4-scout:free",
-          startDate: new Date(),
-          messages: [],
-        };
-      }), */
-
     addNewChat: () => {
       const newChatId = nanoid();
-
       set((state) => {
         state.chats.allChats[newChatId] = {
           status: "idle",
-          model: "meta-llama/llama-4-scout:free",
+          model: { name: "LLAMA-4", APIName: "meta-llama/llama-4-scout:free" },
           messages: [],
           startDate: new Date(),
         };
-
         state.chats.currentChatId = newChatId;
       });
-
       return newChatId;
     },
   })),

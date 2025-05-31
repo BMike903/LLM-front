@@ -39,7 +39,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: model,
+          model: model.APIName,
           messages: [
             ...messages,
             { "role": "user", "content": String(question) },
@@ -86,7 +86,7 @@ function App() {
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div>
-            Model: <b>{model}</b>
+            Model: <b>{model.name}</b>
           </div>
           <div>Chat started at: {startDate.toLocaleString()}</div>
         </div>
