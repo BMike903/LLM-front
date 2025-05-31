@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
+import { models } from "./constants/models";
 
 import { Roles, Chats, LoadingStatuses } from "./types/chat";
 import {
@@ -22,13 +23,13 @@ const useChatsStore = create<StoreState>()(
       allChats: {
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
-          model: { name: "MAI-DS", APIName: "microsoft/mai-ds-r1:free" },
+          model: models["mai-ds"],
           startDate: new Date(),
           messages: [...planetsChatMessages],
         },
         "fuhlDw1udJPnvznJB7tzN": {
           status: "idle",
-          model: { name: "LLAMA-4", APIName: "meta-llama/llama-4-scout:free" },
+          model: models["llama-4"],
           startDate: new Date(),
           messages: [...aircraftChatMessages],
         },
@@ -56,7 +57,7 @@ const useChatsStore = create<StoreState>()(
       set((state) => {
         state.chats.allChats[newChatId] = {
           status: "idle",
-          model: { name: "LLAMA-4", APIName: "meta-llama/llama-4-scout:free" },
+          model: models["llama-4"],
           messages: [],
           startDate: new Date(),
         };
