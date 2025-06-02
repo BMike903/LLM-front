@@ -2,11 +2,11 @@ import { create } from "zustand";
 import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
 
-import { Roles, Chats, LoadingStatuses } from "./types/chat";
+import { Roles, Chats, LoadingStatuses } from "../types/chat";
 import {
   planetsChatMessages,
   aircraftChatMessages,
-} from "./constants/preMadeChats";
+} from "../constants/preMadeChats";
 
 interface StoreState {
   chats: Chats;
@@ -66,13 +66,5 @@ const useChatsStore = create<StoreState>()(
     },
   })),
 );
-
-export const useCurrentChat = () =>
-  useChatsStore((state) => state.chats.allChats[state.chats.currentChatId]);
-
-export const useCurrentChatId = () =>
-  useChatsStore((state) => state.chats.currentChatId);
-
-export const useAllChats = () => useChatsStore((state) => state.chats.allChats);
 
 export default useChatsStore;

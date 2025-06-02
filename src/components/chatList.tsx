@@ -1,5 +1,5 @@
-import useChatsStore from "../store";
-import { useAllChats } from "../store";
+import useChatsStore from "../store/store";
+import { useAllChats } from "../store/chatSelectors";
 
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);

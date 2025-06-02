@@ -5,9 +5,9 @@ import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
 
 import ChatList from "./components/chatList";
-import useChatsStore from "./store";
+import useChatsStore from "./store/store";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
-import { useCurrentChat, useCurrentChatId } from "./store";
+import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 
 import { getModel } from "./types/models";
 
