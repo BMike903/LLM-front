@@ -21,7 +21,7 @@ function ChatList() {
     >
       <div
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-center hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
-        onClick={() => addNewChat()}
+        onClick={() => addNewChat("llama-4")}
       >
         Add new chat
       </div>
