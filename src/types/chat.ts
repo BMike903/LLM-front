@@ -1,4 +1,4 @@
-import { modelsTypes } from "./models";
+import { ModelsKey } from "./models";
 
 export type Roles = "user" | "assistant";
 
@@ -9,7 +9,7 @@ export type Message = {
 };
 
 export type Chat = {
-  model: modelsTypes;
+  modelKey: ModelsKey;
   messages: Array<Message>;
   status: LoadingStatuses;
   startDate: Date;

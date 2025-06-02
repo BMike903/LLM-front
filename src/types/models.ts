@@ -7,4 +7,8 @@ export type Model = {
 
 export type ModelsList = Record<string, Model>;
 
-export type modelsTypes = (typeof models)[number];
+export type ModelsKey = keyof typeof models;
+
+export function getModel(key: ModelsKey): Model {
+  return models[key];
+}
