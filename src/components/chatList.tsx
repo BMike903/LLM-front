@@ -9,6 +9,7 @@ function ChatList() {
     ([chatID, chatContent]) => ({
       chatID,
       firstMessage: chatContent.messages[0]?.content,
+      model: chatContent.modelKey,
     }),
   );
   if (!ChatsPreview) return null;
@@ -26,13 +27,13 @@ function ChatList() {
       </div>
       <hr className="my-5" />
       <ul className="flex flex-col gap-6 px-1">
-        {ChatsPreview.map(({ chatID, firstMessage }) => (
+        {ChatsPreview.map(({ chatID, firstMessage, model }) => (
           <li
             key={chatID}
             onClick={() => setCurrentChat(chatID)}
             className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
-            {firstMessage}
+            {firstMessage} - <b>{model}</b>
           </li>
         ))}
       </ul>
