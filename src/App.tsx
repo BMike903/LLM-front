@@ -80,7 +80,7 @@ function App() {
       return <FiSend size={30} />;
     }
   };
-
+  console.log(model);
   return (
     <div className="flex h-screen w-screen flex-row dark:text-white">
       <ChatList />
@@ -143,7 +143,11 @@ function App() {
             />
 
             <button
-              disabled={status === "fetching" || isInputEmpty()}
+              disabled={
+                status === "fetching" ||
+                isInputEmpty() ||
+                (model ? false : true)
+              }
               onClick={() => makeRequest()}
               className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
             >
