@@ -98,7 +98,7 @@ function App() {
         <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
           {!model && (
             <div className="flex h-full w-full flex-col items-center justify-center gap-6">
-              <b>Select a model to start chat</b>
+              <p className="text-lg font-bold">Select a model to start chat</p>
               <ul className="flex gap-6">
                 {Object.entries(models).map(([modelKey, model]) => (
                   <li
@@ -106,7 +106,9 @@ function App() {
                     onClick={() => console.log(modelKey)}
                     className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
-                    {model.name}
+                    <p className="text-center font-bold">{model.name}</p>
+                    <br />
+                    {model.description}
                   </li>
                 ))}
               </ul>
