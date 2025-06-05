@@ -8,7 +8,7 @@ import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
 import { asterisksToBoldMarkup } from "./utils/stringUtils";
 import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
-
+import { models } from "./constants/models";
 import { getModel } from "./types/models";
 
 function App() {
@@ -96,6 +96,23 @@ function App() {
         </div>
 
         <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
+          {!model && (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-6">
+              <b>Select a model to start chat</b>
+              <ul className="flex gap-6">
+                {Object.entries(models).map(([modelKey, model]) => (
+                  <li
+                    key={modelKey}
+                    onClick={() => console.log(modelKey)}
+                    className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    {model.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {messages.map((message) => {
             if (message.role === "user") {
               return (
