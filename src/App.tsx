@@ -80,7 +80,7 @@ function App() {
       return <FiSend size={30} />;
     }
   };
-  console.log(model);
+
   return (
     <div className="flex h-screen w-screen flex-row dark:text-white">
       <ChatList />
