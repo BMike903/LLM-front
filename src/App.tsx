@@ -20,6 +20,7 @@ function App() {
   const model = modelKey ? getModel(modelKey) : null;
   const addMessage = useChatsStore((state) => state.addMessage);
   const setStatus = useChatsStore((state) => state.setStatus);
+  const setModel = useChatsStore((state) => state.setModel);
 
   const isInputEmpty = () => question.trim() === "";
 
@@ -103,7 +104,7 @@ function App() {
                 {Object.entries(models).map(([modelKey, model]) => (
                   <li
                     key={modelKey}
-                    onClick={() => console.log(modelKey)}
+                    onClick={() => setModel(currentChatId, modelKey)}
                     className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
                     <p className="text-center font-bold">{model.name}</p>
