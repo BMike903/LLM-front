@@ -22,6 +22,12 @@ const useChatsStore = create<StoreState>()(
   immer((set) => ({
     chats: {
       allChats: {
+        "XkBlzJPRrmBMfZYCe_-HF": {
+          status: "idle",
+          modelKey: null,
+          startDate: new Date(),
+          messages: [],
+        },
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
           modelKey: "mai-ds",
@@ -35,7 +41,7 @@ const useChatsStore = create<StoreState>()(
           messages: [...aircraftChatMessages],
         },
       },
-      currentChatId: "V1StGXR8_Z5jdHi6B-myT",
+      currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
     },
     addMessage: (chatId, role, message) =>
       set((state) => {
