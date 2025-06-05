@@ -9,7 +9,7 @@ export type Message = {
 };
 
 export type Chat = {
-  modelKey: ModelsKey;
+  modelKey: ModelsKey | null;
   messages: Array<Message>;
   status: LoadingStatuses;
   startDate: Date;

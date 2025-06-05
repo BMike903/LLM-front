@@ -7,14 +7,13 @@ import {
   planetsChatMessages,
   aircraftChatMessages,
 } from "../constants/preMadeChats";
-import { ModelsKey } from "../types/models";
 
 interface StoreState {
   chats: Chats;
   addMessage: (chatID: string, role: Roles, message: string) => void;
   setStatus: (chatID: string, newStatus: LoadingStatuses) => void;
   setCurrentChat: (chatID: string) => void;
-  addNewChat: (model: ModelsKey) => void;
+  addNewChat: () => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -52,12 +51,12 @@ const useChatsStore = create<StoreState>()(
       set((state) => {
         state.chats.currentChatId = chatId;
       }),
-    addNewChat: (model: ModelsKey) => {
+    addNewChat: () => {
       const newChatId = nanoid();
       set((state) => {
         state.chats.allChats[newChatId] = {
           status: "idle",
-          modelKey: model,
+          modelKey: null,
           messages: [],
           startDate: new Date(),
         };
