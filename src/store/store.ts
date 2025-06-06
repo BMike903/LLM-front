@@ -8,6 +8,7 @@ import {
   aircraftChatMessages,
 } from "../constants/preMadeChats";
 import { ModelsKey } from "../types/models";
+import { getRandomTimeFromPastDays } from "../utils/date";
 
 interface StoreState {
   chats: Chats;
@@ -31,13 +32,13 @@ const useChatsStore = create<StoreState>()(
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
           modelKey: "mai-ds",
-          startDate: new Date(),
+          startDate: getRandomTimeFromPastDays(3),
           messages: [...planetsChatMessages],
         },
         "fuhlDw1udJPnvznJB7tzN": {
           status: "idle",
           modelKey: "llama-4",
-          startDate: new Date(),
+          startDate: getRandomTimeFromPastDays(15),
           messages: [...aircraftChatMessages],
         },
       },
