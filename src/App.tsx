@@ -100,12 +100,12 @@ function App() {
           {!model && (
             <div className="flex h-full w-full flex-col items-center justify-center gap-6">
               <p className="text-lg font-bold">Select a model to start chat</p>
-              <ul className="flex gap-6">
+              <ul className="flex flex-row flex-wrap gap-6">
                 {Object.entries(models).map(([modelKey, model]) => (
                   <li
                     key={modelKey}
                     onClick={() => setModel(currentChatId, modelKey)}
-                    className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    className="w-96 rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-3 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
                     <p className="text-center font-bold">{model.name}</p>
                     <br />
