@@ -5,14 +5,19 @@ function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
   const addNewChat = useChatsStore((state) => state.addNewChat);
   const allChats = useAllChats();
-  const ChatsPreview = Object.entries(allChats).map(
+  const chatsPreview = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
       chatID,
       firstMessage: chatContent.messages[0]?.content,
       model: chatContent.modelKey,
+      startDate: chatContent.startDate,
     }),
   );
-  if (!ChatsPreview) return null;
+  if (!chatsPreview) return null;
+
+  const sortedChatsPreview = [...chatsPreview].sort(
+    (a, b) => a.startDate.getTime() + b.startDate.getTime(),
+  );
 
   return (
     <div
@@ -27,7 +32,7 @@ function ChatList() {
       </div>
       <hr className="my-5" />
       <ul className="flex flex-col gap-6 px-1">
-        {ChatsPreview.map(({ chatID, firstMessage, model }) => (
+        {sortedChatsPreview.map(({ chatID, firstMessage, model }) => (
           <li
             key={chatID}
             onClick={() => setCurrentChat(chatID)}
