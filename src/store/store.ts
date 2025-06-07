@@ -26,19 +26,19 @@ const useChatsStore = create<StoreState>()(
         "XkBlzJPRrmBMfZYCe_-HF": {
           status: "idle",
           modelKey: null,
-          startDate: new Date(),
+          startDate: new Date().toISOString(),
           messages: [],
         },
         "V1StGXR8_Z5jdHi6B-myT": {
           status: "idle",
           modelKey: "mai-ds",
-          startDate: getRandomTimeFromPastDays(3),
+          startDate: getRandomTimeFromPastDays(3).toISOString(),
           messages: [...planetsChatMessages],
         },
         "fuhlDw1udJPnvznJB7tzN": {
           status: "idle",
           modelKey: "llama-4",
-          startDate: getRandomTimeFromPastDays(15),
+          startDate: getRandomTimeFromPastDays(15).toISOString(),
           messages: [...aircraftChatMessages],
         },
       },
@@ -67,7 +67,7 @@ const useChatsStore = create<StoreState>()(
           status: "idle",
           modelKey: null,
           messages: [],
-          startDate: new Date(),
+          startDate: new Date().toISOString(),
         };
         state.chats.currentChatId = newChatId;
       });

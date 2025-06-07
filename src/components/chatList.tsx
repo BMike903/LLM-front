@@ -15,8 +15,8 @@ function ChatList() {
   );
   if (!chatsPreview) return null;
 
-  const sortedChatsPreview = [...chatsPreview].sort(
-    (a, b) => a.startDate.getTime() + b.startDate.getTime(),
+  const sortedChatsPreview = [...chatsPreview].sort((a, b) =>
+    b.startDate.localeCompare(a.startDate),
   );
 
   return (
