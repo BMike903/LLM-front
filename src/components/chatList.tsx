@@ -1,11 +1,27 @@
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
 
+import { daysSince } from "../utils/date";
+
+type ChatPreview = {
+  chatID: string;
+  firstMessage?: string | null;
+  model?: string | null;
+  startDate: string;
+};
+type ChatsPreviewsByDates = {
+  "weekAgo": ChatPreview[];
+  "3daysAgo": ChatPreview[];
+  "yesterday": ChatPreview[];
+  "today": ChatPreview[];
+};
+
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
   const addNewChat = useChatsStore((state) => state.addNewChat);
   const allChats = useAllChats();
-  const chatsPreview = Object.entries(allChats).map(
+
+  const chatsPreviews: ChatPreview[] = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
       chatID,
       firstMessage: chatContent.messages[0]?.content,
@@ -13,11 +29,35 @@ function ChatList() {
       startDate: chatContent.startDate,
     }),
   );
-  if (!chatsPreview) return null;
+  if (!chatsPreviews) return null;
 
-  const sortedChatsPreview = [...chatsPreview].sort((a, b) =>
+  const sortedChatsPreview = [...chatsPreviews].sort((a, b) =>
     b.startDate.localeCompare(a.startDate),
   );
+
+  const chatsPreviewsByDates: ChatsPreviewsByDates = {
+    "weekAgo": [],
+    "3daysAgo": [],
+    "yesterday": [],
+    "today": [],
+  };
+
+  sortedChatsPreview.forEach((chat) => {
+    if (daysSince(chat.startDate) === 0) {
+      chatsPreviewsByDates["today"].push(chat);
+    } else if (daysSince(chat.startDate) === 1) {
+      chatsPreviewsByDates["yesterday"].push(chat);
+    } else if (
+      daysSince(chat.startDate) <= 3 &&
+      daysSince(chat.startDate) > 1
+    ) {
+      chatsPreviewsByDates["3daysAgo"].push(chat);
+    } else if (daysSince(chat.startDate) > 7) {
+      chatsPreviewsByDates["weekAgo"].push(chat);
+    }
+  });
+
+  console.log(chatsPreviewsByDates);
 
   return (
     <div
