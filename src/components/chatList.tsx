@@ -57,12 +57,10 @@ function ChatList() {
     }
   });
 
-  console.log(chatsPreviewsByDates);
-
   return (
     <div
       id="chatList"
-      className="flex h-full flex-1/6 flex-col border-4 border-solid border-gray-300 bg-gray-50 px-1 py-6 dark:border-gray-600 dark:bg-black"
+      className="flex h-full flex-1/6 flex-col overflow-auto border-4 border-solid border-gray-300 bg-gray-50 px-1 py-6 dark:border-gray-600 dark:bg-black"
     >
       <div
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-center hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -70,18 +68,81 @@ function ChatList() {
       >
         Add new chat
       </div>
+
       <hr className="my-5" />
+
       <ul className="flex flex-col gap-6 px-1">
-        {sortedChatsPreview.map(({ chatID, firstMessage, model }) => (
-          <li
-            key={chatID}
-            onClick={() => setCurrentChat(chatID)}
-            className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
-          >
-            {firstMessage ? firstMessage : "no messages"} -{" "}
-            <b>{model ? model : "no model"}</b>
+        {chatsPreviewsByDates["today"].length > 0 && (
+          <li className="flex flex-col gap-2">
+            <div className="text-center">Today</div>
+            {chatsPreviewsByDates["today"].map(
+              ({ chatID, firstMessage, model }) => (
+                <div
+                  key={chatID}
+                  onClick={() => setCurrentChat(chatID)}
+                  className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  {firstMessage ? firstMessage : "no messages"} -{" "}
+                  <b>{model ? model : "no model"}</b>
+                </div>
+              ),
+            )}
           </li>
-        ))}
+        )}
+
+        {chatsPreviewsByDates["yesterday"].length > 0 && (
+          <li className="flex flex-col gap-2">
+            <div className="pb-2 text-center">Yesterday</div>
+            {chatsPreviewsByDates["yesterday"].map(
+              ({ chatID, firstMessage, model }) => (
+                <div
+                  key={chatID}
+                  onClick={() => setCurrentChat(chatID)}
+                  className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  {firstMessage ? firstMessage : "no messages"} -{" "}
+                  <b>{model ? model : "no model"}</b>
+                </div>
+              ),
+            )}
+          </li>
+        )}
+
+        {chatsPreviewsByDates["3daysAgo"].length > 0 && (
+          <li className="flex flex-col gap-2">
+            <div className="pb-2 text-center">3 days ago</div>
+            {chatsPreviewsByDates["3daysAgo"].map(
+              ({ chatID, firstMessage, model }) => (
+                <div
+                  key={chatID}
+                  onClick={() => setCurrentChat(chatID)}
+                  className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  {firstMessage ? firstMessage : "no messages"} -{" "}
+                  <b>{model ? model : "no model"}</b>
+                </div>
+              ),
+            )}
+          </li>
+        )}
+
+        {chatsPreviewsByDates["weekAgo"].length > 0 && (
+          <li className="flex flex-col gap-2">
+            <div className="pb-2 text-center">Week ago</div>
+            {chatsPreviewsByDates["weekAgo"].map(
+              ({ chatID, firstMessage, model }) => (
+                <div
+                  key={chatID}
+                  onClick={() => setCurrentChat(chatID)}
+                  className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  {firstMessage ? firstMessage : "no messages"} -{" "}
+                  <b>{model ? model : "no model"}</b>
+                </div>
+              ),
+            )}
+          </li>
+        )}
       </ul>
     </div>
   );
