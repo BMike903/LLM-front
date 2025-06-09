@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
+import { devtools } from "zustand/middleware";
 
 import { Roles, Chats, LoadingStatuses } from "../types/chat";
 import {
@@ -20,65 +21,67 @@ interface StoreState {
 }
 
 const useChatsStore = create<StoreState>()(
-  immer((set) => ({
-    chats: {
-      allChats: {
-        "XkBlzJPRrmBMfZYCe_-HF": {
-          status: "idle",
-          modelKey: null,
-          startDate: new Date().toISOString(),
-          messages: [],
+  devtools(
+    immer((set) => ({
+      chats: {
+        allChats: {
+          "XkBlzJPRrmBMfZYCe_-HF": {
+            status: "idle",
+            modelKey: null,
+            startDate: new Date().toISOString(),
+            messages: [],
+          },
+          "V1StGXR8_Z5jdHi6B-myT": {
+            status: "idle",
+            modelKey: "mai-ds",
+            startDate: getRandomTimeFromPastDays(3).toISOString(),
+            messages: [...planetsChatMessages],
+          },
+          "fuhlDw1udJPnvznJB7tzN": {
+            status: "idle",
+            modelKey: "llama-4",
+            startDate: getRandomTimeFromPastDays(15).toISOString(),
+            messages: [...aircraftChatMessages],
+          },
         },
-        "V1StGXR8_Z5jdHi6B-myT": {
-          status: "idle",
-          modelKey: "mai-ds",
-          startDate: getRandomTimeFromPastDays(3).toISOString(),
-          messages: [...planetsChatMessages],
-        },
-        "fuhlDw1udJPnvznJB7tzN": {
-          status: "idle",
-          modelKey: "llama-4",
-          startDate: getRandomTimeFromPastDays(15).toISOString(),
-          messages: [...aircraftChatMessages],
-        },
+        currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
       },
-      currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
-    },
-    addMessage: (chatId, role, message) =>
-      set((state) => {
-        state.chats.allChats[chatId].messages.push({
-          role: role,
-          content: message,
-          id: nanoid(),
+      addMessage: (chatId, role, message) =>
+        set((state) => {
+          state.chats.allChats[chatId].messages.push({
+            role: role,
+            content: message,
+            id: nanoid(),
+          });
+        }),
+      setStatus: (chatId, newStatus) =>
+        set((state) => {
+          state.chats.allChats[chatId].status = newStatus;
+        }),
+      setCurrentChat: (chatId) =>
+        set((state) => {
+          state.chats.currentChatId = chatId;
+        }),
+      addNewChat: () => {
+        const newChatId = nanoid();
+        set((state) => {
+          state.chats.allChats[newChatId] = {
+            status: "idle",
+            modelKey: null,
+            messages: [],
+            startDate: new Date().toISOString(),
+          };
+          state.chats.currentChatId = newChatId;
         });
-      }),
-    setStatus: (chatId, newStatus) =>
-      set((state) => {
-        state.chats.allChats[chatId].status = newStatus;
-      }),
-    setCurrentChat: (chatId) =>
-      set((state) => {
-        state.chats.currentChatId = chatId;
-      }),
-    addNewChat: () => {
-      const newChatId = nanoid();
-      set((state) => {
-        state.chats.allChats[newChatId] = {
-          status: "idle",
-          modelKey: null,
-          messages: [],
-          startDate: new Date().toISOString(),
-        };
-        state.chats.currentChatId = newChatId;
-      });
-      return newChatId;
-    },
-    setModel(chatID, model) {
-      set((state) => {
-        state.chats.allChats[chatID].modelKey = model;
-      });
-    },
-  })),
+        return newChatId;
+      },
+      setModel(chatID, model) {
+        set((state) => {
+          state.chats.allChats[chatID].modelKey = model;
+        });
+      },
+    })),
+  ),
 );
 
 export default useChatsStore;
