@@ -181,3 +181,39 @@ export const aircraftChatMessages: Message[] = [
         In summary, the physics behind a propeller involves the interaction of four main forces: thrust, torque, drag, and lift. By understanding these forces and optimizing propeller design, engineers can create more efficient and effective propellers for a wide range of applications.`,
   },
 ];
+
+export const pancakeChatMessages: Message[] = [
+  {
+    role: "user",
+    id: nanoid(),
+    content: `Suggest me pancake receipes`,
+  },
+  {
+    role: "assistant",
+    id: nanoid(),
+    content: `Pancakes! Who can resist a fluffy, golden-brown stack of goodness? Here are some delicious pancake recipes you might enjoy: Classic Buttermilk Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup buttermilk * 1 large egg * 2 tablespoons unsalted butter, melted Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Cook on a non-stick skillet or griddle over medium heat. Blueberry Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1 cup fresh or frozen blueberries Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Gently fold in blueberries. 5. Cook on a non-stick skillet or griddle over medium heat. Banana Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 2 ripe bananas, mashed Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in mashed bananas. 5. Cook on a non-stick skillet or griddle over medium heat. Chocolate Chip Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1/2 cup semi-sweet chocolate chips Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in chocolate chips. 5. Cook on a non-stick skillet or griddle over medium heat. Cinnamon Apple Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1/2 cup diced apple * 1/2 teaspoon ground cinnamon Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in diced apple and cinnamon. 5. Cook on a non-stick skillet or griddle over medium heat. Protein Pancakes Ingredients: * 1 scoop vanilla protein powder * 1/2 cup rolled oats * 1/2 cup almond milk * 1 large egg * 1/4 teaspoon salt * 1 tablespoon unsalted butter, melted * Optional: fruit, nuts, or chocolate chips Instructions: 1. Whisk protein powder, oats, and almond milk together. 2. Add egg, salt, and melted butter. Whisk until smooth. 3. Cook on a non-stick skillet or griddle over medium heat. 4. Add optional toppings. Gluten-Free Pancakes Ingredients: * 1 cup gluten-free all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Cook on a non-stick skillet or griddle over medium heat. Feel free to experiment with different combinations of ingredients and toppings to create your perfect pancake!`,
+  },
+];
+
+export const laptopChatMessages: Message[] = [
+  {
+    role: "user",
+    id: nanoid(),
+    content: `What good temperature for idle laptop?`,
+  },
+  {
+    role: "assistant",
+    id: nanoid(),
+    content: `The ideal temperature for an idle laptop depends on various factors, including the laptop's design, ambient temperature, and usage patterns. However, here are some general guidelines: Typical temperature ranges: * Idle: 40°C to 60°C (104°F to 140°F) * Light usage (browsing, office work): 50°C to 70°C (122°F to 158°F) * Heavy usage (gaming, video editing): 70°C to 90°C (158°F to 194°F) Recommended temperature thresholds: * Maximum: 85°C (185°F) - prolonged exposure above this temperature can reduce laptop lifespan * Optimal: 50°C to 65°C (122°F to 149°F) - a comfortable range for long-term usage Factors that influence temperature: 1. Ambient temperature: The temperature of the room or environment where the laptop is used. 2. Laptop design: The cooling system, materials, and design of the laptop can affect its temperature. 3. Usage patterns: Resource-intensive activities like gaming, video editing, or software development can increase the temperature. 4. Battery health: A worn-out battery can cause the laptop to heat up more. Tips to maintain a healthy temperature: 1. Use your laptop on a hard, flat surface: This allows for good airflow and helps dissipate heat. 2. Keep the laptop clean: Regularly clean dust from the vents and fans to ensure proper airflow. 3. Monitor your laptop's temperature: Use software like SpeedFan, HWMonitor, or GPU-Z to track your laptop's temperature. 4. Consider using a laptop cooling pad: These pads can help reduce temperature, especially during intense usage. By keeping your laptop within the recommended temperature ranges and following these tips, you can help extend its lifespan and ensure reliable performance.`,
+  },
+  {
+    role: "user",
+    id: nanoid(),
+    content: `What if I play on it very long?`,
+  },
+  {
+    role: "assistant",
+    id: nanoid(),
+    content: `If you play on your laptop for an extended period, it's normal for the temperature to rise. Here are some tips to help manage the temperature during long gaming sessions: Pre-gaming precautions: 1. Ensure good airflow: Place your laptop on a hard, flat surface to allow for proper airflow. 2. Clean dust from vents and fans: Regularly clean dust from the vents and fans to ensure proper airflow. During long gaming sessions: 1. Take breaks: Take breaks every 30-60 minutes to give your laptop a chance to cool down. 2. Monitor temperature: Use software like SpeedFan, HWMonitor, or GPU-Z to track your laptop's temperature. 3. Adjust game settings: Lower game settings or turn off unnecessary features to reduce heat generation. Post-gaming precautions: 1. Let it cool down: Allow your laptop to cool down for at least 30 minutes before shutting it down. 2. Use a cooling pad: Consider investing in a laptop cooling pad to help keep your laptop cool during gaming sessions. Temperature thresholds during long gaming sessions: * GPU temperature: Up to 80°C (176°F) is considered safe, but above 85°C (185°F) can cause damage. * CPU temperature: Up to 90°C (194°F) is considered safe, but above 95°C (203°F) can cause damage. By following these tips, you can help extend the lifespan of your laptop and prevent overheating during long gaming sessions.`,
+  },
+];

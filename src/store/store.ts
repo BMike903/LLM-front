@@ -7,6 +7,8 @@ import { Roles, Chats, LoadingStatuses } from "../types/chat";
 import {
   planetsChatMessages,
   aircraftChatMessages,
+  pancakeChatMessages,
+  laptopChatMessages,
 } from "../constants/preMadeChats";
 import { ModelsKey } from "../types/models";
 import { getRandomTimeFromPastDays } from "../utils/date";
@@ -42,6 +44,18 @@ const useChatsStore = create<StoreState>()(
             modelKey: "llama-4",
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...aircraftChatMessages],
+          },
+          "fV3CTpvaQfWfHIjMxfzUo": {
+            status: "idle",
+            modelKey: "llama-4",
+            startDate: getRandomTimeFromPastDays(2).toISOString(),
+            messages: [...pancakeChatMessages],
+          },
+          "8BNMAhGSD5ulJUdgXdyZB": {
+            status: "idle",
+            modelKey: "llama-4",
+            startDate: getRandomTimeFromPastDays(1).toISOString(),
+            messages: [...laptopChatMessages],
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
