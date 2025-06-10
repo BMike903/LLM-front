@@ -186,7 +186,7 @@ export const pancakeChatMessages: Message[] = [
   {
     role: "user",
     id: nanoid(),
-    content: `Suggest me pancake receipes`,
+    content: `Suggest me pancake recipes`,
   },
   {
     role: "assistant",
