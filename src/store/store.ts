@@ -20,6 +20,7 @@ interface StoreState {
   setCurrentChat: (chatID: string) => void;
   addNewChat: () => void;
   setModel: (chatID: string, model: ModelsKey) => void;
+  setDraftMessage: (chatID: string, draftMessage: string) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -32,30 +33,35 @@ const useChatsStore = create<StoreState>()(
             modelKey: null,
             startDate: new Date().toISOString(),
             messages: [],
+            draftMessage: "",
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
             modelKey: "mai-ds",
             startDate: getRandomTimeFromPastDays(3).toISOString(),
             messages: [...planetsChatMessages],
+            draftMessage: "next one is?",
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
             modelKey: "llama-4",
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...aircraftChatMessages],
+            draftMessage: "",
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
             modelKey: "llama-4",
             startDate: getRandomTimeFromPastDays(2).toISOString(),
             messages: [...pancakeChatMessages],
+            draftMessage: "",
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
             modelKey: "llama-4",
             startDate: getRandomTimeFromPastDays(1).toISOString(),
             messages: [...laptopChatMessages],
+            draftMessage: "",
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
@@ -84,6 +90,7 @@ const useChatsStore = create<StoreState>()(
             modelKey: null,
             messages: [],
             startDate: new Date().toISOString(),
+            draftMessage: "",
           };
           state.chats.currentChatId = newChatId;
         });
@@ -92,6 +99,11 @@ const useChatsStore = create<StoreState>()(
       setModel(chatID, model) {
         set((state) => {
           state.chats.allChats[chatID].modelKey = model;
+        });
+      },
+      setDraftMessage(chatID, draftMessage) {
+        set((state) => {
+          state.chats.allChats[chatID].draftMessage = draftMessage;
         });
       },
     })),

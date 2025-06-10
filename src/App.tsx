@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./tailwind.css";
 
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
@@ -12,17 +12,16 @@ import { models } from "./constants/models";
 import { getModel } from "./types/models";
 
 function App() {
-  const [question, setQuestion] = useState("");
-
   const currentChatId = useCurrentChatId();
   const currentChat = useCurrentChat();
-  const { messages, status, modelKey, startDate } = currentChat;
+  const { messages, status, modelKey, startDate, draftMessage } = currentChat;
   const model = modelKey ? getModel(modelKey) : null;
   const addMessage = useChatsStore((state) => state.addMessage);
   const setStatus = useChatsStore((state) => state.setStatus);
   const setModel = useChatsStore((state) => state.setModel);
+  const setDraftMessage = useChatsStore((state) => state.setDraftMessage);
 
-  const isInputEmpty = () => question.trim() === "";
+  const isInputEmpty = () => draftMessage.trim() === "";
 
   const inputContainer = useRef<HTMLDivElement | null>(null);
 
@@ -47,7 +46,7 @@ function App() {
           model: model.APIName,
           messages: [
             ...messages,
-            { "role": "user", "content": String(question) },
+            { "role": "user", "content": String(draftMessage) },
           ],
         }),
       },
@@ -60,10 +59,10 @@ function App() {
     }
 
     const data = await response.json();
-    addMessage(currentChatId, "user", question);
+    addMessage(currentChatId, "user", draftMessage);
     addMessage(currentChatId, "assistant", data.choices[0].message.content);
     setStatus(currentChatId, "idle");
-    setQuestion("");
+    setDraftMessage(currentChatId, "");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -155,8 +154,8 @@ function App() {
             className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-800"
           >
             <input
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
+              value={draftMessage}
+              onChange={(e) => setDraftMessage(currentChatId, e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={status === "fetching"}
               className="mt-0 mr-auto w-full focus:outline-none"

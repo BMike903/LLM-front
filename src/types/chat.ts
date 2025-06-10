@@ -13,6 +13,7 @@ export type Chat = {
   messages: Array<Message>;
   status: LoadingStatuses;
   startDate: string;
+  draftMessage: string;
 };
 
 export type Chats = {
