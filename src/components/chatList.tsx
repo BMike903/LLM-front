@@ -89,14 +89,19 @@ function ChatList() {
           <li className="flex flex-col gap-2">
             <div className="pb-2 text-center">Yesterday</div>
             {chatsPreviewsByDates["yesterday"].map(
-              ({ chatID, firstMessage, model }) => (
+              ({ chatID, firstMessage, model, status }) => (
                 <div
                   key={chatID}
                   onClick={() => setCurrentChat(chatID)}
                   className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   {firstMessage ? firstMessage : "no messages"} -{" "}
-                  <b>{model ? model : "no model"}</b>
+                  <b>
+                    {model ? model + " " : "no model"}
+                    {status === "fetching" && (
+                      <FiLoader className="inline animate-spin" />
+                    )}
+                  </b>
                 </div>
               ),
             )}
@@ -107,14 +112,19 @@ function ChatList() {
           <li className="flex flex-col gap-2">
             <div className="pb-2 text-center">3 days ago</div>
             {chatsPreviewsByDates["3daysAgo"].map(
-              ({ chatID, firstMessage, model }) => (
+              ({ chatID, firstMessage, model, status }) => (
                 <div
                   key={chatID}
                   onClick={() => setCurrentChat(chatID)}
                   className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   {firstMessage ? firstMessage : "no messages"} -{" "}
-                  <b>{model ? model : "no model"}</b>
+                  <b>
+                    {model ? model + " " : "no model"}
+                    {status === "fetching" && (
+                      <FiLoader className="inline animate-spin" />
+                    )}
+                  </b>
                 </div>
               ),
             )}
@@ -125,14 +135,19 @@ function ChatList() {
           <li className="flex flex-col gap-2">
             <div className="pb-2 text-center">Week ago</div>
             {chatsPreviewsByDates["weekAgo"].map(
-              ({ chatID, firstMessage, model }) => (
+              ({ chatID, firstMessage, model, status }) => (
                 <div
                   key={chatID}
                   onClick={() => setCurrentChat(chatID)}
                   className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   {firstMessage ? firstMessage : "no messages"} -{" "}
-                  <b>{model ? model : "no model"}</b>
+                  <b>
+                    {model ? model + " " : "no model"}
+                    {status === "fetching" && (
+                      <FiLoader className="inline animate-spin" />
+                    )}
+                  </b>
                 </div>
               ),
             )}
