@@ -27,6 +27,7 @@ export type ChatPreview = {
   firstMessage?: string | null;
   model?: string | null;
   startDate: string;
+  status: LoadingStatuses;
 };
 export type ChatsPreviewsByDates = {
   "weekAgo": ChatPreview[];

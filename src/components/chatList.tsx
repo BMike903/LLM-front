@@ -1,3 +1,5 @@
+import { FiLoader } from "react-icons/fi";
+
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
 import { daysSince } from "../utils/date";
@@ -14,6 +16,7 @@ function ChatList() {
       firstMessage: chatContent.messages[0]?.content,
       model: chatContent.modelKey,
       startDate: chatContent.startDate,
+      status: chatContent.status,
     }),
   );
   if (!chatsPreviews) return null;
@@ -63,14 +66,19 @@ function ChatList() {
           <li className="flex flex-col gap-2">
             <div className="text-center">Today</div>
             {chatsPreviewsByDates["today"].map(
-              ({ chatID, firstMessage, model }) => (
+              ({ chatID, firstMessage, model, status }) => (
                 <div
                   key={chatID}
                   onClick={() => setCurrentChat(chatID)}
                   className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   {firstMessage ? firstMessage : "no messages"} -{" "}
-                  <b>{model ? model : "no model"}</b>
+                  <b>
+                    {model ? model + " " : "no model"}
+                    {status === "fetching" && (
+                      <FiLoader className="inline animate-spin" />
+                    )}
+                  </b>
                 </div>
               ),
             )}
