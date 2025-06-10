@@ -22,4 +22,17 @@ export type Chats = {
   };
 };
 
+export type ChatPreview = {
+  chatID: string;
+  firstMessage?: string | null;
+  model?: string | null;
+  startDate: string;
+};
+export type ChatsPreviewsByDates = {
+  "weekAgo": ChatPreview[];
+  "3daysAgo": ChatPreview[];
+  "yesterday": ChatPreview[];
+  "today": ChatPreview[];
+};
+
 export type LoadingStatuses = "idle" | "fetching" | "error";

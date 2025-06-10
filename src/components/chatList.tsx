@@ -1,20 +1,7 @@
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
-
 import { daysSince } from "../utils/date";
-
-type ChatPreview = {
-  chatID: string;
-  firstMessage?: string | null;
-  model?: string | null;
-  startDate: string;
-};
-type ChatsPreviewsByDates = {
-  "weekAgo": ChatPreview[];
-  "3daysAgo": ChatPreview[];
-  "yesterday": ChatPreview[];
-  "today": ChatPreview[];
-};
+import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
 
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
