@@ -1,4 +1,4 @@
-import { FiLoader } from "react-icons/fi";
+import { FiLoader, FiAlertCircle } from "react-icons/fi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
@@ -59,6 +59,9 @@ function ChatList() {
           {chatContent.model ? chatContent.model + " " : "no model"}
           {chatContent.status === "fetching" && (
             <FiLoader className="inline animate-spin" />
+          )}
+          {chatContent.status === "error" && (
+            <FiAlertCircle className="inline text-red-600" />
           )}
         </b>
       </div>
