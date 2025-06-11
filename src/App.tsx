@@ -10,14 +10,13 @@ import { asterisksToBoldMarkup } from "./utils/stringUtils";
 import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import { models } from "./constants/models";
 import { getModel } from "./types/models";
+import { sendMessage } from "./services/chatService";
 
 function App() {
   const currentChatId = useCurrentChatId();
   const currentChat = useCurrentChat();
   const { messages, status, modelKey, startDate, draftMessage } = currentChat;
   const model = modelKey ? getModel(modelKey) : null;
-  const addMessage = useChatsStore((state) => state.addMessage);
-  const setStatus = useChatsStore((state) => state.setStatus);
   const setModel = useChatsStore((state) => state.setModel);
   const setDraftMessage = useChatsStore((state) => state.setDraftMessage);
 
@@ -32,37 +31,7 @@ function App() {
   const makeRequest = async () => {
     if (status === "fetching" || isInputEmpty()) return;
     if (model == null) return;
-
-    setStatus(currentChatId, "fetching");
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: model.APIName,
-          messages: [
-            ...messages,
-            { "role": "user", "content": String(draftMessage) },
-          ],
-        }),
-      },
-    );
-
-    if (!response.ok) {
-      console.log("ERROR: ", response);
-      setStatus(currentChatId, "error");
-      return;
-    }
-
-    const data = await response.json();
-    addMessage(currentChatId, "user", draftMessage);
-    addMessage(currentChatId, "assistant", data.choices[0].message.content);
-    setStatus(currentChatId, "idle");
-    setDraftMessage(currentChatId, "");
+    sendMessage(draftMessage, currentChatId);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
