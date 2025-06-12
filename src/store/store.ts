@@ -6,7 +6,7 @@ import { devtools } from "zustand/middleware";
 import { Roles, Chats, LoadingStatuses } from "../types/chat";
 import {
   planetsChatMessages,
-  aircraftChatMessages,
+  zustandChatMessages,
   pancakeChatMessages,
   laptopChatMessages,
 } from "../constants/preMadeChats";
@@ -46,7 +46,7 @@ const useChatsStore = create<StoreState>()(
             status: "idle",
             modelKey: "llama-4",
             startDate: getRandomTimeFromPastDays(15).toISOString(),
-            messages: [...aircraftChatMessages],
+            messages: [...zustandChatMessages],
             draftMessage: "",
           },
           "fV3CTpvaQfWfHIjMxfzUo": {

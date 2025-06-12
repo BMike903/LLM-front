@@ -7,7 +7,6 @@ import Markdown from "react-markdown";
 
 import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
-import { asterisksToBoldMarkup } from "./utils/stringUtils";
 import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import { models } from "./constants/models";
 import { getModel } from "./types/models";
