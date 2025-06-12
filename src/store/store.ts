@@ -34,6 +34,7 @@ const useChatsStore = create<StoreState>()(
             startDate: new Date().toISOString(),
             messages: [],
             draftMessage: "",
+            title: "",
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
@@ -41,6 +42,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(3).toISOString(),
             messages: [...planetsChatMessages],
             draftMessage: "Yes",
+            title: "Planetary Order",
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
@@ -48,6 +50,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...zustandChatMessages],
             draftMessage: "",
+            title: "Zustand State Management",
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
@@ -55,6 +58,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(2).toISOString(),
             messages: [...pancakeChatMessages],
             draftMessage: "",
+            title: "",
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
@@ -62,6 +66,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(1).toISOString(),
             messages: [...laptopChatMessages],
             draftMessage: "",
+            title: "",
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
@@ -91,6 +96,7 @@ const useChatsStore = create<StoreState>()(
             messages: [],
             startDate: new Date().toISOString(),
             draftMessage: "",
+            title: "",
           };
           state.chats.currentChatId = newChatId;
         });
