@@ -193,7 +193,130 @@ export const pancakeChatMessages: Message[] = [
   {
     role: "assistant",
     id: nanoid(),
-    content: `Pancakes! Who can resist a fluffy, golden-brown stack of goodness? Here are some delicious pancake recipes you might enjoy: Classic Buttermilk Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup buttermilk * 1 large egg * 2 tablespoons unsalted butter, melted Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Cook on a non-stick skillet or griddle over medium heat. Blueberry Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1 cup fresh or frozen blueberries Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Gently fold in blueberries. 5. Cook on a non-stick skillet or griddle over medium heat. Banana Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 2 ripe bananas, mashed Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in mashed bananas. 5. Cook on a non-stick skillet or griddle over medium heat. Chocolate Chip Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1/2 cup semi-sweet chocolate chips Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in chocolate chips. 5. Cook on a non-stick skillet or griddle over medium heat. Cinnamon Apple Pancakes Ingredients: * 1 cup all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted * 1/2 cup diced apple * 1/2 teaspoon ground cinnamon Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Fold in diced apple and cinnamon. 5. Cook on a non-stick skillet or griddle over medium heat. Protein Pancakes Ingredients: * 1 scoop vanilla protein powder * 1/2 cup rolled oats * 1/2 cup almond milk * 1 large egg * 1/4 teaspoon salt * 1 tablespoon unsalted butter, melted * Optional: fruit, nuts, or chocolate chips Instructions: 1. Whisk protein powder, oats, and almond milk together. 2. Add egg, salt, and melted butter. Whisk until smooth. 3. Cook on a non-stick skillet or griddle over medium heat. 4. Add optional toppings. Gluten-Free Pancakes Ingredients: * 1 cup gluten-free all-purpose flour * 2 tablespoons sugar * 2 teaspoons baking powder * 1/4 teaspoon salt * 1 cup milk * 1 large egg * 2 tablespoons unsalted butter, melted Instructions: 1. Whisk dry ingredients together. 2. In a separate bowl, whisk wet ingredients together. 3. Pour wet ingredients into dry ingredients and stir until just combined. 4. Cook on a non-stick skillet or griddle over medium heat. Feel free to experiment with different combinations of ingredients and toppings to create your perfect pancake!`,
+    content: `Pancakes! Who can resist a fluffy, golden-brown stack of goodness? Here are some delicious pancake recipes for you to try:
+
+**Classic Buttermilk Pancakes**
+
+Ingredients:
+
+* 1 1/2 cups all-purpose flour
+* 3 1/2 teaspoons baking powder
+* 1 teaspoon salt
+* 1 cup buttermilk
+* 2 large eggs
+* 2 tablespoons unsalted butter, melted
+* Honey or maple syrup (optional)
+
+Instructions:
+
+1. Whisk dry ingredients in a bowl.
+2. In a separate bowl, whisk together buttermilk, eggs, and melted butter.
+3. Add wet ingredients to dry ingredients and stir until just combined.
+4. Cook on a non-stick pan or griddle over medium heat.
+
+**Banana Pancakes**
+
+Ingredients:
+
+* 2 ripe bananas, mashed
+* 1 1/2 cups all-purpose flour
+* 2 1/2 teaspoons baking powder
+* 1/4 teaspoon salt
+* 1 cup milk
+* 1 large egg
+* 2 tablespoons unsalted butter, melted
+* Optional: chopped walnuts or chocolate chips
+
+Instructions:
+
+1. Whisk dry ingredients in a bowl.
+2. In a separate bowl, whisk together milk, egg, melted butter, and mashed bananas.
+3. Add wet ingredients to dry ingredients and stir until just combined.
+4. Cook on a non-stick pan or griddle over medium heat.
+
+**Blueberry Lemon Pancakes**
+
+Ingredients:
+
+* 1 1/2 cups all-purpose flour
+* 2 1/2 teaspoons baking powder
+* 1/4 teaspoon salt
+* 1 cup milk
+* 1 large egg
+* 2 tablespoons unsalted butter, melted
+* 1 tablespoon lemon juice
+* 1 cup fresh or frozen blueberries
+
+Instructions:
+
+1. Whisk dry ingredients in a bowl.
+2. In a separate bowl, whisk together milk, egg, melted butter, and lemon juice.
+3. Add wet ingredients to dry ingredients and stir until just combined.
+4. Gently fold in blueberries.
+5. Cook on a non-stick pan or griddle over medium heat.
+
+**Cinnamon Apple Pancakes**
+
+Ingredients:
+
+* 1 1/2 cups all-purpose flour
+* 2 1/2 teaspoons baking powder
+* 1/4 teaspoon salt
+* 1 cup milk
+* 1 large egg
+* 2 tablespoons unsalted butter, melted
+* 1/2 teaspoon ground cinnamon
+* 1/2 cup diced apple (Granny Smith or other sweet variety)
+
+Instructions:
+
+1. Whisk dry ingredients in a bowl.
+2. In a separate bowl, whisk together milk, egg, melted butter, and cinnamon.
+3. Add wet ingredients to dry ingredients and stir until just combined.
+4. Gently fold in diced apple.
+5. Cook on a non-stick pan or griddle over medium heat.
+
+**Protein Pancakes (with Greek yogurt and oats)**
+
+Ingredients:
+
+* 1 cup rolled oats
+* 1/2 cup Greek yogurt
+* 1/2 cup milk
+* 1 large egg
+* 1 scoop vanilla protein powder (optional)
+* 1 tablespoon honey or maple syrup (optional)
+* Pinch of salt
+
+Instructions:
+
+1. Blend oats, Greek yogurt, milk, egg, and protein powder (if using) in a blender.
+2. Heat a non-stick pan or griddle over medium heat.
+3. Drop batter by 1/4 cupfuls onto pan.
+4. Cook until bubbles appear on surface and edges start to dry.
+
+**Vegan Pancakes (with almond milk and flaxseed)**
+
+Ingredients:
+
+* 1 1/2 cups all-purpose flour
+* 2 1/2 teaspoons baking powder
+* 1/4 teaspoon salt
+* 1 cup almond milk
+* 1 flax egg*
+* 2 tablespoons canola oil
+* Optional: blueberries, chocolate chips, or nuts
+
+Instructions:
+
+1. Whisk dry ingredients in a bowl.
+2. In a separate bowl, whisk together almond milk, flax egg, and canola oil.
+3. Add wet ingredients to dry ingredients and stir until just combined.
+4. Cook on a non-stick pan or griddle over medium heat.
+
+*To make flax egg, mix 1 tablespoon ground flaxseed with 3 tablespoons water in a small bowl. Let sit for 5 minutes to thicken.
+
+Feel free to experiment with different combinations of ingredients and toppings to create your perfect pancake!`,
   },
 ];
 
@@ -206,16 +329,79 @@ export const laptopChatMessages: Message[] = [
   {
     role: "assistant",
     id: nanoid(),
-    content: `The ideal temperature for an idle laptop depends on various factors, including the laptop's design, ambient temperature, and usage patterns. However, here are some general guidelines: Typical temperature ranges: * Idle: 40°C to 60°C (104°F to 140°F) * Light usage (browsing, office work): 50°C to 70°C (122°F to 158°F) * Heavy usage (gaming, video editing): 70°C to 90°C (158°F to 194°F) Recommended temperature thresholds: * Maximum: 85°C (185°F) - prolonged exposure above this temperature can reduce laptop lifespan * Optimal: 50°C to 65°C (122°F to 149°F) - a comfortable range for long-term usage Factors that influence temperature: 1. Ambient temperature: The temperature of the room or environment where the laptop is used. 2. Laptop design: The cooling system, materials, and design of the laptop can affect its temperature. 3. Usage patterns: Resource-intensive activities like gaming, video editing, or software development can increase the temperature. 4. Battery health: A worn-out battery can cause the laptop to heat up more. Tips to maintain a healthy temperature: 1. Use your laptop on a hard, flat surface: This allows for good airflow and helps dissipate heat. 2. Keep the laptop clean: Regularly clean dust from the vents and fans to ensure proper airflow. 3. Monitor your laptop's temperature: Use software like SpeedFan, HWMonitor, or GPU-Z to track your laptop's temperature. 4. Consider using a laptop cooling pad: These pads can help reduce temperature, especially during intense usage. By keeping your laptop within the recommended temperature ranges and following these tips, you can help extend its lifespan and ensure reliable performance.`,
+    content: `The ideal temperature for an idle laptop depends on several factors, including the type of laptop, its components, and the ambient temperature. However, here are some general guidelines:
+
+**Safe temperature ranges:**
+
+* **CPU (Processor):** 40°C to 80°C (104°F to 176°F) - Idle: around 40°C to 50°C (104°F to 122°F)
+* **GPU (Graphics Card):** 40°C to 90°C (104°F to 194°F) - Idle: around 40°C to 50°C (104°F to 122°F)
+* **Laptop skin ( exterior ):** 25°C to 40°C (77°F to 104°F)
+
+**Recommended idle temperatures:**
+
+* For most laptops, an idle temperature between 30°C to 50°C (86°F to 122°F) is considered normal and safe.
+* For gaming laptops or those with high-performance components, idle temperatures may be slightly higher, around 40°C to 60°C (104°F to 140°F).
+
+**Factors that can affect laptop temperature:**
+
+1. **Ambient temperature:** Operating in a hot environment can increase laptop temperatures.
+2. **Laptop usage:** Heavy usage, such as gaming or video editing, can increase temperatures.
+3. **Cooling system:** Laptops with inadequate cooling systems or clogged air vents may run hotter.
+4. **Component quality:** High-quality components can handle higher temperatures, while lower-quality components may be more sensitive to heat.
+
+**Tips to maintain a healthy laptop temperature:**
+
+1. **Keep your laptop in a well-ventilated area.**
+2. **Use a laptop stand or cooling pad** to improve airflow.
+3. **Regularly clean dust from air vents and fans.**
+4. **Monitor your laptop's temperature** using software tools (e.g., HWMonitor, SpeedFan, or GPU-Z).
+5. **Consider applying thermal paste** to the CPU or GPU if you're comfortable with laptop maintenance.
+
+By keeping your laptop within these temperature ranges and following the tips above, you can help prolong its lifespan and prevent heat-related issues. ch`,
   },
   {
     role: "user",
     id: nanoid(),
-    content: `What if I play on it very long?`,
+    content: `And for extensive usage?`,
   },
   {
     role: "assistant",
     id: nanoid(),
-    content: `If you play on your laptop for an extended period, it's normal for the temperature to rise. Here are some tips to help manage the temperature during long gaming sessions: Pre-gaming precautions: 1. Ensure good airflow: Place your laptop on a hard, flat surface to allow for proper airflow. 2. Clean dust from vents and fans: Regularly clean dust from the vents and fans to ensure proper airflow. During long gaming sessions: 1. Take breaks: Take breaks every 30-60 minutes to give your laptop a chance to cool down. 2. Monitor temperature: Use software like SpeedFan, HWMonitor, or GPU-Z to track your laptop's temperature. 3. Adjust game settings: Lower game settings or turn off unnecessary features to reduce heat generation. Post-gaming precautions: 1. Let it cool down: Allow your laptop to cool down for at least 30 minutes before shutting it down. 2. Use a cooling pad: Consider investing in a laptop cooling pad to help keep your laptop cool during gaming sessions. Temperature thresholds during long gaming sessions: * GPU temperature: Up to 80°C (176°F) is considered safe, but above 85°C (185°F) can cause damage. * CPU temperature: Up to 90°C (194°F) is considered safe, but above 95°C (203°F) can cause damage. By following these tips, you can help extend the lifespan of your laptop and prevent overheating during long gaming sessions.`,
+    content: `**Temperature guidelines for extensive laptop usage:**
+
+When using your laptop extensively, such as for gaming, video editing, or other resource-intensive tasks, it's essential to keep temperatures within safe ranges to prevent damage to your components. Here are some guidelines:
+
+**Maximum safe temperatures:**
+
+* **CPU (Processor):** 80°C to 90°C (176°F to 194°F) - Avoid temperatures above 95°C (203°F)
+* **GPU (Graphics Card):** 80°C to 95°C (176°F to 203°F) - Avoid temperatures above 100°C (212°F)
+* **Laptop skin (exterior):** 40°C to 50°C (104°F to 122°F)
+
+**Recommended temperatures for extensive usage:**
+
+* For most laptops, a temperature range of 60°C to 80°C (140°F to 176°F) during extensive usage is considered safe.
+* For gaming laptops or those with high-performance components, temperatures may reach up to 90°C (194°F) during intense usage.
+
+**Factors to consider:**
+
+1. **Usage patterns:** Running multiple resource-intensive applications simultaneously can increase temperatures.
+2. **Laptop cooling system:** Laptops with advanced cooling systems, such as dual fans or liquid cooling, can handle higher temperatures.
+3. **Ambient temperature:** Operating in a hot environment can increase laptop temperatures.
+
+**Tips to manage temperatures during extensive usage:**
+
+1. **Use a laptop stand or cooling pad** to improve airflow and dissipate heat.
+2. **Monitor your laptop's temperature** using software tools (e.g., HWMonitor, SpeedFan, or GPU-Z).
+3. **Take regular breaks** to allow your laptop to cool down.
+4. **Adjust your laptop's power settings** to balance performance and temperature.
+5. **Consider upgrading your laptop's cooling system** if you're experiencing high temperatures during extensive usage.
+
+**Warning signs of overheating:**
+
+1. **Loud fan noise:** If your laptop's fans are running at maximum speed, it may be a sign of overheating.
+2. **Throttling:** If your laptop's performance slows down due to high temperatures, it's a sign that it's trying to protect itself.
+3. **Shutdowns:** If your laptop shuts down due to overheating, it's a clear indication that temperatures are too high.
+
+By following these guidelines and tips, you can help keep your laptop within safe temperatures during extensive usage and prevent damage to your components.`,
   },
 ];
