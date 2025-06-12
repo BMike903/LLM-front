@@ -11,11 +11,13 @@ import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import { models } from "./constants/models";
 import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
+import { selectTitleOrFirstMessage } from "./utils/chat";
 
 function App() {
   const currentChatId = useCurrentChatId();
   const currentChat = useCurrentChat();
-  const { messages, status, modelKey, startDate, draftMessage } = currentChat;
+  const { messages, status, modelKey, startDate, draftMessage, title } =
+    currentChat;
   const model = modelKey ? getModel(modelKey) : null;
   const setModel = useChatsStore((state) => state.setModel);
   const setDraftMessage = useChatsStore((state) => state.setDraftMessage);
@@ -59,7 +61,11 @@ function App() {
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div>
-            Model: <b>{model ? model.name : "No model selected"}</b>
+            Chat:{" "}
+            <b className="mr-2">
+              {selectTitleOrFirstMessage(title, messages[0]?.content)}
+            </b>
+            with Model: <b>{model ? model.name : "No model selected"}</b>
           </div>
           <div>Chat started at: {new Date(startDate).toUTCString()}</div>
         </div>

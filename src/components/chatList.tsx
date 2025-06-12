@@ -4,6 +4,7 @@ import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
 import { daysSince } from "../utils/date";
 import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
+import { selectTitleOrFirstMessage } from "../utils/chat";
 
 function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
@@ -17,6 +18,7 @@ function ChatList() {
       model: chatContent.modelKey,
       startDate: chatContent.startDate,
       status: chatContent.status,
+      title: chatContent.title,
     }),
   );
   if (!chatsPreviews) return null;
@@ -54,7 +56,9 @@ function ChatList() {
         onClick={() => setCurrentChat(chatContent.chatID)}
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
-        {chatContent.firstMessage ? chatContent.firstMessage : "no messages"} -{" "}
+        {/* {chatContent.firstMessage ? chatContent.firstMessage : "no messages"} */}
+        {selectTitleOrFirstMessage(chatContent.title, chatContent.firstMessage)}{" "}
+        -{" "}
         <b>
           {chatContent.model ? chatContent.model + " " : "no model"}
           {chatContent.status === "fetching" && (
