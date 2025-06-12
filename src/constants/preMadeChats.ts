@@ -11,17 +11,19 @@ export const planetsChatMessages: Message[] = [
   {
     role: "assistant",
     id: nanoid(),
-    content: `The first planet in our solar system is Mercury. It is the smallest planet and is closest to the Sun.`,
+    content: `The first planet in our solar system, based on proximity to the Sun, is **Mercury**. It is the closest planet to the Sun and orbits at an average distance of about 58 million kilometers (36 million miles). Mercury is also the smallest planet in our solar system, slightly larger than Earth's Moon. Its position and characteristics make it the first of the eight recognized planets in order from the Sun.`,
   },
   {
     role: "user",
     id: nanoid(),
-    content: `And second one is?`,
+    content: `And next is?`,
   },
   {
     role: "assistant",
     id: nanoid(),
-    content: `The second planet in our solar system is Venus. It's often referred to as Earth's sister planet due to their similar size and proximity to the Sun.`,
+    content: `The next planet after Mercury is **Venus**, the second planet from the Sun. Venus is often called Earth's "sister planet" due to its similar size and rocky composition, but its environment is drastically different. It has a thick, toxic atmosphere dominated by carbon dioxide with clouds of sulfuric acid, creating an extreme greenhouse effect that makes Venus the **hottest planet in the solar system**, with surface temperatures reaching **467°C (872°F)**. Venus also rotates backward (retrograde rotation) compared to most planets and is the brightest natural object in Earth's night sky after the Moon.  
+
+    Would you like to continue to the third planet? 🌍`,
   },
 ];
 

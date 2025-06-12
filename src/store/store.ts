@@ -40,7 +40,7 @@ const useChatsStore = create<StoreState>()(
             modelKey: "mai-ds",
             startDate: getRandomTimeFromPastDays(3).toISOString(),
             messages: [...planetsChatMessages],
-            draftMessage: "next one is?",
+            draftMessage: "Yes",
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
