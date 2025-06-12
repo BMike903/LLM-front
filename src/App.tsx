@@ -3,6 +3,7 @@ import "./tailwind.css";
 
 import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
+import Markdown from "react-markdown";
 
 import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
@@ -97,7 +98,7 @@ function App() {
             } else {
               return (
                 <div key={message.id}>
-                  {asterisksToBoldMarkup(message.content)}
+                  <Markdown>{message.content}</Markdown>
                 </div>
               );
             }
