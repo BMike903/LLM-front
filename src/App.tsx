@@ -11,7 +11,7 @@ import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import { models } from "./constants/models";
 import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
-import { selectTitleOrFirstMessage } from "./utils/chat";
+import CurrentChatTitleInput from "./components/titleInput";
 
 function App() {
   const currentChatId = useCurrentChatId();
@@ -62,10 +62,14 @@ function App() {
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div>
             Chat:{" "}
-            <b className="mr-2">
-              {selectTitleOrFirstMessage(title, messages[0]?.content)}
+            <b className="mr-5">
+              <CurrentChatTitleInput
+                title={title}
+                firstMessage={messages[0]?.content}
+                chatID={currentChatId}
+              />
             </b>
-            with Model: <b>{model ? model.name : "No model selected"}</b>
+            with model: <b>{model ? model.name : "No model selected"}</b>
           </div>
           <div>Chat started at: {new Date(startDate).toUTCString()}</div>
         </div>

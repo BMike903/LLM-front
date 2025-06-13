@@ -21,6 +21,7 @@ interface StoreState {
   addNewChat: () => void;
   setModel: (chatID: string, model: ModelsKey) => void;
   setDraftMessage: (chatID: string, draftMessage: string) => void;
+  setTitle: (chatID: string, newTitle: string) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -110,6 +111,11 @@ const useChatsStore = create<StoreState>()(
       setDraftMessage(chatID, draftMessage) {
         set((state) => {
           state.chats.allChats[chatID].draftMessage = draftMessage;
+        });
+      },
+      setTitle(chatID, newTitle) {
+        set((state) => {
+          state.chats.allChats[chatID].title = newTitle;
         });
       },
     })),
