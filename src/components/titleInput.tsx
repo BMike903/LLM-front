@@ -41,12 +41,13 @@ function CurrentChatTitleInput({
   };
 
   return (
-    <>
+    <div className="flex w-96 flex-row gap-3">
       <input
         disabled={!isEditing}
         value={inputTitle}
         onChange={(e) => setInputTitle(e.target.value)}
         ref={inputRef}
+        className="w-80"
       />
       {isEditing ? (
         <>
@@ -62,7 +63,7 @@ function CurrentChatTitleInput({
           <FiEdit2 />
         </button>
       )}
-    </>
+    </div>
   );
 }
 

@@ -60,9 +60,9 @@ function App() {
         className="flex h-full flex-5/6 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
-          <div>
+          <div className="flex flex-row">
             Chat:{" "}
-            <b className="mr-5">
+            <b className="mx-5">
               <CurrentChatTitleInput
                 title={title}
                 firstMessage={messages[0]?.content}
