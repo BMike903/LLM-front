@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 
-import { FiEdit2, FiCheck, FiRotateCcw, FiLoader } from "react-icons/fi";
+import {
+  FiEdit2,
+  FiCheck,
+  FiRotateCcw,
+  FiLoader,
+  FiExternalLink,
+} from "react-icons/fi";
 
 import { selectTitleOrFirstMessage } from "../utils/chat";
 import useChatsStore from "../store/store";
@@ -89,7 +95,7 @@ function CurrentChatTitleInput({
             {titleTipStatus === "fetching" ? (
               <FiLoader className="animate-spin" />
             ) : (
-              <>Sug</>
+              <FiExternalLink title="Get suggestion from model" />
             )}
           </button>
         </>
