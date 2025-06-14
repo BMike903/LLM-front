@@ -15,6 +15,8 @@ export type Chat = {
   startDate: string;
   draftMessage: string;
   title: string;
+  titleTip: string;
+  titleTipStatus: LoadingStatuses;
 };
 
 export type Chats = {

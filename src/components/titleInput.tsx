@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-import { FiEdit2, FiCheck, FiRotateCcw } from "react-icons/fi";
+import { FiEdit2, FiCheck, FiRotateCcw, FiLoader } from "react-icons/fi";
 
 import { selectTitleOrFirstMessage } from "../utils/chat";
 import useChatsStore from "../store/store";
+import { suggestTitle } from "../services/chatService";
 
 type CurrentChatTitleInputProps = {
   title: string;
@@ -17,6 +18,15 @@ function CurrentChatTitleInput({
   chatID,
 }: CurrentChatTitleInputProps) {
   const setTitle = useChatsStore((state) => state.setTitle);
+  const chatMessages = useChatsStore(
+    (state) => state.chats.allChats[chatID].messages,
+  );
+  const titleTip = useChatsStore(
+    (state) => state.chats.allChats[chatID].titleTip,
+  );
+  const titleTipStatus = useChatsStore(
+    (state) => state.chats.allChats[chatID].titleTipStatus,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(
@@ -29,8 +39,17 @@ function CurrentChatTitleInput({
   }, [title, firstMessage]);
   useEffect(() => {
     inputRef.current?.focus();
-  }, [isEditing]);
+  }, [isEditing, titleTip]);
+  useEffect(() => {
+    if (titleTip !== "") {
+      setInputTitle(titleTip);
+    }
+  }, [titleTip]);
 
+  const handleSuggest = () => {
+    if (chatMessages.length === 0) return;
+    suggestTitle(chatID);
+  };
   const handleSubmit = () => {
     setIsEditing((editing) => !editing);
     setTitle(chatID, inputTitle);
@@ -43,7 +62,7 @@ function CurrentChatTitleInput({
   return (
     <div className="flex w-96 flex-row gap-3">
       <input
-        disabled={!isEditing}
+        disabled={!isEditing || titleTipStatus === "fetching"}
         value={inputTitle}
         onChange={(e) => setInputTitle(e.target.value)}
         ref={inputRef}
@@ -51,11 +70,27 @@ function CurrentChatTitleInput({
       />
       {isEditing ? (
         <>
-          <button onClick={() => handleSubmit()}>
+          <button
+            onClick={() => handleSubmit()}
+            disabled={titleTipStatus === "fetching"}
+          >
             <FiCheck />
           </button>
-          <button onClick={() => handleUndo()}>
+          <button
+            onClick={() => handleUndo()}
+            disabled={titleTipStatus === "fetching"}
+          >
             <FiRotateCcw />
+          </button>
+          <button
+            onClick={() => handleSuggest()}
+            disabled={titleTipStatus === "fetching"}
+          >
+            {titleTipStatus === "fetching" ? (
+              <FiLoader className="animate-spin" />
+            ) : (
+              <>Sug</>
+            )}
           </button>
         </>
       ) : (

@@ -22,6 +22,8 @@ interface StoreState {
   setModel: (chatID: string, model: ModelsKey) => void;
   setDraftMessage: (chatID: string, draftMessage: string) => void;
   setTitle: (chatID: string, newTitle: string) => void;
+  setTitleTip: (chatID: string, titleTip: string) => void;
+  setTitleTipStatus: (chatID: string, status: LoadingStatuses) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -36,6 +38,8 @@ const useChatsStore = create<StoreState>()(
             messages: [],
             draftMessage: "",
             title: "",
+            titleTip: "",
+            titleTipStatus: "idle",
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
@@ -44,6 +48,8 @@ const useChatsStore = create<StoreState>()(
             messages: [...planetsChatMessages],
             draftMessage: "Yes",
             title: "Planetary Order",
+            titleTip: "",
+            titleTipStatus: "idle",
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
@@ -52,6 +58,8 @@ const useChatsStore = create<StoreState>()(
             messages: [...zustandChatMessages],
             draftMessage: "",
             title: "Zustand State Management",
+            titleTip: "",
+            titleTipStatus: "idle",
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
@@ -60,6 +68,8 @@ const useChatsStore = create<StoreState>()(
             messages: [...pancakeChatMessages],
             draftMessage: "",
             title: "",
+            titleTip: "",
+            titleTipStatus: "idle",
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
@@ -68,6 +78,8 @@ const useChatsStore = create<StoreState>()(
             messages: [...laptopChatMessages],
             draftMessage: "",
             title: "",
+            titleTip: "",
+            titleTipStatus: "idle",
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
@@ -98,6 +110,8 @@ const useChatsStore = create<StoreState>()(
             startDate: new Date().toISOString(),
             draftMessage: "",
             title: "",
+            titleTip: "",
+            titleTipStatus: "idle",
           };
           state.chats.currentChatId = newChatId;
         });
@@ -116,6 +130,16 @@ const useChatsStore = create<StoreState>()(
       setTitle(chatID, newTitle) {
         set((state) => {
           state.chats.allChats[chatID].title = newTitle;
+        });
+      },
+      setTitleTipStatus(chatID, status) {
+        set((state) => {
+          state.chats.allChats[chatID].titleTipStatus = status;
+        });
+      },
+      setTitleTip(chatID, titleTip) {
+        set((state) => {
+          state.chats.allChats[chatID].titleTip = titleTip;
         });
       },
     })),
