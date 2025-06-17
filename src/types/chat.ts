@@ -16,7 +16,7 @@ export type Chat = {
   draftMessage: string;
   title: string;
   titleTip: string;
-  titleTipStatus: LoadingStatuses;
+  titleTipStatus: TitleTipStatuses;
 };
 
 export type Chats = {
@@ -42,3 +42,5 @@ export type ChatsPreviewsByDates = {
 };
 
 export type LoadingStatuses = "idle" | "fetching" | "error";
+
+export type TitleTipStatuses = "empty" | "fetching" | "error" | "notApplied";

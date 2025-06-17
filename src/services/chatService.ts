@@ -88,6 +88,6 @@ export async function suggestTitle(chatID: string) {
   }
 
   const data = await response.json();
-  setTitleTipStatus(chatID, "idle");
+  setTitleTipStatus(chatID, "notApplied");
   setTitleTip(chatID, data.choices[0].message.content);
 }

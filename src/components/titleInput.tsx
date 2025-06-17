@@ -6,6 +6,8 @@ import {
   FiRotateCcw,
   FiLoader,
   FiExternalLink,
+  FiAlertTriangle,
+  FiCornerDownLeft,
 } from "react-icons/fi";
 
 import { selectTitleOrFirstMessage } from "../utils/chat";
@@ -30,9 +32,12 @@ function CurrentChatTitleInput({
   const titleTip = useChatsStore(
     (state) => state.chats.allChats[chatID].titleTip,
   );
+  const setTitleTip = useChatsStore((state) => state.setTitleTip);
   const titleTipStatus = useChatsStore(
     (state) => state.chats.allChats[chatID].titleTipStatus,
   );
+  const setTitleTipStatus = useChatsStore((state) => state.setTitleTipStatus);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(
@@ -64,6 +69,11 @@ function CurrentChatTitleInput({
     setIsEditing((editing) => !editing);
     setInputTitle(selectTitleOrFirstMessage(title, firstMessage));
   };
+  const handleApplySuggestedTitle = () => {
+    setInputTitle(titleTip);
+    setTitleTipStatus(chatID, "empty");
+    setTitleTip(chatID, "");
+  };
 
   return (
     <div className="flex w-96 flex-row gap-3">
@@ -74,6 +84,7 @@ function CurrentChatTitleInput({
         ref={inputRef}
         className="w-80"
       />
+
       {isEditing ? (
         <>
           <button
@@ -88,21 +99,41 @@ function CurrentChatTitleInput({
           >
             <FiRotateCcw />
           </button>
-          <button
-            onClick={() => handleSuggest()}
-            disabled={titleTipStatus === "fetching"}
-          >
-            {titleTipStatus === "fetching" ? (
-              <FiLoader className="animate-spin" />
-            ) : (
-              <FiExternalLink title="Get suggestion from model" />
-            )}
-          </button>
+
+          {titleTipStatus === "notApplied" ? (
+            <button onClick={handleApplySuggestedTitle}>
+              <FiCornerDownLeft
+                color="#d4ac0d"
+                title="Apply suggested title tip"
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => handleSuggest()}
+              disabled={titleTipStatus === "fetching"}
+            >
+              {titleTipStatus === "fetching" ? (
+                <FiLoader className="animate-spin" />
+              ) : (
+                <FiExternalLink title="Get suggestion from model" />
+              )}
+            </button>
+          )}
         </>
       ) : (
-        <button onClick={() => setIsEditing((editing) => !editing)}>
-          <FiEdit2 />
-        </button>
+        <>
+          {titleTipStatus === "notApplied" && (
+            <button>
+              <FiAlertTriangle
+                color="#d4ac0d"
+                title="Title tip was not applied"
+              />
+            </button>
+          )}
+          <button onClick={() => setIsEditing((editing) => !editing)}>
+            <FiEdit2 />
+          </button>
+        </>
       )}
     </div>
   );

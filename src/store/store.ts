@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
 
-import { Roles, Chats, LoadingStatuses } from "../types/chat";
+import { Roles, Chats, LoadingStatuses, TitleTipStatuses } from "../types/chat";
 import {
   planetsChatMessages,
   zustandChatMessages,
@@ -23,7 +23,7 @@ interface StoreState {
   setDraftMessage: (chatID: string, draftMessage: string) => void;
   setTitle: (chatID: string, newTitle: string) => void;
   setTitleTip: (chatID: string, titleTip: string) => void;
-  setTitleTipStatus: (chatID: string, status: LoadingStatuses) => void;
+  setTitleTipStatus: (chatID: string, status: TitleTipStatuses) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -39,7 +39,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "",
             title: "",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
@@ -49,7 +49,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "Yes",
             title: "Planetary Order",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
@@ -59,7 +59,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "",
             title: "Zustand State Management",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
@@ -69,7 +69,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "",
             title: "",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
@@ -79,7 +79,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "",
             title: "",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
@@ -111,7 +111,7 @@ const useChatsStore = create<StoreState>()(
             draftMessage: "",
             title: "",
             titleTip: "",
-            titleTipStatus: "idle",
+            titleTipStatus: "empty",
           };
           state.chats.currentChatId = newChatId;
         });
