@@ -8,6 +8,7 @@ import {
   FiExternalLink,
   FiAlertTriangle,
   FiCornerDownLeft,
+  FiRotateCw,
 } from "react-icons/fi";
 
 import { selectTitleOrFirstMessage } from "../utils/chat";
@@ -98,6 +99,38 @@ function CurrentChatTitleInput({
             />
           </button>
         );
+      case "error":
+        return (
+          <button onClick={() => handleSuggest()}>
+            <FiRotateCw
+              color="red"
+              title="Retry getting suggestion from model "
+            />
+          </button>
+        );
+    }
+  };
+
+  const renderSuggestTitleTipWarning = () => {
+    switch (titleTipStatus) {
+      case "error":
+        return (
+          <button>
+            <FiAlertTriangle
+              color="red"
+              title="Error occurred while loading title tip"
+            />
+          </button>
+        );
+      case "notApplied":
+        return (
+          <button>
+            <FiAlertTriangle
+              color="#d4ac0d"
+              title="Title tip was not applied"
+            />
+          </button>
+        );
     }
   };
 
@@ -130,14 +163,8 @@ function CurrentChatTitleInput({
         </>
       ) : (
         <>
-          {titleTipStatus === "notApplied" && (
-            <button>
-              <FiAlertTriangle
-                color="#d4ac0d"
-                title="Title tip was not applied"
-              />
-            </button>
-          )}
+          {renderSuggestTitleTipWarning()}
+
           <button onClick={() => setIsEditing((editing) => !editing)}>
             <FiEdit2 />
           </button>
