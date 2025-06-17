@@ -75,6 +75,32 @@ function CurrentChatTitleInput({
     setTitleTip(chatID, "");
   };
 
+  const renderSuggestTitleTipButton = () => {
+    switch (titleTipStatus) {
+      case "empty":
+        return (
+          <button onClick={() => handleSuggest()}>
+            <FiExternalLink title="Get suggestion from model" />
+          </button>
+        );
+      case "fetching":
+        return (
+          <button>
+            <FiLoader className="animate-spin" />
+          </button>
+        );
+      case "notApplied":
+        return (
+          <button onClick={handleApplySuggestedTitle}>
+            <FiCornerDownLeft
+              color="#d4ac0d"
+              title="Apply suggested title tip"
+            />
+          </button>
+        );
+    }
+  };
+
   return (
     <div className="flex w-96 flex-row gap-3">
       <input
@@ -100,25 +126,7 @@ function CurrentChatTitleInput({
             <FiRotateCcw />
           </button>
 
-          {titleTipStatus === "notApplied" ? (
-            <button onClick={handleApplySuggestedTitle}>
-              <FiCornerDownLeft
-                color="#d4ac0d"
-                title="Apply suggested title tip"
-              />
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSuggest()}
-              disabled={titleTipStatus === "fetching"}
-            >
-              {titleTipStatus === "fetching" ? (
-                <FiLoader className="animate-spin" />
-              ) : (
-                <FiExternalLink title="Get suggestion from model" />
-              )}
-            </button>
-          )}
+          {renderSuggestTitleTipButton()}
         </>
       ) : (
         <>
