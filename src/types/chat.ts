@@ -33,6 +33,7 @@ export type ChatPreview = {
   startDate: string;
   status: LoadingStatuses;
   title: string;
+  titleTipStatus: string;
 };
 export type ChatsPreviewsByDates = {
   "weekAgo": ChatPreview[];

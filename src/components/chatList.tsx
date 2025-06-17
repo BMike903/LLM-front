@@ -19,6 +19,7 @@ function ChatList() {
       startDate: chatContent.startDate,
       status: chatContent.status,
       title: chatContent.title,
+      titleTipStatus: chatContent.titleTipStatus,
     }),
   );
   if (!chatsPreviews) return null;
@@ -63,7 +64,8 @@ function ChatList() {
           {chatContent.status === "fetching" && (
             <FiLoader className="inline animate-spin" />
           )}
-          {chatContent.status === "error" && (
+          {(chatContent.status === "error" ||
+            chatContent.titleTipStatus === "error") && (
             <FiAlertCircle className="inline text-red-600" />
           )}
         </b>
