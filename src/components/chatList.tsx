@@ -56,7 +56,6 @@ function ChatList() {
         onClick={() => setCurrentChat(chatContent.chatID)}
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
-        {/* {chatContent.firstMessage ? chatContent.firstMessage : "no messages"} */}
         {selectTitleOrFirstMessage(chatContent.title, chatContent.firstMessage)}{" "}
         -{" "}
         <b>
