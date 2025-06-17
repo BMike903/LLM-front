@@ -26,14 +26,12 @@ export type Chats = {
   };
 };
 
-export type ChatPreview = {
+export type ChatPreview = Omit<
+  Chat,
+  "messages" | "draftMessage" | "titleTip"
+> & {
   chatID: string;
   firstMessage?: string | null;
-  model?: string | null;
-  startDate: string;
-  status: LoadingStatuses;
-  title: string;
-  titleTipStatus: string;
 };
 export type ChatsPreviewsByDates = {
   "weekAgo": ChatPreview[];

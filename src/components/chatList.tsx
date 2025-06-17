@@ -15,7 +15,7 @@ function ChatList() {
     ([chatID, chatContent]) => ({
       chatID,
       firstMessage: chatContent.messages[0]?.content,
-      model: chatContent.modelKey,
+      modelKey: chatContent.modelKey,
       startDate: chatContent.startDate,
       status: chatContent.status,
       title: chatContent.title,
@@ -60,7 +60,7 @@ function ChatList() {
         {selectTitleOrFirstMessage(chatContent.title, chatContent.firstMessage)}{" "}
         -{" "}
         <b>
-          {chatContent.model ? chatContent.model + " " : "no model"}
+          {chatContent.modelKey ? chatContent.modelKey + " " : "no model"}
           {chatContent.status === "fetching" && (
             <FiLoader className="inline animate-spin" />
           )}
