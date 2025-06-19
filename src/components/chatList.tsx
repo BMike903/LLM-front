@@ -1,4 +1,4 @@
-import { FiLoader, FiAlertCircle } from "react-icons/fi";
+import { BiLoader, BiErrorCircle } from "react-icons/bi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
@@ -62,11 +62,11 @@ function ChatList() {
         <b>
           {chatContent.modelKey ? chatContent.modelKey + " " : "no model"}
           {chatContent.status === "fetching" && (
-            <FiLoader className="inline animate-spin" />
+            <BiLoader className="inline animate-spin" />
           )}
           {(chatContent.status === "error" ||
             chatContent.titleTipStatus === "error") && (
-            <FiAlertCircle className="inline text-red-600" />
+            <BiErrorCircle className="inline text-red-600" />
           )}
         </b>
       </div>

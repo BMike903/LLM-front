@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./tailwind.css";
 
-import { FiSend, FiLoader, FiRotateCcw } from "react-icons/fi";
+import { BiSend, BiLoader, BiRepeat } from "react-icons/bi";
 import { motion, AnimatePresence } from "motion/react";
 import Markdown from "react-markdown";
 
@@ -44,11 +44,11 @@ function App() {
 
   const renderSendButton = () => {
     if (status === "fetching") {
-      return <FiLoader className="animate-spin" size={30} />;
+      return <BiLoader className="animate-spin" size={30} />;
     } else if (status === "error") {
-      return <FiRotateCcw size={30} />;
+      return <BiRepeat size={30} />;
     } else {
-      return <FiSend size={30} />;
+      return <BiSend size={30} />;
     }
   };
 

@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 
 import {
-  FiEdit2,
-  FiCheck,
-  FiRotateCcw,
-  FiLoader,
-  FiExternalLink,
-  FiAlertTriangle,
-  FiCornerDownLeft,
-  FiRotateCw,
-} from "react-icons/fi";
+  BiCheck,
+  BiEdit,
+  BiRepeat,
+  BiLoader,
+  BiUndo,
+  BiBot,
+  BiError,
+  BiChevronsLeft,
+} from "react-icons/bi";
 
 import { selectTitleOrFirstMessage } from "../utils/chat";
 import useChatsStore from "../store/store";
@@ -81,28 +81,25 @@ function CurrentChatTitleInput({
       case "empty":
         return (
           <button onClick={() => handleSuggest()}>
-            <FiExternalLink title="Get suggestion from model" />
+            <BiBot title="Get suggestion from model" />
           </button>
         );
       case "fetching":
         return (
           <button>
-            <FiLoader className="animate-spin" />
+            <BiLoader className="animate-spin" />
           </button>
         );
       case "notApplied":
         return (
           <button onClick={handleApplySuggestedTitle}>
-            <FiCornerDownLeft
-              color="#d4ac0d"
-              title="Apply suggested title tip"
-            />
+            <BiChevronsLeft color="#d4ac0d" title="Apply suggested title tip" />
           </button>
         );
       case "error":
         return (
           <button onClick={() => handleSuggest()}>
-            <FiRotateCw
+            <BiRepeat
               color="red"
               title="Retry getting suggestion from model "
             />
@@ -116,7 +113,7 @@ function CurrentChatTitleInput({
       case "error":
         return (
           <button>
-            <FiAlertTriangle
+            <BiError
               color="red"
               title="Error occurred while loading title tip"
             />
@@ -125,10 +122,7 @@ function CurrentChatTitleInput({
       case "notApplied":
         return (
           <button>
-            <FiAlertTriangle
-              color="#d4ac0d"
-              title="Title tip was not applied"
-            />
+            <BiError color="#d4ac0d" title="Title tip was not applied" />
           </button>
         );
     }
@@ -150,13 +144,13 @@ function CurrentChatTitleInput({
             onClick={() => handleSubmit()}
             disabled={titleTipStatus === "fetching"}
           >
-            <FiCheck />
+            <BiCheck />
           </button>
           <button
             onClick={() => handleUndo()}
             disabled={titleTipStatus === "fetching"}
           >
-            <FiRotateCcw />
+            <BiUndo />
           </button>
 
           {renderSuggestTitleTipButton()}
@@ -166,7 +160,7 @@ function CurrentChatTitleInput({
           {renderSuggestTitleTipWarning()}
 
           <button onClick={() => setIsEditing((editing) => !editing)}>
-            <FiEdit2 />
+            <BiEdit />
           </button>
         </>
       )}
