@@ -75,6 +75,10 @@ function CurrentChatTitleInput({
     setTitleTipStatus(chatID, "empty");
     setTitleTip(chatID, "");
   };
+  const handleTipAlert = () => {
+    setInputTitle(titleTip);
+    setIsEditing(true);
+  };
 
   const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -133,7 +137,7 @@ function CurrentChatTitleInput({
         );
       case "notApplied":
         return (
-          <button>
+          <button onClick={handleTipAlert}>
             <BiError
               color="#d4ac0d"
               title="Title tip was not applied"
