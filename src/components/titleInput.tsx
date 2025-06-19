@@ -81,19 +81,23 @@ function CurrentChatTitleInput({
       case "empty":
         return (
           <button onClick={() => handleSuggest()}>
-            <BiBot title="Get suggestion from model" />
+            <BiBot title="Get suggestion from model" size="1.3em" />
           </button>
         );
       case "fetching":
         return (
           <button>
-            <BiLoader className="animate-spin" />
+            <BiLoader className="animate-spin" size="1.3em" />
           </button>
         );
       case "notApplied":
         return (
           <button onClick={handleApplySuggestedTitle}>
-            <BiChevronsLeft color="#d4ac0d" title="Apply suggested title tip" />
+            <BiChevronsLeft
+              color="#d4ac0d"
+              title="Apply suggested title tip"
+              size="1.3em"
+            />
           </button>
         );
       case "error":
@@ -102,6 +106,7 @@ function CurrentChatTitleInput({
             <BiRepeat
               color="red"
               title="Retry getting suggestion from model "
+              size="1.3em"
             />
           </button>
         );
@@ -116,13 +121,18 @@ function CurrentChatTitleInput({
             <BiError
               color="red"
               title="Error occurred while loading title tip"
+              size="1.3em"
             />
           </button>
         );
       case "notApplied":
         return (
           <button>
-            <BiError color="#d4ac0d" title="Title tip was not applied" />
+            <BiError
+              color="#d4ac0d"
+              title="Title tip was not applied"
+              size="1.3em"
+            />
           </button>
         );
     }
@@ -144,13 +154,13 @@ function CurrentChatTitleInput({
             onClick={() => handleSubmit()}
             disabled={titleTipStatus === "fetching"}
           >
-            <BiCheck />
+            <BiCheck size="1.3em" />
           </button>
           <button
             onClick={() => handleUndo()}
             disabled={titleTipStatus === "fetching"}
           >
-            <BiUndo />
+            <BiUndo size="1.3em" />
           </button>
 
           {renderSuggestTitleTipButton()}
@@ -160,7 +170,7 @@ function CurrentChatTitleInput({
           {renderSuggestTitleTipWarning()}
 
           <button onClick={() => setIsEditing((editing) => !editing)}>
-            <BiEdit />
+            <BiEdit size="1.3em" />
           </button>
         </>
       )}

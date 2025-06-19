@@ -62,11 +62,11 @@ function ChatList() {
         <b>
           {chatContent.modelKey ? chatContent.modelKey + " " : "no model"}
           {chatContent.status === "fetching" && (
-            <BiLoader className="inline animate-spin" />
+            <BiLoader className="inline animate-spin" size="1.15em" />
           )}
           {(chatContent.status === "error" ||
             chatContent.titleTipStatus === "error") && (
-            <BiErrorCircle className="inline text-red-600" />
+            <BiErrorCircle className="inline text-red-600" size="1.15em" />
           )}
         </b>
       </div>

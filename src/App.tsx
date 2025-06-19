@@ -44,11 +44,11 @@ function App() {
 
   const renderSendButton = () => {
     if (status === "fetching") {
-      return <BiLoader className="animate-spin" size={30} />;
+      return <BiLoader className="animate-spin" size="2em" />;
     } else if (status === "error") {
-      return <BiRepeat size={30} />;
+      return <BiRepeat size="2em" />;
     } else {
-      return <BiSend size={30} />;
+      return <BiSend size="2em" />;
     }
   };
 
