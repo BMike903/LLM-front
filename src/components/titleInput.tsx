@@ -76,6 +76,12 @@ function CurrentChatTitleInput({
     setTitleTip(chatID, "");
   };
 
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const renderSuggestTitleTipButton = () => {
     switch (titleTipStatus) {
       case "empty":
@@ -146,6 +152,7 @@ function CurrentChatTitleInput({
         onChange={(e) => setInputTitle(e.target.value)}
         ref={inputRef}
         className="w-80"
+        onKeyDown={handleEnterPress}
       />
 
       {isEditing ? (
