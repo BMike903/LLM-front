@@ -77,6 +77,7 @@ function CurrentChatTitleInput({
   };
   const handleTipAlert = () => {
     setInputTitle(titleTip);
+    setTitleTipStatus(chatID, "empty");
     setIsEditing(true);
   };
 
