@@ -82,12 +82,16 @@ function App() {
                 {Object.entries(models).map(([modelKey, model]) => (
                   <li
                     key={modelKey}
-                    onClick={() => setModel(currentChatId, modelKey)}
                     className="w-96 rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-3 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
-                    <p className="text-center font-bold">{model.name}</p>
-                    <br />
-                    {model.description}
+                    <button
+                      onClick={() => setModel(currentChatId, modelKey)}
+                      tabIndex={0}
+                    >
+                      <p className="text-center font-bold">{model.name}</p>
+                      <br />
+                      {model.description}
+                    </button>
                   </li>
                 ))}
               </ul>
