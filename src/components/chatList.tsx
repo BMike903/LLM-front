@@ -52,8 +52,9 @@ function ChatList() {
 
   const renderChatPreview = (chatContent: ChatPreview) => {
     return (
-      <div
+      <button
         key={chatContent.chatID}
+        tabIndex={0}
         onClick={() => setCurrentChat(chatContent.chatID)}
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
@@ -69,7 +70,7 @@ function ChatList() {
             <BiErrorCircle className="inline text-red-600" size="1.15em" />
           )}
         </b>
-      </div>
+      </button>
     );
   };
 
@@ -78,12 +79,13 @@ function ChatList() {
       id="chatList"
       className="flex h-full flex-1/6 flex-col overflow-auto border-4 border-solid border-gray-300 bg-gray-50 px-1 py-6 dark:border-gray-600 dark:bg-black"
     >
-      <div
+      <button
         className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-center hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
         onClick={() => addNewChat()}
+        tabIndex={0}
       >
         Add new chat
-      </div>
+      </button>
 
       <hr className="my-5" />
 
