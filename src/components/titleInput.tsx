@@ -121,6 +121,12 @@ function CurrentChatTitleInput({
 
   const renderSuggestTitleTipWarning = () => {
     switch (titleTipStatus) {
+      case "fetching":
+        return (
+          <button>
+            <BiLoader className="animate-spin" size="1.3em" />
+          </button>
+        );
       case "error":
         return (
           <button>
