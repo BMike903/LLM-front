@@ -61,7 +61,7 @@ function App() {
       >
         <div className="flex flex-row justify-between border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
           <div className="flex flex-row">
-            Chat:{" "}
+            {"Chat title: \u00A0"}
             <b className="mx-5">
               <CurrentChatTitleInput
                 title={title}
@@ -69,7 +69,8 @@ function App() {
                 chatID={currentChatId}
               />
             </b>
-            with model: <b>{model ? model.name : "No model selected"}</b>
+            {"model name:\u00A0"}
+            <b>{model ? model.name : "No model selected"}</b>
           </div>
           <div>Chat started at: {new Date(startDate).toUTCString()}</div>
         </div>
