@@ -25,4 +25,10 @@ export const models: ModelsList = {
     description:
       "Gemma is a large language model created by Google DeepMind and released as an open-weights AI assistant. It processes both text and images to generate text-based responses, operating without access to external tools or real-time information.",
   },
+  "Qwen-QwQ": {
+    name: "Qwen QwQ",
+    APIName: "qwen/qwq-32b:free",
+    description:
+      "Qwen is a large language model developed by Alibaba Cloud, designed to provide information, answer questions, and assist with tasks across various subjects. Trained on data up to July 2024, it supports multilingual communication and operates without personal experiences or self-awareness.",
+  },
 } as const;
