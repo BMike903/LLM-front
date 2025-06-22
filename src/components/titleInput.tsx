@@ -157,18 +157,18 @@ function CurrentChatTitleInput({
   };
 
   return (
-    <div className="flex h-auto flex-row gap-3">
-      <textarea
-        disabled={!isEditing || titleTipStatus === "fetching"}
-        value={inputTitle}
-        onChange={(e) => setInputTitle(e.target.value)}
-        ref={inputRef}
-        className="h-auto flex-2/3 resize-none"
-        onKeyDown={handleEnterPress}
-      />
-
+    <div className="flex flex-row gap-3">
       {isEditing ? (
         <>
+          <textarea
+            disabled={!isEditing || titleTipStatus === "fetching"}
+            value={inputTitle}
+            onChange={(e) => setInputTitle(e.target.value)}
+            ref={inputRef}
+            className="h-auto flex-2/3 resize-none"
+            onKeyDown={handleEnterPress}
+          />
+
           <button
             onClick={() => handleSubmit()}
             disabled={titleTipStatus === "fetching"}
@@ -186,6 +186,8 @@ function CurrentChatTitleInput({
         </>
       ) : (
         <>
+          <div className="h-auto flex-2/3">{inputTitle}</div>
+
           {renderSuggestTitleTipWarning()}
 
           <button onClick={() => setIsEditing((editing) => !editing)}>
