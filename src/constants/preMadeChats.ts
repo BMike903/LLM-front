@@ -378,21 +378,29 @@ This is a basic overview of how to use Zustand with React. For more information,
     id: nanoid(),
     content: `Zustand is a state management solution for React that is designed to be simple, fast, and scalable. Here's a step-by-step guide on how to use Zustand with React:
 
-**Installation**
+---
+
+### **Installation**
 
 To get started with Zustand, you need to install it using npm or yarn:
-\\\`\\\`\\\`bash
+
+\`\`\`bash
 npm install zustand
-\\\`\\\`\\\`
+\`\`\`
+
 or
-\\\`\\\`\\\`bash
+
+\`\`\`bash
 yarn add zustand
-\\\`\\\`\\\`
+\`\`\`
 
-**Creating a store**
+---
 
-In Zustand, a store is an object that holds the state and provides methods to update it. Create a new file, e.g., \\\`useStore.js\\\`, and add the following code:
-\\\`\\\`\\\`js
+### **Creating a store**
+
+In Zustand, a store is an object that holds the state and provides methods to update it. Create a new file, e.g., \`useStore.js\`, and add the following code:
+
+\`\`\`js
 import create from 'zustand';
 
 const useStore = create((set) => ({
@@ -402,14 +410,17 @@ const useStore = create((set) => ({
 }));
 
 export default useStore;
-\\\`\\\`\\\`
+\`\`\`
 
-In this example, we create a store with an initial state of \\\`bears: 0\\\` and two methods: \\\`increasePopulation\\\` and \\\`removeAllBears\\\`. The \\\`set\\\` function is used to update the state.
+In this example, we create a store with an initial state of \`bears: 0\` and two methods: \`increasePopulation\` and \`removeAllBears\`. The \`set\` function is used to update the state.
 
-**Using the store in a React component**
+---
 
-To use the store in a React component, import the \\\`useStore\\\` hook and call it inside your component:
-\\\`\\\`\\\`jsx
+### **Using the store in a React component**
+
+To use the store in a React component, import the \`useStore\` hook and call it inside your component:
+
+\`\`\`jsx
 import React from 'react';
 import useStore from './useStore';
 
@@ -426,18 +437,21 @@ function BearCounter() {
 }
 
 export default BearCounter;
-\\\`\\\`\\\`
+\`\`\`
 
-In this example, we destructure the \\\`bears\\\`, \\\`increasePopulation\\\`, and \\\`removeAllBears\\\` values from the store and use them in our component.
+---
 
-**Multiple stores**
+### **Multiple stores**
 
-Zustand allows you to create multiple stores, which can be useful for large applications with multiple features. To create multiple stores, simply create separate files for each store, e.g., \\\`useBearStore.js\\\`, \\\`useUserStore.js\\\`, etc.
+Zustand allows you to create multiple stores, which can be useful for large applications with multiple features. To create multiple stores, simply create separate files for each store, e.g., \`useBearStore.js\`, \`useUserStore.js\`, etc.
 
-**Using middleware**
+---
 
-Zustand provides a middleware system that allows you to extend its functionality. For example, you can use the \\\`persist\\\` middleware to persist the state to local storage:
-\\\`\\\`\\\`js
+### **Using middleware**
+
+Zustand provides a middleware system that allows you to extend its functionality. For example, you can use the \`persist\` middleware to persist the state to local storage:
+
+\`\`\`js
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -454,21 +468,27 @@ const useStore = create(
     }
   )
 );
-\\\`\\\`\\\`
+\`\`\`
 
-**Devtools**
+---
 
-Zustand provides a DevTools extension that allows you to inspect the state and actions in the browser. To use it, install the \\\`zustand-devtools\\\` package:
-\\\`\\\`\\\`bash
+### **Devtools**
+
+Zustand provides a DevTools extension that allows you to inspect the state and actions in the browser. To use it, install the \`zustand-devtools\` package:
+
+\`\`\`bash
 npm install zustand-devtools
-\\\`\\\`\\\`
+\`\`\`
+
 or
-\\\`\\\`\\\`bash
+
+\`\`\`bash
 yarn add zustand-devtools
-\\\`\\\`\\\`
+\`\`\`
 
 Then, add the following code to your store:
-\\\`\\\`\\\`js
+
+\`\`\`js
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -484,8 +504,11 @@ const useStore = create(
     }
   )
 );
-\\\`\\\`\\\`
+\`\`\`
 
-This is a basic overview of how to use Zustand with React. For more information, check out the official documentation and examples.`,
+---
+
+This is a basic overview of how to use Zustand with React. For more information, check out the official documentation and examples.
+`,
   },
 ];
