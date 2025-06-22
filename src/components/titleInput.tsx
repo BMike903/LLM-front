@@ -39,7 +39,7 @@ function CurrentChatTitleInput({
   );
   const setTitleTipStatus = useChatsStore((state) => state.setTitleTipStatus);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(
     selectTitleOrFirstMessage(title, firstMessage),
@@ -82,7 +82,7 @@ function CurrentChatTitleInput({
     setTitleTipStatus(chatID, "empty");
   };
 
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       handleSubmit();
     }
@@ -157,13 +157,13 @@ function CurrentChatTitleInput({
   };
 
   return (
-    <div className="flex w-96 flex-row gap-3">
-      <input
+    <div className="flex h-auto flex-row gap-3">
+      <textarea
         disabled={!isEditing || titleTipStatus === "fetching"}
         value={inputTitle}
         onChange={(e) => setInputTitle(e.target.value)}
         ref={inputRef}
-        className="w-80"
+        className="h-auto flex-2/3 resize-none"
         onKeyDown={handleEnterPress}
       />
 
