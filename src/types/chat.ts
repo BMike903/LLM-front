@@ -10,6 +10,7 @@ export type Message = {
 
 export type Chat = {
   modelKey: ModelsKey | null;
+  isSelectingModel: boolean;
   messages: Array<Message>;
   status: LoadingStatuses;
   startDate: string;

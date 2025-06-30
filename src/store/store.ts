@@ -24,6 +24,7 @@ interface StoreState {
   setTitle: (chatID: string, newTitle: string) => void;
   setTitleTip: (chatID: string, titleTip: string) => void;
   setTitleTipStatus: (chatID: string, status: TitleTipStatuses) => void;
+  setSelectingModel: (chatID: string, isSelectingModel: boolean) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -40,6 +41,7 @@ const useChatsStore = create<StoreState>()(
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: true,
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
@@ -50,6 +52,7 @@ const useChatsStore = create<StoreState>()(
             title: "Planetary Order",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: false,
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
@@ -60,6 +63,7 @@ const useChatsStore = create<StoreState>()(
             title: "Zustand State Management",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: false,
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
@@ -70,6 +74,7 @@ const useChatsStore = create<StoreState>()(
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: false,
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
@@ -80,6 +85,7 @@ const useChatsStore = create<StoreState>()(
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: false,
           },
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
@@ -112,6 +118,7 @@ const useChatsStore = create<StoreState>()(
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
+            isSelectingModel: true,
           };
           state.chats.currentChatId = newChatId;
         });
@@ -140,6 +147,11 @@ const useChatsStore = create<StoreState>()(
       setTitleTip(chatID, titleTip) {
         set((state) => {
           state.chats.allChats[chatID].titleTip = titleTip;
+        });
+      },
+      setSelectingModel(chatID, isSelectingModel) {
+        set((state) => {
+          state.chats.allChats[chatID].isSelectingModel = isSelectingModel;
         });
       },
     })),

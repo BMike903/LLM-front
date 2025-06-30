@@ -1,10 +1,17 @@
 import { models } from "../constants/models";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
+import { ModelsKey } from "../types/models";
 
 function SelectModelList() {
   const setModel = useChatsStore((state) => state.setModel);
+  const setSelectingModel = useChatsStore((state) => state.setSelectingModel);
   const currentChatId = useCurrentChatId();
+
+  const onModelClick = (modelKey: ModelsKey) => {
+    setModel(currentChatId, modelKey);
+    setSelectingModel(currentChatId, false);
+  };
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-6">
@@ -13,11 +20,11 @@ function SelectModelList() {
         {Object.entries(models).map(([modelKey, model]) => (
           <li
             key={modelKey}
-            onClick={() => setModel(currentChatId, modelKey)}
+            onClick={() => onModelClick(modelKey)}
             className="w-96 rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-3 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             <button
-              onClick={() => setModel(currentChatId, modelKey)}
+              onClick={() => onModelClick(modelKey)}
               tabIndex={0}
               className="hover:cursor-pointer"
             >
