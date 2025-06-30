@@ -190,7 +190,10 @@ function CurrentChatTitleInput({
 
           {renderSuggestTitleTipWarning()}
 
-          <button onClick={() => setIsEditing((editing) => !editing)}>
+          <button
+            className="hover:cursor-pointer"
+            onClick={() => setIsEditing((editing) => !editing)}
+          >
             <BiEdit size="1.3em" />
           </button>
         </>
