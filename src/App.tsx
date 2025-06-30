@@ -8,7 +8,7 @@ import Markdown from "react-markdown";
 import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
 import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
-import { models } from "./constants/models";
+import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
 import CurrentChatTitleInput from "./components/titleInput";
@@ -19,7 +19,6 @@ function App() {
   const { messages, status, modelKey, startDate, draftMessage, title } =
     currentChat;
   const model = modelKey ? getModel(modelKey) : null;
-  const setModel = useChatsStore((state) => state.setModel);
   const setDraftMessage = useChatsStore((state) => state.setDraftMessage);
 
   const isInputEmpty = () => draftMessage.trim() === "";
@@ -79,30 +78,7 @@ function App() {
         </div>
 
         <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
-          {!model && (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-6">
-              <p className="text-lg font-bold">Select a model to start chat</p>
-              <ul className="flex flex-row flex-wrap gap-6">
-                {Object.entries(models).map(([modelKey, model]) => (
-                  <li
-                    key={modelKey}
-                    onClick={() => setModel(currentChatId, modelKey)}
-                    className="w-96 rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-3 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
-                  >
-                    <button
-                      onClick={() => setModel(currentChatId, modelKey)}
-                      tabIndex={0}
-                      className="hover:cursor-pointer"
-                    >
-                      <p className="text-center font-bold">{model.name}</p>
-                      <br />
-                      {model.description}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {!model && <SelectModelList />}
 
           {messages.map((message) => {
             if (message.role === "user") {
