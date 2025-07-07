@@ -57,27 +57,23 @@ export async function suggestTitle(chatID: string) {
 
   setTitleTipStatus(chatID, "fetching");
 
-  const response = await fetch(
-    "https://openrouter.ai/api/v1/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: model.APIName,
-        messages: [
-          ...chatMessages,
-          {
-            "role": "user",
-            "content":
-              "Give one short neutral title(2-4 words) to our conversation. Send only it and nothing more.",
-          },
-        ],
-      }),
+  const response = await fetch(proxyURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      model: model.APIName,
+      messages: [
+        ...chatMessages,
+        {
+          "role": "user",
+          "content":
+            "Give one short neutral title(2-4 words) to our conversation. Send only it and nothing more.",
+        },
+      ],
+    }),
+  });
 
   if (!response.ok) {
     console.log("ERROR: ", response);
