@@ -1,6 +1,8 @@
 import useChatsStore from "../store/store";
 import { getModel } from "../types/models";
 
+const proxyURL = "http://localhost:3000/message";
+
 export async function sendMessage(message: string, currentChatId: string) {
   const setStatus = useChatsStore.getState().setStatus;
   const addMessage = useChatsStore.getState().addMessage;
@@ -14,23 +16,19 @@ export async function sendMessage(message: string, currentChatId: string) {
   const model = getModel(modelKey);
 
   setStatus(currentChatId, "fetching");
-  const response = await fetch(
-    "https://openrouter.ai/api/v1/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${import.meta.env.VITE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: model.APIName,
-        messages: [
-          ...useChatsStore.getState().chats.allChats[currentChatId].messages,
-          { "role": "user", "content": String(message) },
-        ],
-      }),
+  const response = await fetch(proxyURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      model: model.APIName,
+      messages: [
+        ...useChatsStore.getState().chats.allChats[currentChatId].messages,
+        { "role": "user", "content": String(message) },
+      ],
+    }),
+  });
 
   if (!response.ok) {
     console.log("ERROR: ", response);
