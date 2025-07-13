@@ -20,7 +20,7 @@ export async function sendMessage(message: string, currentChatId: string) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Client-Token": "publictoken",
+      "Client-Token": "publictoken",
     },
     body: JSON.stringify({
       model: model.APIName,
@@ -62,7 +62,7 @@ export async function suggestTitle(chatID: string) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Client-Token": "publictoken",
+      "Client-Token": "publictoken",
     },
     body: JSON.stringify({
       model: model.APIName,
