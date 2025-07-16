@@ -1,7 +1,7 @@
 import useChatsStore from "../store/store";
 import { getModel } from "../types/models";
 
-const proxyURL = "https://openrouter-proxy-a7s0.onrender.com/message";
+const proxyURL = import.meta.env.VITE_PROXY_URL;
 
 export async function sendMessage(message: string, currentChatId: string) {
   const setStatus = useChatsStore.getState().setStatus;
