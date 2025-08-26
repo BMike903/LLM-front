@@ -1,12 +1,12 @@
 import { ModelsList } from "../types/models";
 
 export const models: ModelsList = {
-  "llama-4": {
+  /* "llama-4": {
     name: "LLAMA-4 SCOUT",
     APIName: "meta-llama/llama-4-scout:free",
     description:
       "Llama is a Meta-designed conversational model that adapts to a wide range of interaction styles. With a focus on flexibility and responsiveness, Llama provides quick and accurate answers, engages in in-depth discussions, and facilitates creative exchanges, making it a versatile tool for various conversational needs.",
-  },
+  }, */
   "mai-ds": {
     name: "Microsoft AI DS-R1",
     APIName: "microsoft/mai-ds-r1:free",
@@ -30,5 +30,11 @@ export const models: ModelsList = {
     APIName: "qwen/qwq-32b:free",
     description:
       "Qwen is a large language model developed by Alibaba Cloud, designed to provide information, answer questions, and assist with tasks across various subjects. Trained on data up to July 2024, it supports multilingual communication and operates without personal experiences or self-awareness.",
+  },
+  "Kimi-K2": {
+    name: "Kimi K2",
+    APIName: "moonshotai/kimi-k2:free",
+    description:
+      "Kimi K2 is a large language model trained by Moonshot AI with knowledge updated to April 2025. It excels in accurate reasoning, fluent text generation, and provides helpful guidance across a wide range of subjects. Kimi communicates clearly in multiple languages, adopting an informative yet approachable tone.",
   },
 } as const;

@@ -56,7 +56,7 @@ const useChatsStore = create<StoreState>()(
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
-            modelKey: "llama-4",
+            modelKey: "Qwen-QwQ",
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...zustandChatMessages],
             draftMessage: "",
@@ -67,7 +67,7 @@ const useChatsStore = create<StoreState>()(
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
-            modelKey: "llama-4",
+            modelKey: "Kimi-K2",
             startDate: getRandomTimeFromPastDays(2).toISOString(),
             messages: [...pancakeChatMessages],
             draftMessage: "",
@@ -78,7 +78,7 @@ const useChatsStore = create<StoreState>()(
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
-            modelKey: "llama-4",
+            modelKey: "ds-r1",
             startDate: getRandomTimeFromPastDays(1).toISOString(),
             messages: [...laptopChatMessages],
             draftMessage: "",
