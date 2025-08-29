@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# LLM-front
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LLM-front is a modern frontend application for chatting with various Large Language Models (LLMs). It provides a user-friendly interface to interact with multiple LLMs, manage conversations, and customize chat experiences. Based on openrouter.ai API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Chat with different LLMs (Gemma, DeepSeek, etc.)
+- Model selection and switching
+- Pre-made chat templates
+- Conversation history management
+- Responsive and clean UI built with React and Tailwind CSS
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** (TypeScript)
+- **Vite**
+- **Tailwind CSS**
+- **Zustand**
+- **ESLint** for code quality
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the App
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+## Project Structure
+
+```
+LLM-front/
+├── src/
+│   ├── components/        # React components (chat list, model selector, etc.)
+│   ├── constants/         # Static data (models, pre-made chats)
+│   ├── services/          # API and chat service logic
+│   ├── store/             # State management
+│   ├── types/             # TypeScript types
+│   ├── utils/             # Utility functions
+│   ├── App.tsx            # Main app component
+│   └── main.tsx           # Entry point
+├── public/                # Static assets
+├── package.json           # Project metadata and scripts
+├── vite.config.ts         # Vite configuration
+└── tailwind.css           # Tailwind CSS config
+```
+
+## Customization
+
+- Add or modify LLM models in `src/constants/models.ts`
+- Update chat templates in `src/constants/preMadeChats.ts`
+
+## Backend Proxy: openrouter-proxy
+
+LLM-front uses a companion backend project, [**openrouter-proxy**](https://github.com/BMike903/openrouter-proxy). This proxy acts as a secure intermediary for calling the OpenRouter.ai API, ensuring secret API key is never exposed to the frontend or client-side code.
+
+- All requests to OpenRouter.ai are routed through this proxy.
+- You should configure your secret key in the proxy env.
