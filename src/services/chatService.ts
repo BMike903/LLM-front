@@ -38,6 +38,13 @@ export async function sendMessage(message: string, currentChatId: string) {
   }
 
   const data = await response.json();
+
+  if (!data.choices) {
+    console.log("No answer generated: ", data);
+    setStatus(currentChatId, "error");
+    return;
+  }
+
   addMessage(
     currentChatId,
     "user",
@@ -84,6 +91,13 @@ export async function suggestTitle(chatID: string) {
   }
 
   const data = await response.json();
+
+  if (!data.choices) {
+    console.log("No answer generated: ", data);
+    setTitleTipStatus(chatID, "error");
+    return;
+  }
+
   setTitleTipStatus(chatID, "notApplied");
   setTitleTip(chatID, data.choices[0].message.content);
 }
