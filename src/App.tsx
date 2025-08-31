@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./tailwind.css";
 
-import { BiSend, BiLoader, BiRepeat, BiEdit } from "react-icons/bi";
+import { BiSend, BiLoader, BiRepeat, BiEdit, BiImageAdd } from "react-icons/bi";
 import { motion, AnimatePresence } from "motion/react";
 import Markdown from "react-markdown";
+import { nanoid } from "nanoid";
 
 import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
@@ -12,6 +13,8 @@ import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
 import CurrentChatTitleInput from "./components/titleInput";
+
+import { ChatFile } from "./types/chat";
 
 function App() {
   const currentChatId = useCurrentChatId();
@@ -24,10 +27,14 @@ function App() {
     draftMessage,
     title,
     isSelectingModel,
+    draftFiles,
   } = currentChat;
   const model = modelKey ? getModel(modelKey) : null;
   const setDraftMessage = useChatsStore((state) => state.setDraftMessage);
   const setSelectingModel = useChatsStore((state) => state.setSelectingModel);
+  const setDraftFiles = useChatsStore((state) => state.setDraftFiles);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const isInputEmpty = () => draftMessage.trim() === "";
 
@@ -56,6 +63,25 @@ function App() {
       return <BiRepeat size="2em" />;
     } else {
       return <BiSend size="2em" />;
+    }
+  };
+
+  const addImage = () => {
+    fileInputRef.current?.click();
+  };
+
+  const removeAttachedFile = (id: string) => {
+    const updatedFiles = draftFiles.filter((file) => file.id !== id);
+    setDraftFiles(currentChatId, updatedFiles);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawFiles = Array.from(e.target.files || []);
+    const files: ChatFile[] = rawFiles.map((item) => {
+      return { id: nanoid(), file: item, fileType: "img" };
+    });
+    if (files.length > 0) {
+      setDraftFiles(currentChatId, [...draftFiles, ...files]);
     }
   };
 
@@ -135,7 +161,7 @@ function App() {
           <div
             key="input-container"
             ref={inputContainer}
-            className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-800"
+            className="relative mx-auto mt-auto box-border flex h-18 w-3/5 flex-row gap-3 self-end rounded-sm border-2 border-solid border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-800"
           >
             <input
               value={draftMessage}
@@ -145,6 +171,45 @@ function App() {
               className="mt-0 mr-auto w-full focus:outline-none"
             />
 
+            {draftFiles.length > 0 && (
+              <div id="attachedFiles" className="absolute bottom-3">
+                {draftFiles.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => removeAttachedFile(item.id)}
+                  >
+                    {item.fileType === "img" ? (
+                      <img
+                        className="h-32 w-24 object-cover"
+                        id={item.id}
+                        src={URL.createObjectURL(item.file)}
+                      />
+                    ) : (
+                      <div>unsupported file type</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {model?.features?.includes("img") && (
+              <>
+                <button
+                  disabled={status === "fetching" || (model ? false : true)}
+                  className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
+                >
+                  <BiImageAdd size="2em" onClick={addImage} />
+                </button>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </>
+            )}
             <button
               disabled={
                 status === "fetching" ||

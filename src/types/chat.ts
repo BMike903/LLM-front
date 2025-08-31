@@ -8,6 +8,14 @@ export type Message = {
   id: string;
 };
 
+export type FileTypes = "img" | "audio" | "file" | "video";
+
+export type ChatFile = {
+  id: string;
+  file: File;
+  fileType: FileTypes;
+};
+
 export type Chat = {
   modelKey: ModelsKey | null;
   isSelectingModel: boolean;
@@ -15,6 +23,7 @@ export type Chat = {
   status: LoadingStatuses;
   startDate: string;
   draftMessage: string;
+  draftFiles: ChatFile[];
   title: string;
   titleTip: string;
   titleTipStatus: TitleTipStatuses;

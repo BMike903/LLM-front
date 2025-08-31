@@ -37,4 +37,11 @@ export const models: ModelsList = {
     description:
       "Kimi K2 is a large language model trained by Moonshot AI with knowledge updated to April 2025. It excels in accurate reasoning, fluent text generation, and provides helpful guidance across a wide range of subjects. Kimi communicates clearly in multiple languages, adopting an informative yet approachable tone.",
   },
+  "Gemini-2.5-img": {
+    name: "Gemini 2.5 Image",
+    APIName: "google/gemini-2.5-flash-image-preview:free",
+    description:
+      "Gemini 2.5 Flash, is a large language model from Google. It is designed to be a helpful and informative AI assistant, capable of understanding and generating human-like text to answer questions and complete various tasks. One of its key features is the ability to generate and modify images based on user requests, enhancing its responses with visual content.",
+    features: ["img"],
+  },
 } as const;

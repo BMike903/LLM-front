@@ -3,7 +3,13 @@ import { nanoid } from "nanoid";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
 
-import { Roles, Chats, LoadingStatuses, TitleTipStatuses } from "../types/chat";
+import {
+  Roles,
+  Chats,
+  LoadingStatuses,
+  TitleTipStatuses,
+  ChatFile,
+} from "../types/chat";
 import {
   planetsChatMessages,
   zustandChatMessages,
@@ -25,6 +31,7 @@ interface StoreState {
   setTitleTip: (chatID: string, titleTip: string) => void;
   setTitleTipStatus: (chatID: string, status: TitleTipStatuses) => void;
   setSelectingModel: (chatID: string, isSelectingModel: boolean) => void;
+  setDraftFiles: (chatID: string, draftFiles: ChatFile[]) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -38,6 +45,7 @@ const useChatsStore = create<StoreState>()(
             startDate: new Date().toISOString(),
             messages: [],
             draftMessage: "",
+            draftFiles: [],
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
@@ -49,6 +57,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(3).toISOString(),
             messages: [...planetsChatMessages],
             draftMessage: "Yes",
+            draftFiles: [],
             title: "Planetary Order",
             titleTip: "",
             titleTipStatus: "empty",
@@ -60,6 +69,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...zustandChatMessages],
             draftMessage: "",
+            draftFiles: [],
             title: "Zustand State Management",
             titleTip: "",
             titleTipStatus: "empty",
@@ -71,6 +81,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(2).toISOString(),
             messages: [...pancakeChatMessages],
             draftMessage: "",
+            draftFiles: [],
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
@@ -82,6 +93,7 @@ const useChatsStore = create<StoreState>()(
             startDate: getRandomTimeFromPastDays(1).toISOString(),
             messages: [...laptopChatMessages],
             draftMessage: "",
+            draftFiles: [],
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
@@ -115,6 +127,7 @@ const useChatsStore = create<StoreState>()(
             messages: [],
             startDate: new Date().toISOString(),
             draftMessage: "",
+            draftFiles: [],
             title: "",
             titleTip: "",
             titleTipStatus: "empty",
@@ -152,6 +165,11 @@ const useChatsStore = create<StoreState>()(
       setSelectingModel(chatID, isSelectingModel) {
         set((state) => {
           state.chats.allChats[chatID].isSelectingModel = isSelectingModel;
+        });
+      },
+      setDraftFiles(chatID, draftFiles) {
+        set((state) => {
+          state.chats.allChats[chatID].draftFiles = [...draftFiles];
         });
       },
     })),
