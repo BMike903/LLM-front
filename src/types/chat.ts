@@ -12,8 +12,9 @@ export type FileTypes = "img" | "audio" | "file" | "video";
 
 export type ChatFile = {
   id: string;
-  file: File;
   fileType: FileTypes;
+  file: string;
+  name?: string;
 };
 
 export type Chat = {

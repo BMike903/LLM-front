@@ -4,7 +4,6 @@ import "./tailwind.css";
 import { BiSend, BiLoader, BiRepeat, BiEdit, BiImageAdd } from "react-icons/bi";
 import { motion, AnimatePresence } from "motion/react";
 import Markdown from "react-markdown";
-import { nanoid } from "nanoid";
 
 import ChatList from "./components/chatList";
 import useChatsStore from "./store/store";
@@ -13,6 +12,7 @@ import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
 import CurrentChatTitleInput from "./components/titleInput";
+import { fileToChatFile } from "./utils/files";
 
 import { ChatFile } from "./types/chat";
 
@@ -75,11 +75,13 @@ function App() {
     setDraftFiles(currentChatId, updatedFiles);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawFiles = Array.from(e.target.files || []);
-    const files: ChatFile[] = rawFiles.map((item) => {
-      return { id: nanoid(), file: item, fileType: "img" };
-    });
+
+    const files: ChatFile[] = await Promise.all(
+      rawFiles.map((file) => fileToChatFile(file, "img")),
+    );
+
     if (files.length > 0) {
       setDraftFiles(currentChatId, [...draftFiles, ...files]);
     }
@@ -182,7 +184,7 @@ function App() {
                       <img
                         className="h-32 w-24 object-cover"
                         id={item.id}
-                        src={URL.createObjectURL(item.file)}
+                        src={item.file}
                       />
                     ) : (
                       <div>unsupported file type</div>
