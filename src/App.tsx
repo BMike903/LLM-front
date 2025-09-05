@@ -13,8 +13,7 @@ import { getModel } from "./types/models";
 import { sendMessage } from "./services/chatService";
 import CurrentChatTitleInput from "./components/titleInput";
 import { fileToChatFile } from "./utils/files";
-
-import { ChatFile } from "./types/chat";
+import { FileConversionResult } from "./types/chat";
 
 function App() {
   const currentChatId = useCurrentChatId();
@@ -78,13 +77,33 @@ function App() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawFiles = Array.from(e.target.files || []);
 
-    const files: ChatFile[] = await Promise.all(
-      rawFiles.map((file) => fileToChatFile(file, "img")),
+    const results: FileConversionResult[] = await Promise.allSettled(
+      rawFiles.map((item) => fileToChatFile(item, "img")),
+    ).then((settled) =>
+      settled.map((res, i) =>
+        res.status === "fulfilled"
+          ? { success: true, file: res.value }
+          : { success: false, error: res.reason, name: rawFiles[i]?.name },
+      ),
     );
 
-    if (files.length > 0) {
-      setDraftFiles(currentChatId, [...draftFiles, ...files]);
+    const successfulFiles = results
+      .filter((item) => item.success)
+      .map((item) => item.file);
+
+    if (successfulFiles.length > 0) {
+      setDraftFiles(currentChatId, [...draftFiles, ...successfulFiles]);
     }
+
+    results.forEach((item) => {
+      if (!item.success) {
+        if (item.error instanceof Error) {
+          console.error(item.error.message);
+        } else {
+          console.error("Unknown error", item.error);
+        }
+      }
+    });
   };
 
   return (

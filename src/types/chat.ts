@@ -10,6 +10,10 @@ export type Message = {
 
 export type FileTypes = "img" | "audio" | "file" | "video";
 
+export type FileConversionResult =
+  | { success: true; file: ChatFile }
+  | { success: false; error: unknown; name?: string };
+
 export type ChatFile = {
   id: string;
   fileType: FileTypes;
