@@ -1,6 +1,8 @@
 import useChatsStore from "../store/store";
 import { getModel } from "../types/models";
 
+import { messageToAPIObject } from "../utils/api";
+
 const proxyURL = import.meta.env.VITE_PROXY_URL;
 
 export async function sendMessage(message: string, currentChatId: string) {
@@ -15,6 +17,21 @@ export async function sendMessage(message: string, currentChatId: string) {
   }
   const model = getModel(modelKey);
 
+  const messages = useChatsStore
+    .getState()
+    .chats.allChats[
+      currentChatId
+    ].messages.map((message) => messageToAPIObject(message));
+  messages.push({
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": String(message),
+      },
+    ],
+  });
+
   setStatus(currentChatId, "fetching");
   const response = await fetch(proxyURL, {
     method: "POST",
@@ -24,10 +41,7 @@ export async function sendMessage(message: string, currentChatId: string) {
     },
     body: JSON.stringify({
       model: model.APIName,
-      messages: [
-        ...useChatsStore.getState().chats.allChats[currentChatId].messages,
-        { "role": "user", "content": String(message) },
-      ],
+      messages: messages,
     }),
   });
 
