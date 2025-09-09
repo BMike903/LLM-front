@@ -152,6 +152,23 @@ function App() {
                       key={message.id}
                     >
                       {message.content}
+                      {message.files && (
+                        <div className="mt-1 flex flex-row gap-3">
+                          {message.files.map((item) => {
+                            if (item.fileType === "img") {
+                              return (
+                                <img
+                                  className="max-h-80 max-w-xs rounded-lg object-contain shadow"
+                                  id={item.id}
+                                  src={item.file}
+                                />
+                              );
+                            } else {
+                              return <div>unsupported file format</div>;
+                            }
+                          })}
+                        </div>
+                      )}
                     </div>
                   );
                 } else {
