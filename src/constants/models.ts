@@ -1,12 +1,13 @@
 import { ModelsList } from "../types/models";
 
 export const models: ModelsList = {
-  /* "llama-4": {
+  "llama-4": {
     name: "LLAMA-4 SCOUT",
     APIName: "meta-llama/llama-4-scout:free",
     description:
       "Llama is a Meta-designed conversational model that adapts to a wide range of interaction styles. With a focus on flexibility and responsiveness, Llama provides quick and accurate answers, engages in in-depth discussions, and facilitates creative exchanges, making it a versatile tool for various conversational needs.",
-  }, */
+    features: ["img"],
+  },
   "mai-ds": {
     name: "Microsoft AI DS-R1",
     APIName: "microsoft/mai-ds-r1:free",
@@ -36,18 +37,5 @@ export const models: ModelsList = {
     APIName: "moonshotai/kimi-k2:free",
     description:
       "Kimi K2 is a large language model trained by Moonshot AI with knowledge updated to April 2025. It excels in accurate reasoning, fluent text generation, and provides helpful guidance across a wide range of subjects. Kimi communicates clearly in multiple languages, adopting an informative yet approachable tone.",
-  },
-  /* "Gemini-2.5-img": {
-    name: "Gemini 2.5 Image",
-    APIName: "google/gemini-2.5-flash-image-preview:free",
-    description:
-      "Gemini 2.5 Flash, is a large language model from Google. It is designed to be a helpful and informative AI assistant, capable of understanding and generating human-like text to answer questions and complete various tasks. One of its key features is the ability to generate and modify images based on user requests, enhancing its responses with visual content.",
-    features: ["img"],
-  }, */
-  "Llama-4-Scout ": {
-    name: "Llama 4 Scout ",
-    APIName: "meta-llama/llama-4-scout:free",
-    description: "descr",
-    features: ["img"],
   },
 } as const;
