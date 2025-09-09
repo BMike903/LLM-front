@@ -46,7 +46,7 @@ function App() {
   const makeRequest = async () => {
     if (status === "fetching" || isInputEmpty()) return;
     if (model == null) return;
-    sendMessage(draftMessage, currentChatId);
+    sendMessage(currentChatId);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

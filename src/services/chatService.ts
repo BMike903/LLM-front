@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 
 const proxyURL = import.meta.env.VITE_PROXY_URL;
 
-export async function sendMessage(message: string, currentChatId: string) {
+export async function sendMessage(currentChatId: string) {
   const setStatus = useChatsStore.getState().setStatus;
   const addMessage = useChatsStore.getState().addMessage;
   const setDraftMessage = useChatsStore.getState().setDraftMessage;
