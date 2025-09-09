@@ -6,6 +6,7 @@ export type Message = {
   role: Roles;
   content: string;
   id: string;
+  files?: ChatFile[];
 };
 
 export type FileTypes = "img" | "audio" | "file" | "video";

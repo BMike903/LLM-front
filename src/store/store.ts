@@ -21,7 +21,12 @@ import { getRandomTimeFromPastDays } from "../utils/date";
 
 interface StoreState {
   chats: Chats;
-  addMessage: (chatID: string, role: Roles, message: string) => void;
+  addMessage: (
+    chatID: string,
+    role: Roles,
+    message: string,
+    files?: ChatFile[],
+  ) => void;
   setStatus: (chatID: string, newStatus: LoadingStatuses) => void;
   setCurrentChat: (chatID: string) => void;
   addNewChat: () => void;
@@ -102,12 +107,13 @@ const useChatsStore = create<StoreState>()(
         },
         currentChatId: "XkBlzJPRrmBMfZYCe_-HF",
       },
-      addMessage: (chatId, role, message) =>
+      addMessage: (chatId, role, message, files) =>
         set((state) => {
           state.chats.allChats[chatId].messages.push({
             role: role,
             content: message,
             id: nanoid(),
+            files: files,
           });
         }),
       setStatus: (chatId, newStatus) =>

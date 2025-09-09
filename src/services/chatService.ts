@@ -1,7 +1,9 @@
 import useChatsStore from "../store/store";
 import { getModel } from "../types/models";
+import { Message } from "../types/chat";
 
 import { messageToAPIObject } from "../utils/api";
+import { nanoid } from "nanoid";
 
 const proxyURL = import.meta.env.VITE_PROXY_URL;
 
@@ -9,6 +11,7 @@ export async function sendMessage(message: string, currentChatId: string) {
   const setStatus = useChatsStore.getState().setStatus;
   const addMessage = useChatsStore.getState().addMessage;
   const setDraftMessage = useChatsStore.getState().setDraftMessage;
+  const setDraftFiles = useChatsStore.getState().setDraftFiles;
 
   const modelKey =
     useChatsStore.getState().chats.allChats[currentChatId].modelKey;
@@ -22,15 +25,14 @@ export async function sendMessage(message: string, currentChatId: string) {
     .chats.allChats[
       currentChatId
     ].messages.map((message) => messageToAPIObject(message));
-  messages.push({
-    "role": "user",
-    "content": [
-      {
-        "type": "text",
-        "text": String(message),
-      },
-    ],
-  });
+  const newMessage: Message = {
+    role: "user",
+    content:
+      useChatsStore.getState().chats.allChats[currentChatId].draftMessage,
+    id: nanoid(),
+    files: useChatsStore.getState().chats.allChats[currentChatId].draftFiles,
+  };
+  messages.push(messageToAPIObject(newMessage));
 
   setStatus(currentChatId, "fetching");
   const response = await fetch(proxyURL, {
@@ -63,10 +65,12 @@ export async function sendMessage(message: string, currentChatId: string) {
     currentChatId,
     "user",
     useChatsStore.getState().chats.allChats[currentChatId].draftMessage,
+    useChatsStore.getState().chats.allChats[currentChatId].draftFiles,
   );
   addMessage(currentChatId, "assistant", data.choices[0].message.content);
   setStatus(currentChatId, "idle");
   setDraftMessage(currentChatId, "");
+  setDraftFiles(currentChatId, []);
 }
 
 export async function suggestTitle(chatID: string) {
