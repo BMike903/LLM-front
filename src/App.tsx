@@ -159,7 +159,7 @@ function App() {
                               return (
                                 <img
                                   className="max-h-80 max-w-xs rounded-lg object-contain shadow"
-                                  id={item.id}
+                                  key={item.id}
                                   src={item.file}
                                 />
                               );
@@ -210,7 +210,7 @@ function App() {
                     {item.fileType === "img" ? (
                       <img
                         className="h-24 w-20 rounded-lg border border-gray-300 object-cover shadow transition-opacity group-hover:opacity-70 dark:border-gray-700"
-                        id={item.id}
+                        key={item.id}
                         src={item.file}
                       />
                     ) : (
