@@ -44,7 +44,7 @@ export type Chats = {
 
 export type ChatPreview = Omit<
   Chat,
-  "messages" | "draftMessage" | "titleTip" | "isSelectingModel"
+  "messages" | "draftMessage" | "titleTip" | "isSelectingModel" | "draftFiles"
 > & {
   chatID: string;
   firstMessage?: string | null;
