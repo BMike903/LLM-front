@@ -49,6 +49,7 @@ function FileItem({
             <FiDownload
               style={{ color: "white", opacity: "80%" }}
               size={40}
+              className="text-white drop-shadow-[0_0_2px_black]"
             />{" "}
           </button>
         )}
@@ -62,6 +63,7 @@ function FileItem({
             <FiTrash2
               style={{ color: "white", opacity: "80%" }}
               size={20}
+              className="text-white drop-shadow-[0_0_2px_black]"
             />{" "}
           </button>
         )}
