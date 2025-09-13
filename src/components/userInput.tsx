@@ -8,6 +8,7 @@ import { getModel } from "../types/models";
 import { sendMessage } from "../services/chatService";
 import { FileConversionResult } from "../types/chat";
 import { fileToChatFile } from "../utils/files";
+import FileItem from "./fileItem";
 
 function UserInput() {
   const currentChatId = useCurrentChatId();
@@ -49,6 +50,9 @@ function UserInput() {
   };
 
   const removeAttachedFile = (id: string) => {
+    if (status === "fetching") {
+      return;
+    }
     const updatedFiles = draftFiles.filter((file) => file.id !== id);
     setDraftFiles(currentChatId, updatedFiles);
   };
@@ -93,17 +97,12 @@ function UserInput() {
           className="mx-auto mb-2 flex w-full max-w-2xl flex-row flex-wrap gap-4 rounded-xl border border-gray-300 bg-white/90 p-3 shadow-lg dark:border-gray-700 dark:bg-gray-900/90"
         >
           {draftFiles.map((item) => (
-            <div key={item.id} onClick={() => removeAttachedFile(item.id)}>
-              {item.fileType === "img" ? (
-                <img
-                  className="h-24 w-20 rounded-lg border border-gray-300 object-cover shadow transition-opacity group-hover:opacity-70 dark:border-gray-700"
-                  key={item.id}
-                  src={item.file}
-                />
-              ) : (
-                <div>unsupported file type</div>
-              )}
-            </div>
+            <FileItem
+              file={item}
+              displayType="draftFile"
+              onRemove={() => removeAttachedFile(item.id)}
+              key={item.id}
+            />
           ))}
         </div>
       )}

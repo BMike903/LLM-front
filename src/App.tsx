@@ -12,6 +12,7 @@ import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
 import CurrentChatTitleInput from "./components/titleInput";
+import FileItem from "./components/fileItem";
 
 function App() {
   const currentChatId = useCurrentChatId();
@@ -76,17 +77,13 @@ function App() {
                       {message.files && (
                         <div className="mt-1 flex flex-row gap-3">
                           {message.files.map((item) => {
-                            if (item.fileType === "img") {
-                              return (
-                                <img
-                                  className="max-h-80 max-w-xs rounded-lg object-contain shadow"
-                                  key={item.id}
-                                  src={item.file}
-                                />
-                              );
-                            } else {
-                              return <div>unsupported file format</div>;
-                            }
+                            return (
+                              <FileItem
+                                file={item}
+                                displayType="messageFile"
+                                key={item.id}
+                              />
+                            );
                           })}
                         </div>
                       )}
