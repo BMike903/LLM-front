@@ -63,7 +63,9 @@ function App() {
 
         <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
           {!model || isSelectingModel ? (
-            <SelectModelList />
+            <div>
+              <SelectModelList />
+            </div>
           ) : (
             <>
               {messages.map((message) => {
