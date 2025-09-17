@@ -3,7 +3,7 @@ import "./tailwind.css";
 
 import { BiEdit } from "react-icons/bi";
 import { motion, AnimatePresence } from "motion/react";
-import Markdown from "react-markdown";
+import ChatMessage from "./components/chatMessage";
 
 import ChatList from "./components/chatList";
 import UserInput from "./components/userInput";
@@ -12,7 +12,6 @@ import { useCurrentChat, useCurrentChatId } from "./store/chatSelectors";
 import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
 import CurrentChatTitleInput from "./components/titleInput";
-import FileItem from "./components/fileItem";
 
 function App() {
   const currentChatId = useCurrentChatId();
@@ -68,37 +67,9 @@ function App() {
             </div>
           ) : (
             <>
-              {messages.map((message) => {
-                if (message.role === "user") {
-                  return (
-                    <div
-                      className="self-end rounded-s-xl rounded-br-xl border-gray-200 bg-gray-300 p-4 dark:bg-gray-800"
-                      key={message.id}
-                    >
-                      {message.content}
-                      {message.files && (
-                        <div className="mt-1 flex flex-row gap-3">
-                          {message.files.map((item) => {
-                            return (
-                              <FileItem
-                                file={item}
-                                displayType="messageFile"
-                                key={item.id}
-                              />
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div key={message.id}>
-                      <Markdown>{message.content}</Markdown>
-                    </div>
-                  );
-                }
-              })}
+              {messages.map((message) => (
+                <ChatMessage message={message} key={message.id} />
+              ))}
 
               {status === "error" && (
                 <AnimatePresence>
