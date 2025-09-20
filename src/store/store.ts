@@ -37,6 +37,7 @@ interface StoreState {
   setTitleTipStatus: (chatID: string, status: TitleTipStatuses) => void;
   setSelectingModel: (chatID: string, isSelectingModel: boolean) => void;
   setDraftFiles: (chatID: string, draftFiles: ChatFile[]) => void;
+  deleteChat: (chatID: string) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -176,6 +177,33 @@ const useChatsStore = create<StoreState>()(
       setDraftFiles(chatID, draftFiles) {
         set((state) => {
           state.chats.allChats[chatID].draftFiles = [...draftFiles];
+        });
+      },
+      deleteChat(chatID) {
+        set((state) => {
+          delete state.chats.allChats[chatID];
+
+          if (state.chats.currentChatId === chatID) {
+            const remaining = Object.keys(state.chats.allChats);
+            if (remaining.length > 0) {
+              state.chats.currentChatId = remaining[0];
+            } else {
+              const newChatId = nanoid();
+              state.chats.allChats[newChatId] = {
+                status: "idle",
+                modelKey: null,
+                messages: [],
+                startDate: new Date().toISOString(),
+                draftMessage: "",
+                draftFiles: [],
+                title: "",
+                titleTip: "",
+                titleTipStatus: "empty",
+                isSelectingModel: true,
+              };
+              state.chats.currentChatId = newChatId;
+            }
+          }
         });
       },
     })),

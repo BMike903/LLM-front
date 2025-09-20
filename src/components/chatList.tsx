@@ -1,4 +1,5 @@
 import { BiLoader, BiErrorCircle } from "react-icons/bi";
+import { FiTrash2 } from "react-icons/fi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
@@ -68,6 +69,20 @@ function ChatList() {
           {(chatContent.status === "error" ||
             chatContent.titleTipStatus === "error") && (
             <BiErrorCircle className="inline text-red-600" size="1.15em" />
+          )}
+          {chatContent.status !== "fetching" && (
+            <>
+              {" "}
+              <FiTrash2
+                className="inline"
+                size="1.15em"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  const deleteChat = useChatsStore.getState().deleteChat;
+                  deleteChat(chatContent.chatID);
+                }}
+              />
+            </>
           )}
         </b>
       </button>
