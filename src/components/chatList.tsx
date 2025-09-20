@@ -1,8 +1,10 @@
+import React from "react";
 import { BiLoader, BiErrorCircle } from "react-icons/bi";
 import { FiTrash2 } from "react-icons/fi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
+import ConfirmModal from "./ConfirmModal";
 import { daysSince } from "../utils/date";
 import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
 import { selectTitleOrFirstMessage } from "../utils/chat";
@@ -11,6 +13,10 @@ function ChatList() {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
   const addNewChat = useChatsStore((state) => state.addNewChat);
   const allChats = useAllChats();
+  const deleteChat = useChatsStore((state) => state.deleteChat);
+
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [chatToDelete, setChatToDelete] = React.useState<string | null>(null);
 
   const chatsPreviews: ChatPreview[] = Object.entries(allChats).map(
     ([chatID, chatContent]) => ({
@@ -78,8 +84,8 @@ function ChatList() {
                 size="1.15em"
                 onClick={(event) => {
                   event.stopPropagation();
-                  const deleteChat = useChatsStore.getState().deleteChat;
-                  deleteChat(chatContent.chatID);
+                  setChatToDelete(chatContent.chatID);
+                  setIsModalOpen(true);
                 }}
               />
             </>
@@ -141,6 +147,20 @@ function ChatList() {
           </li>
         )}
       </ul>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        title="Delete chat"
+        description="Are you sure you want to delete this chat? This action cannot be undone."
+        onCancel={() => {
+          setIsModalOpen(false);
+          setChatToDelete(null);
+        }}
+        onConfirm={() => {
+          if (chatToDelete) deleteChat(chatToDelete);
+          setIsModalOpen(false);
+          setChatToDelete(null);
+        }}
+      />
     </div>
   );
 }
