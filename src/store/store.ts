@@ -38,6 +38,7 @@ interface StoreState {
   setSelectingModel: (chatID: string, isSelectingModel: boolean) => void;
   setDraftFiles: (chatID: string, draftFiles: ChatFile[]) => void;
   deleteChat: (chatID: string) => void;
+  deleteMessage: (chatID: string, messageID: string) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -177,6 +178,25 @@ const useChatsStore = create<StoreState>()(
       setDraftFiles(chatID, draftFiles) {
         set((state) => {
           state.chats.allChats[chatID].draftFiles = [...draftFiles];
+        });
+      },
+      deleteMessage(chatID, messageID) {
+        set((state) => {
+          const messages = state.chats.allChats[chatID]?.messages;
+          if (!messages) return;
+
+          const idx = messages.findIndex((m) => m.id === messageID);
+          if (idx === -1) return;
+
+          const deleted = messages[idx];
+          messages.splice(idx, 1);
+
+          // if it was a user message, and the next message was assistant, remove it too
+          if (deleted.role === "user") {
+            if (idx < messages.length && messages[idx]?.role === "assistant") {
+              messages.splice(idx, 1);
+            }
+          }
         });
       },
       deleteChat(chatID) {
