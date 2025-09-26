@@ -32,13 +32,13 @@ export default function ConfirmModal({
         </p>
         <div className="flex justify-end gap-3">
           <button
-            className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 px-3 py-1 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 px-3 py-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            className="rounded-md border-2 border-solid border-gray-300 bg-red-600 px-3 py-1 text-white hover:bg-red-700 dark:border-gray-600"
+            className="rounded-md border-2 border-solid border-gray-300 bg-red-600 px-3 py-1 text-white hover:cursor-pointer hover:bg-red-700 dark:border-gray-600"
             onClick={onConfirm}
           >
             {confirmButtonText}
