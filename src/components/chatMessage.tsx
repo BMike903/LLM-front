@@ -15,7 +15,7 @@ function ChatMessage({ message }: { message: Message }) {
       <div key={message.id} className="group flex w-full justify-end">
         <div className="relative max-w-[80%]">
           <button
-            className="absolute top-1 -left-6 text-gray-600 opacity-0 transition-opacity group-hover:opacity-100 hover:text-gray-800 dark:text-gray-300"
+            className="absolute top-1 -left-6 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100 hover:cursor-pointer hover:text-gray-950 dark:text-gray-300 dark:hover:text-gray-50"
             onClick={(e) => {
               e.stopPropagation();
               if (currentChatId) deleteMessage(currentChatId, message.id);
@@ -46,7 +46,7 @@ function ChatMessage({ message }: { message: Message }) {
     return (
       <div className="group relative pl-10" key={message.id}>
         <button
-          className="absolute top-2 left-2 text-gray-600 opacity-0 transition-opacity group-hover:opacity-100 hover:text-gray-800 dark:text-gray-300"
+          className="absolute top-2 left-2 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100 hover:cursor-pointer hover:text-gray-950 dark:text-gray-300 dark:hover:text-gray-50"
           onClick={(e) => {
             e.stopPropagation();
             if (currentChatId) deleteMessage(currentChatId, message.id);
