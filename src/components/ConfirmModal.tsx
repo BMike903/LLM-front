@@ -1,14 +1,17 @@
 type ConfirmModalProps = {
   title?: string;
   description?: string;
+  confirmButtonText?: string;
   isOpen: boolean;
   onConfirm: () => void;
+
   onCancel: () => void;
 };
 
 export default function ConfirmModal({
   title = "Confirm",
   description = "Are you sure?",
+  confirmButtonText = "Delete",
   isOpen,
   onConfirm,
   onCancel,
@@ -39,7 +42,7 @@ export default function ConfirmModal({
             className="rounded-md border-2 border-solid border-gray-300 bg-red-600 px-3 py-1 text-white hover:bg-red-700 dark:border-gray-600"
             onClick={onConfirm}
           >
-            Delete
+            {confirmButtonText}
           </button>
         </div>
       </div>
