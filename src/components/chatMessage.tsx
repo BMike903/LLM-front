@@ -7,7 +7,7 @@ import FileItem from "./fileItem";
 import { Message } from "../types/chat";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "./сonfirmModal";
 
 function ChatMessage({ message }: { message: Message }) {
   const deleteMessage = useChatsStore((state) => state.deleteMessage);

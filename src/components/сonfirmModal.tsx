@@ -4,7 +4,6 @@ type ConfirmModalProps = {
   confirmButtonText?: string;
   isOpen: boolean;
   onConfirm: () => void;
-
   onCancel: () => void;
 };
 

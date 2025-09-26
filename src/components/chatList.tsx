@@ -4,7 +4,7 @@ import { FiTrash2 } from "react-icons/fi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "./сonfirmModal";
 import { daysSince } from "../utils/date";
 import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
 import { selectTitleOrFirstMessage } from "../utils/chat";
