@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Markdown from "react-markdown";
-import { FiTrash2 } from "react-icons/fi";
+import { BiSolidTrashAlt  } from "react-icons/bi";
 
 import FileItem from "./fileItem";
 import { Message } from "../types/chat";
@@ -29,7 +29,7 @@ function ChatMessage({ message }: { message: Message }) {
             }}
             aria-label="Delete message"
           >
-            <FiTrash2 size="1.2em" />
+            <BiSolidTrashAlt  size="1.2em" />
           </button>
 
           <div className="rounded-s-xl rounded-br-xl border-gray-200 bg-gray-300 p-4 dark:bg-gray-800">
@@ -60,7 +60,7 @@ function ChatMessage({ message }: { message: Message }) {
           }}
           aria-label="Delete message"
         >
-          <FiTrash2 size="1.2em" />
+          <BiSolidTrashAlt  size="1.2em" />
         </button>
         <div>
           <Markdown>{message.content}</Markdown>

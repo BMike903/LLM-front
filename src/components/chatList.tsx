@@ -1,6 +1,6 @@
 import React from "react";
-import { BiLoader, BiErrorCircle } from "react-icons/bi";
-import { FiTrash2 } from "react-icons/fi";
+
+import { BiLoader, BiErrorCircle, BiSolidTrashAlt } from "react-icons/bi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
@@ -79,7 +79,7 @@ function ChatList() {
           {chatContent.status !== "fetching" && (
             <>
               {" "}
-              <FiTrash2
+              <BiSolidTrashAlt
                 className="inline"
                 size="1.15em"
                 onClick={(event) => {

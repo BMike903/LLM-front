@@ -1,4 +1,4 @@
-import { FiDownload, FiTrash2 } from "react-icons/fi";
+import { BiDownload, BiSolidTrashAlt } from "react-icons/bi";
 
 import { ChatFile } from "../types/chat";
 import { base64ToFile } from "../utils/files";
@@ -46,7 +46,7 @@ function FileItem({
             className="absolute top-2 left-2 cursor-pointer"
           >
             {" "}
-            <FiDownload
+            <BiDownload
               style={{ color: "white", opacity: "80%" }}
               size={40}
               className="text-white drop-shadow-[0_0_2px_black]"
@@ -60,7 +60,7 @@ function FileItem({
             onClick={onRemove}
           >
             {" "}
-            <FiTrash2
+            <BiSolidTrashAlt
               style={{ color: "white", opacity: "80%" }}
               size={20}
               className="text-white drop-shadow-[0_0_2px_black]"
