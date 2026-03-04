@@ -63,34 +63,37 @@ function ChatList() {
         key={chatContent.chatID}
         tabIndex={0}
         onClick={() => setCurrentChat(chatContent.chatID)}
-        className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="group flex w-full flex-col gap-1 rounded-xl border border-transparent bg-white/70 px-3 py-2 text-left text-sm transition hover:border-[color:var(--border)] hover:bg-white"
       >
-        {selectTitleOrFirstMessage(chatContent.title, chatContent.firstMessage)}{" "}
-        -{" "}
-        <b>
-          {chatContent.modelKey ? chatContent.modelKey + " " : "no model"}
+        <div className="flex items-center justify-between gap-3">
+          <span className="min-w-0 flex-1 truncate font-medium text-[color:var(--text)]">
+            {selectTitleOrFirstMessage(
+              chatContent.title,
+              chatContent.firstMessage,
+            )}
+          </span>
           {chatContent.status === "fetching" && (
-            <BiLoader className="inline animate-spin" size="1.15em" />
+            <BiLoader className="animate-spin text-[color:var(--muted)]" size="1.1em" />
           )}
           {(chatContent.status === "error" ||
             chatContent.titleTipStatus === "error") && (
-            <BiErrorCircle className="inline text-red-600" size="1.15em" />
+            <BiErrorCircle className="text-red-500" size="1.1em" />
           )}
+        </div>
+        <div className="flex items-center justify-between gap-2 text-xs text-[color:var(--muted)]">
+          <span>{chatContent.modelKey ? chatContent.modelKey : "No model"}</span>
           {chatContent.status !== "fetching" && (
-            <>
-              {" "}
-              <BiSolidTrashAlt
-                className="inline"
-                size="1.15em"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setChatToDelete(chatContent.chatID);
-                  setIsModalOpen(true);
-                }}
-              />
-            </>
+            <BiSolidTrashAlt
+              className="opacity-0 transition group-hover:opacity-100"
+              size="1.1em"
+              onClick={(event) => {
+                event.stopPropagation();
+                setChatToDelete(chatContent.chatID);
+                setIsModalOpen(true);
+              }}
+            />
           )}
-        </b>
+        </div>
       </button>
     );
   };
@@ -98,22 +101,24 @@ function ChatList() {
   return (
     <div
       id="chatList"
-      className="flex h-full flex-1/6 flex-col overflow-auto border-4 border-solid border-gray-300 bg-gray-50 px-1 py-6 dark:border-gray-600 dark:bg-black"
+      className="flex h-full w-72 shrink-0 flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5"
     >
       <button
-        className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-center hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="rounded-xl border border-[color:var(--border)] bg-white px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
         onClick={() => addNewChat()}
         tabIndex={0}
       >
-        Add new chat
+        New chat
       </button>
 
-      <hr className="my-5" />
+      <hr className="my-5 border-[color:var(--border)]" />
 
-      <ul className="flex flex-col gap-6 px-1">
+      <ul className="flex flex-col gap-6">
         {chatsPreviewsByDates["today"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="text-center">Today</div>
+            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              Today
+            </div>
             {chatsPreviewsByDates["today"].map((chat) =>
               renderChatPreview(chat),
             )}
@@ -122,7 +127,9 @@ function ChatList() {
 
         {chatsPreviewsByDates["yesterday"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="pb-2 text-center">Yesterday</div>
+            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              Yesterday
+            </div>
             {chatsPreviewsByDates["yesterday"].map((chat) =>
               renderChatPreview(chat),
             )}
@@ -131,7 +138,9 @@ function ChatList() {
 
         {chatsPreviewsByDates["3daysAgo"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="pb-2 text-center">3 days ago</div>
+            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              3 days ago
+            </div>
             {chatsPreviewsByDates["3daysAgo"].map((chat) =>
               renderChatPreview(chat),
             )}
@@ -140,7 +149,9 @@ function ChatList() {
 
         {chatsPreviewsByDates["weekAgo"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="pb-2 text-center">Week ago</div>
+            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              Week ago
+            </div>
             {chatsPreviewsByDates["weekAgo"].map((chat) =>
               renderChatPreview(chat),
             )}

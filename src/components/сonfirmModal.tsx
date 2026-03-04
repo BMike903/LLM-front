@@ -20,25 +20,25 @@ export default function ConfirmModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black opacity-50"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onCancel}
       />
-      <div className="relative z-10 w-11/12 max-w-md rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-6 shadow-sm dark:border-gray-600 dark:bg-gray-800">
-        <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div className="relative z-10 w-11/12 max-w-md rounded-2xl border border-[color:var(--border)] bg-white p-6 shadow-xl">
+        <h3 className="mb-2 text-lg font-semibold text-[color:var(--text)]">
           {title}
         </h3>
-        <p className="mb-4 text-sm text-gray-700 dark:text-gray-300">
+        <p className="mb-5 text-sm text-[color:var(--muted)]">
           {description}
         </p>
         <div className="flex justify-end gap-3">
           <button
-            className="rounded-md border-2 border-solid border-gray-300 bg-gray-200 px-3 py-1 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="rounded-full border border-[color:var(--border)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--text)] transition hover:bg-[color:var(--surface-muted)]"
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            className="rounded-md border-2 border-solid border-gray-300 bg-red-600 px-3 py-1 text-white hover:cursor-pointer hover:bg-red-700 dark:border-gray-600"
+            className="rounded-full border border-transparent bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
             onClick={onConfirm}
           >
             {confirmButtonText}

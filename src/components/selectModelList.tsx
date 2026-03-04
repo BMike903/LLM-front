@@ -14,23 +14,28 @@ function SelectModelList() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-6">
-      <p className="text-lg font-bold">Select a model to start chat</p>
-      <ul className="flex flex-row flex-wrap gap-6">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-6 text-center">
+      <p className="text-lg font-semibold">Select a model to start chat</p>
+      <p className="max-w-xl text-sm text-[color:var(--muted)]">
+        Choose the model that fits your task. You can switch later from the
+        header.
+      </p>
+      <ul className="grid w-full max-w-3xl grid-cols-1 gap-4 md:grid-cols-2">
         {Object.entries(models).map(([modelKey, model]) => (
           <li
             key={modelKey}
             onClick={() => onModelClick(modelKey)}
-            className="w-96 rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-3 hover:cursor-pointer hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="group rounded-2xl border border-[color:var(--border)] bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[color:var(--accent)] hover:shadow-md hover:shadow-emerald-500/10"
           >
             <button
               onClick={() => onModelClick(modelKey)}
               tabIndex={0}
-              className="hover:cursor-pointer"
+              className="w-full text-left"
             >
-              <p className="text-center font-bold">{model.name}</p>
-              <br />
-              {model.description}
+              <p className="text-sm font-semibold">{model.name}</p>
+              <p className="mt-2 text-sm text-[color:var(--muted)]">
+                {model.description}
+              </p>
             </button>
           </li>
         ))}

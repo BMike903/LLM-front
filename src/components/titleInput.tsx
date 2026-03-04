@@ -92,19 +92,25 @@ function CurrentChatTitleInput({
     switch (titleTipStatus) {
       case "empty":
         return (
-          <button onClick={() => handleSuggest()}>
+          <button
+            onClick={() => handleSuggest()}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+          >
             <BiBot title="Get suggestion from model" size="1.3em" />
           </button>
         );
       case "fetching":
         return (
-          <button>
+          <button className="rounded-full border border-transparent p-1 text-[color:var(--muted)]">
             <BiLoader className="animate-spin" size="1.3em" />
           </button>
         );
       case "notApplied":
         return (
-          <button onClick={handleApplySuggestedTitle}>
+          <button
+            onClick={handleApplySuggestedTitle}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+          >
             <BiChevronsLeft
               color="#d4ac0d"
               title="Apply suggested title tip"
@@ -114,7 +120,10 @@ function CurrentChatTitleInput({
         );
       case "error":
         return (
-          <button onClick={() => handleSuggest()}>
+          <button
+            onClick={() => handleSuggest()}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+          >
             <BiRepeat
               color="red"
               title="Retry getting suggestion from model "
@@ -129,13 +138,13 @@ function CurrentChatTitleInput({
     switch (titleTipStatus) {
       case "fetching":
         return (
-          <button>
+          <button className="rounded-full border border-transparent p-1 text-[color:var(--muted)]">
             <BiLoader className="animate-spin" size="1.3em" />
           </button>
         );
       case "error":
         return (
-          <button>
+          <button className="rounded-full border border-transparent p-1 text-[color:var(--muted)]">
             <BiError
               color="red"
               title="Error occurred while loading title tip"
@@ -145,7 +154,10 @@ function CurrentChatTitleInput({
         );
       case "notApplied":
         return (
-          <button onClick={handleApplyTitleTipAlert}>
+          <button
+            onClick={handleApplyTitleTipAlert}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+          >
             <BiError
               color="#d4ac0d"
               title="Title tip was not applied"
@@ -157,7 +169,7 @@ function CurrentChatTitleInput({
   };
 
   return (
-    <div className="flex flex-row gap-3">
+    <div className="flex min-w-0 flex-row items-center gap-2">
       {isEditing ? (
         <>
           <textarea
@@ -165,19 +177,21 @@ function CurrentChatTitleInput({
             value={inputTitle}
             onChange={(e) => setInputTitle(e.target.value)}
             ref={inputRef}
-            className="h-auto flex-2/3 resize-none"
+            className="h-9 min-w-0 flex-1 resize-none rounded-full border border-[color:var(--border)] bg-white px-3 py-2 text-sm focus:outline-none"
             onKeyDown={handleEnterPress}
           />
 
           <button
             onClick={() => handleSubmit()}
             disabled={titleTipStatus === "fetching"}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
           >
             <BiCheck size="1.3em" />
           </button>
           <button
             onClick={() => handleUndo()}
             disabled={titleTipStatus === "fetching"}
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
           >
             <BiUndo size="1.3em" />
           </button>
@@ -186,12 +200,14 @@ function CurrentChatTitleInput({
         </>
       ) : (
         <>
-          <div className="h-auto flex-2/3">{inputTitle}</div>
+          <div className="min-w-0 flex-1 truncate text-sm font-semibold">
+            {inputTitle}
+          </div>
 
           {renderSuggestTitleTipWarning()}
 
           <button
-            className="hover:cursor-pointer"
+            className="rounded-full border border-transparent p-1 text-[color:var(--muted)] hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
             onClick={() => setIsEditing((editing) => !editing)}
           >
             <BiEdit size="1.3em" />

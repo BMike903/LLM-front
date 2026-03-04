@@ -94,7 +94,7 @@ function UserInput() {
       {draftFiles.length > 0 && (
         <div
           id="attachedFiles"
-          className="mx-auto mb-2 flex w-full max-w-2xl flex-row flex-wrap gap-4 rounded-xl border border-gray-300 bg-white/90 p-3 shadow-lg dark:border-gray-700 dark:bg-gray-900/90"
+          className="mx-auto mb-3 flex w-full max-w-2xl flex-row flex-wrap gap-4 rounded-2xl border border-[color:var(--border)] bg-white/90 p-3 shadow-sm"
         >
           {draftFiles.map((item) => (
             <FileItem
@@ -109,23 +109,26 @@ function UserInput() {
 
       <div
         key="input-container"
-        className="flex h-18 flex-row gap-3 rounded-sm border-2 border-solid border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-800"
+        className="flex min-h-[3.5rem] flex-row items-center gap-3 rounded-3xl border border-[color:var(--border)] bg-white px-4 py-3 shadow-lg shadow-black/5"
       >
         <input
           value={draftMessage}
           onChange={(e) => setDraftMessage(currentChatId, e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={status === "fetching"}
-          className="mt-0 mr-auto w-full focus:outline-none"
+          placeholder="Message..."
+          className="mr-auto w-full bg-transparent text-sm focus:outline-none"
         />
 
         {model?.features?.includes("img") && (
           <>
             <button
               disabled={status === "fetching" || (model ? false : true)}
-              className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--border)] text-[color:var(--muted)] transition hover:text-[color:var(--text)] disabled:opacity-50"
+              aria-label="Attach image"
+              onClick={addImage}
             >
-              <BiImageAdd size="2em" onClick={addImage} />
+              <BiImageAdd size="2em" />
             </button>
 
             <input
@@ -142,7 +145,8 @@ function UserInput() {
             status === "fetching" || isInputEmpty() || (model ? false : true)
           }
           onClick={() => makeRequest()}
-          className="flex h-10 w-10 items-center justify-center rounded-sm border-2 border-solid border-gray-400 disabled:opacity-50 dark:border-gray-600"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--accent)] text-white transition hover:bg-[color:var(--accent-strong)] disabled:opacity-50 disabled:hover:bg-[color:var(--accent)]"
+          aria-label="Send message"
         >
           {renderSendButton()}
         </button>

@@ -1,1 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap");
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --app-bg: #f7f7f8;
+    --sidebar-bg: #f1f2f4;
+    --surface: #ffffff;
+    --surface-muted: #f5f6f8;
+    --border: #e3e6ea;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #10a37f;
+    --accent-strong: #0e8f70;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--text);
+    font-family: "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 20% 0%, #ffffff 0%, #f7f7f8 45%, #eff1f4 100%);
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  input,
+  textarea {
+    font-family: inherit;
+  }
+
+  .markdown p {
+    margin: 0 0 0.75rem;
+  }
+
+  .markdown p:last-child {
+    margin-bottom: 0;
+  }
+
+  .markdown pre {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    overflow: auto;
+    border-radius: 12px;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .markdown code {
+    border-radius: 6px;
+    background: #f1f5f9;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.875rem;
+  }
+
+  .markdown ul {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .markdown ol {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+    list-style: decimal;
+  }
+
+  .markdown li {
+    margin-bottom: 0.35rem;
+  }
+}

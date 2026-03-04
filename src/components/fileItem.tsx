@@ -36,35 +36,31 @@ function FileItem({
           alt={file.name || "img"}
           className={
             displayType === "messageFile"
-              ? "max-h-80 max-w-xs rounded-lg object-cover shadow"
-              : "h-20 w-20 rounded object-cover"
+              ? "max-h-80 max-w-xs rounded-2xl border border-[color:var(--border)] object-cover shadow"
+              : "h-20 w-20 rounded-xl border border-[color:var(--border)] object-cover"
           }
         />
         {displayType === "messageFile" && (
           <button
             onClick={downloadFile}
-            className="absolute top-2 left-2 cursor-pointer"
+            className="absolute top-2 left-2 rounded-full bg-black/50 p-1 text-white transition hover:bg-black/70"
           >
-            {" "}
             <BiDownload
-              style={{ color: "white", opacity: "80%" }}
-              size={40}
+              size={24}
               className="text-white drop-shadow-[0_0_2px_black]"
-            />{" "}
+            />
           </button>
         )}
 
         {displayType === "draftFile" && (
           <button
-            className="absolute top-1 right-1 cursor-pointer"
+            className="absolute top-1 right-1 rounded-full bg-black/50 p-1 text-white transition hover:bg-black/70"
             onClick={onRemove}
           >
-            {" "}
             <BiSolidTrashAlt
-              style={{ color: "white", opacity: "80%" }}
-              size={20}
+              size={16}
               className="text-white drop-shadow-[0_0_2px_black]"
-            />{" "}
+            />
           </button>
         )}
       </div>

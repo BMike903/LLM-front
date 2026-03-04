@@ -28,71 +28,77 @@ function App() {
   }, [status, messages]);
 
   return (
-    <div className="flex h-screen w-screen flex-row dark:text-white">
+    <div className="flex h-screen w-screen bg-[color:var(--app-bg)] text-[color:var(--text)]">
       <ChatList />
-      <div
-        id="chatBox"
-        className="flex h-full flex-5/6 flex-col border-4 border-solid border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-black"
-      >
-        <div className="flex flex-row items-center justify-between gap-6 border-2 border-solid border-gray-400 bg-gray-200 p-1 px-2 pl-6 dark:border-gray-600 dark:bg-black">
-          <div className="flex flex-row gap-2">
-            {"model name:\u00A0"}
-            <b>{model ? model.name : "No model selected"}</b>
-            <button
-              className="hover:cursor-pointer"
-              disabled={status === "fetching"}
-              onClick={() => setSelectingModel(currentChatId, true)}
-            >
-              <BiEdit size="1.3em" />
-            </button>
-          </div>
-          <div className="flex flex-row items-center">
-            {"Chat title: \u00A0"}
-            <b className="mx-5">
+      <div id="chatBox" className="flex min-w-0 flex-1 flex-col">
+        <div className="sticky top-0 z-10 border-b border-[color:var(--border)] bg-white/80 px-6 py-3 backdrop-blur">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              <span>Model</span>
+              <span className="rounded-full bg-[color:var(--surface-muted)] px-3 py-1 text-[0.7rem] font-semibold text-[color:var(--text)]">
+                {model ? model.name : "Select model"}
+              </span>
+              <button
+                className="rounded-full border border-transparent p-1 text-[color:var(--muted)] transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
+                disabled={status === "fetching"}
+                onClick={() => setSelectingModel(currentChatId, true)}
+                aria-label="Change model"
+              >
+                <BiEdit size="1.1em" />
+              </button>
+            </div>
+
+            <div className="flex min-w-[220px] flex-1 items-center justify-center text-sm font-semibold">
               <CurrentChatTitleInput
                 title={title}
                 firstMessage={messages[0]?.content}
                 chatID={currentChatId}
               />
-            </b>
-          </div>
+            </div>
 
-          <div>Chat started at: {new Date(startDate).toUTCString()}</div>
+            <div className="hidden text-xs text-[color:var(--muted)] lg:block">
+              Started {new Date(startDate).toUTCString()}
+            </div>
+          </div>
         </div>
 
-        <div className="mx-auto flex h-full w-full flex-col items-center gap-15 overflow-y-scroll scroll-smooth border-2 border-solid border-gray-300 bg-gray-100 p-5 dark:border-gray-600 dark:bg-black">
+        <div className="flex-1 overflow-y-auto scroll-smooth">
           {!model || isSelectingModel ? (
-            <div>
+            <div className="flex min-h-[70vh] items-center justify-center px-6 py-12">
               <SelectModelList />
             </div>
           ) : (
             <>
-              {messages.map((message) => (
-                <ChatMessage message={message} key={message.id} />
-              ))}
+              <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 pb-8 pt-10">
+                {messages.map((message) => (
+                  <ChatMessage message={message} key={message.id} />
+                ))}
 
-              {status === "error" && (
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="rounded-4xl border-gray-200 bg-red-400 p-4 font-bold dark:bg-red-900"
-                  >
-                    Error occurred. Try to resend request later.
-                  </motion.div>
-                </AnimatePresence>
-              )}
+                {status === "error" && (
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700"
+                    >
+                      Error occurred. Try to resend request later.
+                    </motion.div>
+                  </AnimatePresence>
+                )}
+              </div>
+
+              <div
+                ref={inputContainer}
+                className="sticky bottom-0 z-10 border-t border-transparent bg-gradient-to-t from-[#f7f7f8] via-[#f7f7f8] to-transparent"
+              >
+                <div className="mx-auto w-full max-w-3xl px-6 pb-8 pt-5">
+                  <UserInput />
+                </div>
+              </div>
             </>
           )}
-
-          <div
-            ref={inputContainer}
-            className="mx-auto mt-auto box-border flex w-3/5 flex-col gap-2 self-end"
-          >
-            <UserInput />
-          </div>
         </div>
       </div>
     </div>
