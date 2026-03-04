@@ -31,7 +31,7 @@ function App() {
     <div className="flex h-screen w-screen bg-[color:var(--app-bg)] text-[color:var(--text)]">
       <ChatList />
       <div id="chatBox" className="flex min-w-0 flex-1 flex-col">
-        <div className="sticky top-0 z-10 border-b border-[color:var(--border)] bg-white/80 px-6 py-3 backdrop-blur">
+        <div className="sticky top-0 z-10 border-b border-[color:var(--border)] bg-[color:var(--surface-80)] px-6 py-3 backdrop-blur">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
               <span>Model</span>
@@ -81,7 +81,7 @@ function App() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700"
+                      className="rounded-2xl border border-[color:var(--error-border)] bg-[color:var(--error-bg)] p-4 text-sm font-semibold text-[color:var(--error-text)]"
                     >
                       Error occurred. Try to resend request later.
                     </motion.div>
@@ -91,7 +91,7 @@ function App() {
 
               <div
                 ref={inputContainer}
-                className="sticky bottom-0 z-10 border-t border-transparent bg-gradient-to-t from-[#f7f7f8] via-[#f7f7f8] to-transparent"
+                className="sticky bottom-0 z-10 border-t border-transparent bg-gradient-to-t from-[color:var(--app-bg)] via-[color:var(--app-bg)] to-transparent"
               >
                 <div className="mx-auto w-full max-w-3xl px-6 pb-8 pt-5">
                   <UserInput />

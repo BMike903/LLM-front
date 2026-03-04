@@ -32,7 +32,7 @@ function ChatMessage({ message }: { message: Message }) {
             <BiSolidTrashAlt size="1.1em" />
           </button>
 
-          <div className="rounded-2xl border border-[color:var(--border)] bg-white px-4 py-3 shadow-sm">
+          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             <div className="text-sm leading-6 whitespace-pre-wrap">
               {message.content}
             </div>

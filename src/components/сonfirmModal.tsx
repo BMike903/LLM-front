@@ -23,7 +23,7 @@ export default function ConfirmModal({
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onCancel}
       />
-      <div className="relative z-10 w-11/12 max-w-md rounded-2xl border border-[color:var(--border)] bg-white p-6 shadow-xl">
+      <div className="relative z-10 w-11/12 max-w-md rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-6 shadow-xl">
         <h3 className="mb-2 text-lg font-semibold text-[color:var(--text)]">
           {title}
         </h3>
@@ -32,7 +32,7 @@ export default function ConfirmModal({
         </p>
         <div className="flex justify-end gap-3">
           <button
-            className="rounded-full border border-[color:var(--border)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--text)] transition hover:bg-[color:var(--surface-muted)]"
+            className="rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-2 text-sm font-semibold text-[color:var(--text)] transition hover:bg-[color:var(--surface-muted)]"
             onClick={onCancel}
           >
             Cancel

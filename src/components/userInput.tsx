@@ -94,7 +94,7 @@ function UserInput() {
       {draftFiles.length > 0 && (
         <div
           id="attachedFiles"
-          className="mx-auto mb-3 flex w-full max-w-2xl flex-row flex-wrap gap-4 rounded-2xl border border-[color:var(--border)] bg-white/90 p-3 shadow-sm"
+          className="mx-auto mb-3 flex w-full max-w-2xl flex-row flex-wrap gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-90)] p-3 shadow-sm"
         >
           {draftFiles.map((item) => (
             <FileItem
@@ -109,7 +109,7 @@ function UserInput() {
 
       <div
         key="input-container"
-        className="flex min-h-[3.5rem] flex-row items-center gap-3 rounded-3xl border border-[color:var(--border)] bg-white px-4 py-3 shadow-lg shadow-black/5"
+        className="flex min-h-[3.5rem] flex-row items-center gap-3 rounded-3xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-lg shadow-black/5"
       >
         <input
           value={draftMessage}

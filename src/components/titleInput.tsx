@@ -177,7 +177,7 @@ function CurrentChatTitleInput({
             value={inputTitle}
             onChange={(e) => setInputTitle(e.target.value)}
             ref={inputRef}
-            className="h-9 min-w-0 flex-1 resize-none rounded-full border border-[color:var(--border)] bg-white px-3 py-2 text-sm focus:outline-none"
+            className="h-9 min-w-0 flex-1 resize-none rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-sm focus:outline-none"
             onKeyDown={handleEnterPress}
           />
 

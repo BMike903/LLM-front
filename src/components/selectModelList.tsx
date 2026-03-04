@@ -25,7 +25,7 @@ function SelectModelList() {
           <li
             key={modelKey}
             onClick={() => onModelClick(modelKey)}
-            className="group rounded-2xl border border-[color:var(--border)] bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[color:var(--accent)] hover:shadow-md hover:shadow-emerald-500/10"
+            className="group rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[color:var(--accent)] hover:shadow-md hover:shadow-emerald-500/10"
           >
             <button
               onClick={() => onModelClick(modelKey)}

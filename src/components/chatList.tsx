@@ -63,7 +63,7 @@ function ChatList() {
         key={chatContent.chatID}
         tabIndex={0}
         onClick={() => setCurrentChat(chatContent.chatID)}
-        className="group flex w-full flex-col gap-1 rounded-xl border border-transparent bg-white/70 px-3 py-2 text-left text-sm transition hover:border-[color:var(--border)] hover:bg-white"
+        className="group flex w-full flex-col gap-1 rounded-xl border border-transparent bg-[color:var(--surface-70)] px-3 py-2 text-left text-sm transition hover:border-[color:var(--border)] hover:bg-[color:var(--surface)]"
       >
         <div className="flex items-center justify-between gap-3">
           <span className="min-w-0 flex-1 truncate font-medium text-[color:var(--text)]">
@@ -104,7 +104,7 @@ function ChatList() {
       className="flex h-full w-72 shrink-0 flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5"
     >
       <button
-        className="rounded-xl border border-[color:var(--border)] bg-white px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
+        className="rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
         onClick={() => addNewChat()}
         tabIndex={0}
       >
