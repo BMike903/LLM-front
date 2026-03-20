@@ -69,32 +69,34 @@ function App() {
             </div>
           ) : (
             <>
-              <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 pb-8 pt-10">
-                {messages.map((message) => (
-                  <ChatMessage message={message} key={message.id} />
-                ))}
+              <div className="flex min-h-full flex-col">
+                <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 pb-8 pt-10">
+                  {messages.map((message) => (
+                    <ChatMessage message={message} key={message.id} />
+                  ))}
 
-                {status === "error" && (
-                  <AnimatePresence>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="rounded-2xl border border-[color:var(--error-border)] bg-[color:var(--error-bg)] p-4 text-sm font-semibold text-[color:var(--error-text)]"
-                    >
-                      Error occurred. Try to resend request later.
-                    </motion.div>
-                  </AnimatePresence>
-                )}
-              </div>
+                  {status === "error" && (
+                    <AnimatePresence>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="rounded-2xl border border-[color:var(--error-border)] bg-[color:var(--error-bg)] p-4 text-sm font-semibold text-[color:var(--error-text)]"
+                      >
+                        Error occurred. Try to resend request later.
+                      </motion.div>
+                    </AnimatePresence>
+                  )}
+                </div>
 
-              <div
-                ref={inputContainer}
-                className="sticky bottom-0 z-10 border-t border-transparent bg-gradient-to-t from-[color:var(--app-bg)] via-[color:var(--app-bg)] to-transparent"
-              >
-                <div className="mx-auto w-full max-w-3xl px-6 pb-8 pt-5">
-                  <UserInput />
+                <div
+                  ref={inputContainer}
+                  className="sticky bottom-0 z-10 border-t border-transparent bg-gradient-to-t from-[color:var(--app-bg)] via-[color:var(--app-bg)] to-transparent"
+                >
+                  <div className="mx-auto w-full max-w-3xl px-6 pb-8 pt-5">
+                    <UserInput />
+                  </div>
                 </div>
               </div>
             </>
