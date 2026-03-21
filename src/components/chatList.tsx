@@ -4,7 +4,7 @@ import { BiLoader, BiErrorCircle, BiSolidTrashAlt } from "react-icons/bi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
-import ConfirmModal from "./сonfirmModal";
+import ConfirmModal from "./confirmModal";
 import { daysSince } from "../utils/date";
 import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
 import { selectTitleOrFirstMessage } from "../utils/chat";
@@ -73,7 +73,10 @@ function ChatList() {
             )}
           </span>
           {chatContent.status === "fetching" && (
-            <BiLoader className="animate-spin text-[color:var(--muted)]" size="1.1em" />
+            <BiLoader
+              className="animate-spin text-[color:var(--muted)]"
+              size="1.1em"
+            />
           )}
           {(chatContent.status === "error" ||
             chatContent.titleTipStatus === "error") && (
@@ -81,7 +84,9 @@ function ChatList() {
           )}
         </div>
         <div className="flex items-center justify-between gap-2 text-xs text-[color:var(--muted)]">
-          <span>{chatContent.modelKey ? chatContent.modelKey : "No model"}</span>
+          <span>
+            {chatContent.modelKey ? chatContent.modelKey : "No model"}
+          </span>
           {chatContent.status !== "fetching" && (
             <BiSolidTrashAlt
               className="opacity-0 transition group-hover:opacity-100"
@@ -116,7 +121,7 @@ function ChatList() {
       <ul className="flex flex-col gap-6">
         {chatsPreviewsByDates["today"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
               Today
             </div>
             {chatsPreviewsByDates["today"].map((chat) =>
@@ -127,7 +132,7 @@ function ChatList() {
 
         {chatsPreviewsByDates["yesterday"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
               Yesterday
             </div>
             {chatsPreviewsByDates["yesterday"].map((chat) =>
@@ -138,7 +143,7 @@ function ChatList() {
 
         {chatsPreviewsByDates["3daysAgo"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
               3 days ago
             </div>
             {chatsPreviewsByDates["3daysAgo"].map((chat) =>
@@ -149,7 +154,7 @@ function ChatList() {
 
         {chatsPreviewsByDates["weekAgo"].length > 0 && (
           <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
               Week ago
             </div>
             {chatsPreviewsByDates["weekAgo"].map((chat) =>
