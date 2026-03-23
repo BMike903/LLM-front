@@ -106,7 +106,7 @@ function ChatList() {
   return (
     <div
       id="chatList"
-      className="flex h-full w-72 shrink-0 flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5"
+      className="hidden shrink-0 flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5 lg:flex lg:h-full lg:w-72"
     >
       <button
         className="rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"

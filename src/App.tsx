@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./tailwind.css";
 
 import { motion, AnimatePresence } from "motion/react";
@@ -10,6 +10,7 @@ import Topbar from "./components/topbar";
 import { useCurrentChat } from "./store/chatSelectors";
 import SelectModelList from "./components/selectModelList";
 import { getModel } from "./types/models";
+import MobileChatList from "./components/mobileChatList";
 
 function App() {
   const currentChat = useCurrentChat();
@@ -18,6 +19,8 @@ function App() {
 
   const inputContainer = useRef<HTMLDivElement | null>(null);
 
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
   useEffect(() => {
     inputContainer.current?.scrollIntoView({ behavior: "smooth" });
   }, [status, messages]);
@@ -25,6 +28,15 @@ function App() {
   return (
     <div className="flex h-screen w-screen bg-[color:var(--app-bg)] text-[color:var(--text)]">
       <ChatList />
+      {/* mobile sidebar */}
+
+      <MobileChatList
+        isOpen={mobileSidebarOpen}
+        setIsOpen={setMobileSidebarOpen}
+      />
+
+      {/* sidebar end */}
+
       <div id="chatBox" className="flex min-w-0 flex-1 flex-col">
         <Topbar />
 
