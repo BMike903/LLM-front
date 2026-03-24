@@ -5,12 +5,12 @@ function MobileChatList({
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }) {
-  const openButtonClasses = isOpen
-    ? "absolute top-2 right-2 z-60 lg:hidden"
-    : "absolute top-2 left-2 z-60 lg:hidden";
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)} className={openButtonClasses}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`absolute top-2 z-60 lg:hidden ${isOpen ? "right-2" : "left-2"}`}
+      >
         X
       </button>
 
