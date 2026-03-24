@@ -1,6 +1,11 @@
 import React from "react";
 
-import { BiLoader, BiErrorCircle, BiSolidTrashAlt } from "react-icons/bi";
+import {
+  BiLoader,
+  BiErrorCircle,
+  BiSolidTrashAlt,
+  BiMenu,
+} from "react-icons/bi";
 
 import useChatsStore from "../store/store";
 import { useAllChats } from "../store/chatSelectors";
@@ -9,7 +14,12 @@ import { daysSince } from "../utils/date";
 import { ChatPreview, ChatsPreviewsByDates } from "../types/chat";
 import { selectTitleOrFirstMessage } from "../utils/chat";
 
-function ChatList() {
+type chatListProps = {
+  overlayOpen: boolean;
+  setOverlayOpen: (overlayOpen: boolean) => void;
+};
+
+function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
   const setCurrentChat = useChatsStore((state) => state.setCurrentChat);
   const addNewChat = useChatsStore((state) => state.addNewChat);
   const allChats = useAllChats();
@@ -62,7 +72,10 @@ function ChatList() {
       <button
         key={chatContent.chatID}
         tabIndex={0}
-        onClick={() => setCurrentChat(chatContent.chatID)}
+        onClick={() => {
+          setCurrentChat(chatContent.chatID);
+          setOverlayOpen(false);
+        }}
         className="group flex w-full flex-col gap-1 rounded-xl border border-transparent bg-[color:var(--surface-70)] px-3 py-2 text-left text-sm transition hover:border-[color:var(--border)] hover:bg-[color:var(--surface)]"
       >
         <div className="flex items-center justify-between gap-3">
@@ -104,80 +117,94 @@ function ChatList() {
   };
 
   return (
-    <div
-      id="chatList"
-      className="hidden shrink-0 flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5 lg:flex lg:h-full lg:w-72"
-    >
+    <>
       <button
-        className="rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
-        onClick={() => addNewChat()}
-        tabIndex={0}
+        onClick={() => setOverlayOpen(!overlayOpen)}
+        className={`absolute top-2 z-60 lg:hidden ${overlayOpen ? "right-2" : "left-2"}`}
       >
-        New chat
+        <BiMenu />
       </button>
+      {overlayOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+          onClick={() => setOverlayOpen(false)}
+        />
+      )}
+      <div
+        id="chatList"
+        className={`fixed top-0 left-0 z-50 h-full w-[80%] shrink-0 transform flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5 transition-transform duration-300 lg:static lg:z-auto lg:flex lg:h-full lg:w-72 lg:translate-x-0 ${overlayOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <button
+          className="rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
+          onClick={() => addNewChat()}
+          tabIndex={0}
+        >
+          New chat
+        </button>
 
-      <hr className="my-5 border-[color:var(--border)]" />
+        <hr className="my-5 border-[color:var(--border)]" />
 
-      <ul className="flex flex-col gap-6">
-        {chatsPreviewsByDates["today"].length > 0 && (
-          <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
-              Today
-            </div>
-            {chatsPreviewsByDates["today"].map((chat) =>
-              renderChatPreview(chat),
-            )}
-          </li>
-        )}
+        <ul className="flex flex-col gap-6">
+          {chatsPreviewsByDates["today"].length > 0 && (
+            <li className="flex flex-col gap-2">
+              <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
+                Today
+              </div>
+              {chatsPreviewsByDates["today"].map((chat) =>
+                renderChatPreview(chat),
+              )}
+            </li>
+          )}
 
-        {chatsPreviewsByDates["yesterday"].length > 0 && (
-          <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
-              Yesterday
-            </div>
-            {chatsPreviewsByDates["yesterday"].map((chat) =>
-              renderChatPreview(chat),
-            )}
-          </li>
-        )}
+          {chatsPreviewsByDates["yesterday"].length > 0 && (
+            <li className="flex flex-col gap-2">
+              <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
+                Yesterday
+              </div>
+              {chatsPreviewsByDates["yesterday"].map((chat) =>
+                renderChatPreview(chat),
+              )}
+            </li>
+          )}
 
-        {chatsPreviewsByDates["3daysAgo"].length > 0 && (
-          <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
-              3 days ago
-            </div>
-            {chatsPreviewsByDates["3daysAgo"].map((chat) =>
-              renderChatPreview(chat),
-            )}
-          </li>
-        )}
+          {chatsPreviewsByDates["3daysAgo"].length > 0 && (
+            <li className="flex flex-col gap-2">
+              <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
+                3 days ago
+              </div>
+              {chatsPreviewsByDates["3daysAgo"].map((chat) =>
+                renderChatPreview(chat),
+              )}
+            </li>
+          )}
 
-        {chatsPreviewsByDates["weekAgo"].length > 0 && (
-          <li className="flex flex-col gap-2">
-            <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
-              Week ago
-            </div>
-            {chatsPreviewsByDates["weekAgo"].map((chat) =>
-              renderChatPreview(chat),
-            )}
-          </li>
-        )}
-      </ul>
-      <ConfirmModal
-        isOpen={isModalOpen}
-        title="Delete chat"
-        description="Are you sure you want to delete this chat? This action cannot be undone."
-        onCancel={() => {
-          setIsModalOpen(false);
-          setChatToDelete(null);
-        }}
-        onConfirm={() => {
-          if (chatToDelete) deleteChat(chatToDelete);
-          setIsModalOpen(false);
-          setChatToDelete(null);
-        }}
-      />
-    </div>
+          {chatsPreviewsByDates["weekAgo"].length > 0 && (
+            <li className="flex flex-col gap-2">
+              <div className="px-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase">
+                Week ago
+              </div>
+              {chatsPreviewsByDates["weekAgo"].map((chat) =>
+                renderChatPreview(chat),
+              )}
+            </li>
+          )}
+        </ul>
+        <ConfirmModal
+          isOpen={isModalOpen}
+          title="Delete chat"
+          description="Are you sure you want to delete this chat? This action cannot be undone."
+          onCancel={() => {
+            setIsModalOpen(false);
+            setChatToDelete(null);
+          }}
+          onConfirm={() => {
+            if (chatToDelete) deleteChat(chatToDelete);
+            setIsModalOpen(false);
+            setChatToDelete(null);
+          }}
+        />
+      </div>
+    </>
   );
 }
 
