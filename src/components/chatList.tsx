@@ -120,7 +120,7 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
     <>
       <button
         onClick={() => setOverlayOpen(!overlayOpen)}
-        className={`absolute top-2 z-60 lg:hidden ${overlayOpen ? "right-2" : "left-2"}`}
+        className={`absolute top-2 z-60 lg:hidden ${overlayOpen ? "hidden" : "left-2"}`}
       >
         <BiMenu />
       </button>
