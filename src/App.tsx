@@ -19,6 +19,7 @@ function App() {
   const inputContainer = useRef<HTMLDivElement | null>(null);
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [mobileTopbarOpen, setMobileTopbarOpen] = useState(false);
 
   useEffect(() => {
     inputContainer.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,7 +33,10 @@ function App() {
       />
 
       <div id="chatBox" className="flex min-w-0 flex-1 flex-col">
-        <Topbar />
+        <Topbar
+          overlayOpen={mobileTopbarOpen}
+          setOverlayOpen={setMobileTopbarOpen}
+        />
 
         <div className="flex-1 overflow-y-auto scroll-smooth">
           {!model || isSelectingModel ? (
