@@ -37,7 +37,10 @@ function Topbar({ overlayOpen, setOverlayOpen }: topbarProps) {
             <button
               className="rounded-full border border-transparent p-1 text-[color:var(--muted)] transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
               disabled={status === "fetching"}
-              onClick={() => setSelectingModel(currentChatId, true)}
+              onClick={() => {
+                setSelectingModel(currentChatId, true);
+                setOverlayOpen(false);
+              }}
               aria-label="Change model"
             >
               <BiEdit size="1.1em" />
