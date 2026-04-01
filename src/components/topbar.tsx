@@ -29,7 +29,7 @@ function Topbar({ overlayOpen, setOverlayOpen }: topbarProps) {
         className={`fixed top-0 left-0 z-20 h-full w-full transform border-b border-[color:var(--border)] bg-[color:var(--surface-80)] px-6 py-3 backdrop-blur transition-transform duration-300 md:block lg:sticky lg:top-0 lg:z-auto lg:h-auto lg:translate-y-0 ${overlayOpen ? "translate-y-0" : "-translate-y-full"}`}
       >
         <div className="flex h-full flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase lg:flex-row">
+          <div className="flex w-full items-center justify-center gap-2 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase lg:w-auto lg:flex-row lg:justify-start">
             <span>Model</span>
             <span className="rounded-full bg-[color:var(--surface-muted)] px-3 py-1 text-[0.7rem] font-semibold text-[color:var(--text)]">
               {model ? model.name : "Select model"}
@@ -55,7 +55,7 @@ function Topbar({ overlayOpen, setOverlayOpen }: topbarProps) {
             />
           </div>
 
-          <div className="text-lg text-[color:var(--muted)] lg:block lg:text-xs">
+          <div className="text-center text-lg text-[color:var(--muted)] lg:block lg:text-xs">
             Started {new Date(startDate).toUTCString()}
           </div>
         </div>
