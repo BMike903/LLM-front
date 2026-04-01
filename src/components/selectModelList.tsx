@@ -1,12 +1,14 @@
 import { models } from "../constants/models";
 import useChatsStore from "../store/store";
-import { useCurrentChatId } from "../store/chatSelectors";
+import { useCurrentChatId, useCurrentChat } from "../store/chatSelectors";
 import { ModelsKey } from "../types/models";
 
 function SelectModelList() {
   const setModel = useChatsStore((state) => state.setModel);
   const setSelectingModel = useChatsStore((state) => state.setSelectingModel);
   const currentChatId = useCurrentChatId();
+
+  const currentModelKey = useCurrentChat().modelKey;
 
   const onModelClick = (modelKey: ModelsKey) => {
     setModel(currentChatId, modelKey);
@@ -17,7 +19,9 @@ function SelectModelList() {
     <div className="flex h-full w-full flex-col items-center justify-center gap-8 text-center">
       <div className="flex max-w-3xl flex-col items-center gap-3">
         <p className="text-2xl font-semibold tracking-tight">
-          Select a model to start chat
+          {currentModelKey
+            ? "Select model to switch"
+            : "Select a model to start chat"}
         </p>
         <p className="max-w-2xl text-sm text-[color:var(--muted)]">
           Pick the model that matches your task. You can always switch later
@@ -27,9 +31,10 @@ function SelectModelList() {
       <ul className="grid w-full max-w-5xl grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
         {Object.entries(models).map(([modelKey, model]) => (
           <li
+            title={currentModelKey === modelKey ? "current model" : ""}
             key={modelKey}
             onClick={() => onModelClick(modelKey)}
-            className="group overflow-hidden rounded-3xl border border-[color:var(--border)] bg-[color:var(--surface)] p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[color:var(--accent)] hover:shadow-lg hover:shadow-emerald-500/10"
+            className={`group overflow-hidden rounded-3xl border bg-[color:var(--surface)] p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/10 ${currentModelKey === modelKey ? "border-[#4079f5] hover:border-[#1542bf]" : "border-[color:var(--border)] hover:border-[color:var(--accent)]"}`}
           >
             <button
               onClick={() => onModelClick(modelKey)}
