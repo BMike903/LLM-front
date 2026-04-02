@@ -41,12 +41,10 @@ function Topbar({ overlayOpen, setOverlayOpen }: topbarProps) {
       >
         <div className="flex h-full flex-col gap-4 lg:h-auto lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
           <div className="flex w-full items-center justify-between gap-3 text-xs font-semibold tracking-[0.2em] text-[color:var(--muted)] uppercase lg:w-auto lg:justify-start">
-            <div className="flex items-center gap-2">
-              <span>Model</span>
-              <span className="rounded-full bg-[color:var(--surface-muted)] px-3 py-1 text-[0.7rem] font-semibold text-[color:var(--text)]">
-                {model ? model.name : "Select model"}
-              </span>
-            </div>
+            <span>Model</span>
+            <span className="rounded-full bg-[color:var(--surface-muted)] px-3 py-1 text-[0.7rem] font-semibold text-[color:var(--text)]">
+              {model ? model.name : "Select model"}
+            </span>
             <button
               className="rounded-full border border-transparent p-1 text-[color:var(--muted)] transition hover:border-[color:var(--border)] hover:text-[color:var(--text)]"
               disabled={status === "fetching"}
