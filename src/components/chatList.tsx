@@ -135,7 +135,7 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
         className={`fixed top-0 left-0 z-50 h-full w-[80%] shrink-0 transform flex-col overflow-auto border-r border-[color:var(--border)] bg-[color:var(--sidebar-bg)] px-3 py-5 transition-transform duration-300 lg:static lg:z-auto lg:flex lg:h-full lg:w-72 lg:translate-x-0 ${overlayOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <button
-          className="rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
+          className="w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-left text-sm font-semibold transition hover:bg-[color:var(--surface-muted)]"
           onClick={() => addNewChat()}
           tabIndex={0}
         >
