@@ -101,15 +101,18 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
             {chatContent.modelKey ? chatContent.modelKey : "No model"}
           </span>
           {chatContent.status !== "fetching" && (
-            <BiSolidTrashAlt
-              className="opacity-0 transition group-hover:opacity-100"
-              size="1.1em"
+            <button
+              type="button"
+              className="p-1 -m-1 text-[color:var(--muted)] opacity-100 transition hover:text-[color:var(--text)] lg:opacity-0 lg:group-hover:opacity-100"
               onClick={(event) => {
                 event.stopPropagation();
                 setChatToDelete(chatContent.chatID);
                 setIsModalOpen(true);
               }}
-            />
+              aria-label="Delete chat"
+            >
+              <BiSolidTrashAlt size="1.1em" />
+            </button>
           )}
         </div>
       </button>
