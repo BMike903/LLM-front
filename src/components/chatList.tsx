@@ -101,9 +101,8 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
             {chatContent.modelKey ? chatContent.modelKey : "No model"}
           </span>
           {chatContent.status !== "fetching" && (
-            <button
-              type="button"
-              className="p-1 -m-1 text-[color:var(--muted)] opacity-100 transition hover:text-[color:var(--text)] lg:opacity-0 lg:group-hover:opacity-100"
+            <div
+              className="-m-1 p-1 text-[color:var(--muted)] opacity-100 transition hover:text-[color:var(--text)] lg:opacity-0 lg:group-hover:opacity-100"
               onClick={(event) => {
                 event.stopPropagation();
                 setChatToDelete(chatContent.chatID);
@@ -112,7 +111,7 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
               aria-label="Delete chat"
             >
               <BiSolidTrashAlt size="1.1em" />
-            </button>
+            </div>
           )}
         </div>
       </button>
