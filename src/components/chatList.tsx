@@ -69,52 +69,62 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
 
   const renderChatPreview = (chatContent: ChatPreview) => {
     return (
-      <button
+      <div
         key={chatContent.chatID}
-        tabIndex={0}
-        onClick={() => {
-          setCurrentChat(chatContent.chatID);
-          setOverlayOpen(false);
-        }}
-        className="group flex w-full flex-col gap-1 rounded-xl border border-transparent bg-[color:var(--surface-70)] px-3 py-2 text-left text-sm transition hover:border-[color:var(--border)] hover:bg-[color:var(--surface)]"
+        className="group relative flex w-full flex-col gap-1 rounded-xl border border-transparent bg-[color:var(--surface-70)] px-3 py-2 text-sm transition hover:border-[color:var(--border)] hover:bg-[color:var(--surface)]"
       >
-        <div className="flex items-center justify-between gap-3">
-          <span className="min-w-0 flex-1 truncate font-medium text-[color:var(--text)]">
-            {selectTitleOrFirstMessage(
-              chatContent.title,
-              chatContent.firstMessage,
+        <button
+          tabIndex={0}
+          onClick={() => {
+            setCurrentChat(chatContent.chatID);
+            setOverlayOpen(false);
+          }}
+          className="absolute inset-0 z-0"
+          aria-label="Open chat"
+        />
+
+        <div className="pointer-events-none relative z-10 flex flex-col gap-1">
+          <div className="flex items-center justify-between gap-3">
+            <span className="min-w-0 flex-1 truncate font-medium text-[color:var(--text)]">
+              {selectTitleOrFirstMessage(
+                chatContent.title,
+                chatContent.firstMessage,
+              )}
+            </span>
+
+            {chatContent.status === "fetching" && (
+              <BiLoader
+                className="animate-spin text-[color:var(--muted)]"
+                size="1.1em"
+              />
             )}
-          </span>
-          {chatContent.status === "fetching" && (
-            <BiLoader
-              className="animate-spin text-[color:var(--muted)]"
-              size="1.1em"
-            />
-          )}
-          {(chatContent.status === "error" ||
-            chatContent.titleTipStatus === "error") && (
-            <BiErrorCircle className="text-red-500" size="1.1em" />
-          )}
+
+            {(chatContent.status === "error" ||
+              chatContent.titleTipStatus === "error") && (
+              <BiErrorCircle className="text-red-500" size="1.1em" />
+            )}
+          </div>
+
+          <div className="flex items-center justify-between gap-2 text-xs text-[color:var(--muted)]">
+            <span>
+              {chatContent.modelKey ? chatContent.modelKey : "No model"}
+            </span>
+
+            {chatContent.status !== "fetching" && (
+              <button
+                className="pointer-events-auto -m-1 p-1 text-[color:var(--muted)] opacity-100 transition hover:text-[color:var(--text)] lg:opacity-0 lg:group-hover:opacity-100"
+                onClick={() => {
+                  setChatToDelete(chatContent.chatID);
+                  setIsModalOpen(true);
+                }}
+                aria-label="Delete chat"
+              >
+                <BiSolidTrashAlt size="1.1em" />
+              </button>
+            )}
+          </div>
         </div>
-        <div className="flex items-center justify-between gap-2 text-xs text-[color:var(--muted)]">
-          <span>
-            {chatContent.modelKey ? chatContent.modelKey : "No model"}
-          </span>
-          {chatContent.status !== "fetching" && (
-            <div
-              className="-m-1 p-1 text-[color:var(--muted)] opacity-100 transition hover:text-[color:var(--text)] lg:opacity-0 lg:group-hover:opacity-100"
-              onClick={(event) => {
-                event.stopPropagation();
-                setChatToDelete(chatContent.chatID);
-                setIsModalOpen(true);
-              }}
-              aria-label="Delete chat"
-            >
-              <BiSolidTrashAlt size="1.1em" />
-            </div>
-          )}
-        </div>
-      </button>
+      </div>
     );
   };
 
