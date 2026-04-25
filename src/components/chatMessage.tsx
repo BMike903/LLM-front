@@ -8,10 +8,13 @@ import { Message } from "../types/chat";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
 import ConfirmModal from "./confirmModal";
+import { useLongPress } from "../hooks/useLongPress";
 
 function ChatMessage({ message }: { message: Message }) {
   const deleteMessage = useChatsStore((state) => state.deleteMessage);
   const currentChatId = useCurrentChatId();
+
+  const longPress = useLongPress(() => setIsModalOpen(true), 600);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +22,11 @@ function ChatMessage({ message }: { message: Message }) {
 
   if (message.role === "user") {
     messageItem = (
-      <div key={message.id} className="group flex w-full justify-end">
+      <div
+        key={message.id}
+        {...longPress}
+        className="group flex w-full justify-end"
+      >
         <div className="relative max-w-[85%]">
           <button
             className="absolute top-2 -left-5 -m-2 p-2 text-[color:var(--muted)] opacity-100 transition-opacity hover:text-[color:var(--text)] lg:-left-7 lg:opacity-0 lg:group-hover:opacity-100"
@@ -53,7 +60,7 @@ function ChatMessage({ message }: { message: Message }) {
     );
   } else {
     messageItem = (
-      <div className="group relative" key={message.id}>
+      <div className="group relative" {...longPress} key={message.id}>
         <button
           className="absolute top-4 -left-5 -m-2 p-2 text-[color:var(--muted)] opacity-100 transition-opacity hover:text-[color:var(--text)] lg:-left-7 lg:opacity-0 lg:group-hover:opacity-100"
           onClick={(e) => {
