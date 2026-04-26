@@ -71,7 +71,7 @@ function ChatMessage({ message }: { message: Message }) {
         >
           <BiSolidTrashAlt size="1.1em" />
         </button>
-        <div>
+        <div className="markdown">
           <Markdown>{message.content}</Markdown>
         </div>
       </div>
