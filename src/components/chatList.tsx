@@ -119,7 +119,7 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
                 }}
                 aria-label="Delete chat"
               >
-                <BiSolidTrashAlt size="1.1em" />
+                <BiSolidTrashAlt size="1.5em" />
               </button>
             )}
           </div>
