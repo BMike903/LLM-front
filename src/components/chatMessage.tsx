@@ -29,7 +29,7 @@ function ChatMessage({ message }: { message: Message }) {
       >
         <div className="relative max-w-[85%]">
           <button
-            className="absolute top-2 -left-5 -m-2 p-2 text-[color:var(--muted)] opacity-100 transition-opacity hover:text-[color:var(--text)] lg:-left-7 lg:opacity-0 lg:group-hover:opacity-100"
+            className="absolute top-2 -left-7 -m-2 hidden p-2 text-[color:var(--muted)] opacity-0 transition-opacity hover:text-[color:var(--text)] lg:block lg:group-hover:opacity-100"
             onClick={(e) => {
               e.stopPropagation();
               setIsModalOpen(true);
@@ -62,7 +62,7 @@ function ChatMessage({ message }: { message: Message }) {
     messageItem = (
       <div className="group relative" {...longPress} key={message.id}>
         <button
-          className="absolute top-4 -left-5 -m-2 p-2 text-[color:var(--muted)] opacity-100 transition-opacity hover:text-[color:var(--text)] lg:-left-7 lg:opacity-0 lg:group-hover:opacity-100"
+          className="absolute top-4 -left-7 -m-2 hidden p-2 text-[color:var(--muted)] opacity-0 transition-opacity hover:text-[color:var(--text)] lg:block lg:group-hover:opacity-100"
           onClick={(e) => {
             e.stopPropagation();
             setIsModalOpen(true);
