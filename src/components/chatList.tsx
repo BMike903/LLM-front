@@ -132,9 +132,9 @@ function ChatList({ overlayOpen, setOverlayOpen }: chatListProps) {
     <>
       <button
         onClick={() => setOverlayOpen(!overlayOpen)}
-        className={`absolute top-2 z-60 lg:hidden ${overlayOpen ? "hidden" : "left-2"}`}
+        className={`absolute top-2 left-2 z-60 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] p-2 text-[color:var(--muted)] shadow-sm lg:hidden ${overlayOpen ? "hidden" : "left-2"}`}
       >
-        <BiMenu />
+        <BiMenu size="1.2em" />
       </button>
       {overlayOpen && (
         <div
