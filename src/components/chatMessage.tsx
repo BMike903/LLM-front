@@ -8,13 +8,10 @@ import { Message } from "../types/chat";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
 import ConfirmModal from "./confirmModal";
-import { useLongPress } from "../hooks/useLongPress";
 
 function ChatMessage({ message }: { message: Message }) {
   const deleteMessage = useChatsStore((state) => state.deleteMessage);
   const currentChatId = useCurrentChatId();
-
-  const longPress = useLongPress(() => setIsModalOpen(true), 600);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,11 +19,7 @@ function ChatMessage({ message }: { message: Message }) {
 
   if (message.role === "user") {
     messageItem = (
-      <div
-        key={message.id}
-        {...longPress}
-        className="group flex w-full justify-end"
-      >
+      <div key={message.id} className="group flex w-full justify-end">
         <div className="relative flex max-w-[85%] flex-col gap-2">
           <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             <div className="text-sm leading-6 whitespace-pre-wrap">
@@ -60,11 +53,7 @@ function ChatMessage({ message }: { message: Message }) {
     );
   } else {
     messageItem = (
-      <div
-        className="group relative flex flex-col gap-2"
-        {...longPress}
-        key={message.id}
-      >
+      <div className="group relative flex flex-col gap-2" key={message.id}>
         <div className="markdown">
           <Markdown>{message.content}</Markdown>
         </div>
