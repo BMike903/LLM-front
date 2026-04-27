@@ -7,7 +7,7 @@ import FileItem from "./fileItem";
 import { Message } from "../types/chat";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
-import ConfirmModal from "./сonfirmModal";
+import ConfirmModal from "./confirmModal";
 
 function ChatMessage({ message }: { message: Message }) {
   const deleteMessage = useChatsStore((state) => state.deleteMessage);
@@ -20,18 +20,7 @@ function ChatMessage({ message }: { message: Message }) {
   if (message.role === "user") {
     messageItem = (
       <div key={message.id} className="group flex w-full justify-end">
-        <div className="relative max-w-[85%]">
-          <button
-            className="absolute top-2 -left-7 text-[color:var(--muted)] opacity-0 transition-opacity group-hover:opacity-100 hover:text-[color:var(--text)]"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsModalOpen(true);
-            }}
-            aria-label="Delete message"
-          >
-            <BiSolidTrashAlt size="1.1em" />
-          </button>
-
+        <div className="relative flex max-w-[85%] flex-col gap-2">
           <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             <div className="text-sm leading-6 whitespace-pre-wrap">
               {message.content}
@@ -48,14 +37,29 @@ function ChatMessage({ message }: { message: Message }) {
               </div>
             )}
           </div>
+
+          <button
+            className="self-end text-[color:var(--muted)] hover:text-[color:var(--text)]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsModalOpen(true);
+            }}
+            aria-label="Delete message"
+          >
+            <BiSolidTrashAlt size="1.1em" />
+          </button>
         </div>
       </div>
     );
   } else {
     messageItem = (
-      <div className="group relative" key={message.id}>
+      <div className="group relative flex flex-col gap-2" key={message.id}>
+        <div className="markdown">
+          <Markdown>{message.content}</Markdown>
+        </div>
+
         <button
-          className="absolute top-4 -left-7 text-[color:var(--muted)] opacity-0 transition-opacity group-hover:opacity-100 hover:text-[color:var(--text)]"
+          className="self-start text-[color:var(--muted)] hover:text-[color:var(--text)]"
           onClick={(e) => {
             e.stopPropagation();
             setIsModalOpen(true);
@@ -64,9 +68,6 @@ function ChatMessage({ message }: { message: Message }) {
         >
           <BiSolidTrashAlt size="1.1em" />
         </button>
-        <div>
-          <Markdown>{message.content}</Markdown>
-        </div>
       </div>
     );
   }
