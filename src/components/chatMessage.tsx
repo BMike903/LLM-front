@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Markdown from "react-markdown";
-import { BiSolidTrashAlt } from "react-icons/bi";
+import { BiSolidTrashAlt, BiCopy } from "react-icons/bi";
 
 import FileItem from "./fileItem";
 import { Message } from "../types/chat";
@@ -37,17 +37,29 @@ function ChatMessage({ message }: { message: Message }) {
               </div>
             )}
           </div>
+          <div className="flex flex-row gap-3 self-end">
+            <button
+              className="text-[color:var(--muted)] hover:text-[color:var(--text)]"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(true);
+              }}
+              aria-label="Delete message"
+            >
+              <BiSolidTrashAlt size="1.1em" />
+            </button>
 
-          <button
-            className="self-end text-[color:var(--muted)] hover:text-[color:var(--text)]"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsModalOpen(true);
-            }}
-            aria-label="Delete message"
-          >
-            <BiSolidTrashAlt size="1.1em" />
-          </button>
+            <button
+              className="text-[color:var(--muted)] hover:text-[color:var(--text)]"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(message.content);
+              }}
+              aria-label="Delete message"
+            >
+              <BiCopy size="1.1em" />
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -58,16 +70,29 @@ function ChatMessage({ message }: { message: Message }) {
           <Markdown>{message.content}</Markdown>
         </div>
 
-        <button
-          className="self-start text-[color:var(--muted)] hover:text-[color:var(--text)]"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsModalOpen(true);
-          }}
-          aria-label="Delete message"
-        >
-          <BiSolidTrashAlt size="1.1em" />
-        </button>
+        <div className="flex flex-row gap-3 self-start">
+          <button
+            className="text-[color:var(--muted)] hover:text-[color:var(--text)]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsModalOpen(true);
+            }}
+            aria-label="Delete message"
+          >
+            <BiSolidTrashAlt size="1.1em" />
+          </button>
+
+          <button
+            className="text-[color:var(--muted)] hover:text-[color:var(--text)]"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigator.clipboard.writeText(message.content);
+            }}
+            aria-label="Delete message"
+          >
+            <BiCopy size="1.1em" />
+          </button>
+        </div>
       </div>
     );
   }
