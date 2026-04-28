@@ -45,6 +45,7 @@ function ChatMessage({ message }: { message: Message }) {
                 setIsModalOpen(true);
               }}
               aria-label="Delete message"
+              title="Delete message"
             >
               <BiSolidTrashAlt size="1.1em" />
             </button>
@@ -55,7 +56,8 @@ function ChatMessage({ message }: { message: Message }) {
                 e.stopPropagation();
                 navigator.clipboard.writeText(message.content);
               }}
-              aria-label="Delete message"
+              aria-label="Copy message"
+              title="Copy message"
             >
               <BiCopy size="1.1em" />
             </button>
@@ -78,6 +80,7 @@ function ChatMessage({ message }: { message: Message }) {
               setIsModalOpen(true);
             }}
             aria-label="Delete message"
+            title="Delete message"
           >
             <BiSolidTrashAlt size="1.1em" />
           </button>
@@ -88,7 +91,8 @@ function ChatMessage({ message }: { message: Message }) {
               e.stopPropagation();
               navigator.clipboard.writeText(message.content);
             }}
-            aria-label="Delete message"
+            aria-label="Copy message"
+            title="Copy message"
           >
             <BiCopy size="1.1em" />
           </button>
