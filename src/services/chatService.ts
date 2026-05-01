@@ -7,6 +7,53 @@ import { nanoid } from "nanoid";
 
 const proxyURL = import.meta.env.VITE_PROXY_URL;
 
+export async function regenerateMessage(
+  currentChatId: string,
+  messageID: string,
+) {
+  const store = useChatsStore.getState();
+  const { setStatus, chats, updateMessage } = store;
+  const chat = chats.allChats[currentChatId];
+  const { modelKey, messages } = chat;
+
+  if (!modelKey) return;
+  const model = getModel(modelKey);
+
+  const index = messages.findIndex((m) => m.id === messageID);
+  if (index === -1) return;
+
+  const previousMessages = messages.slice(0, index);
+  const apiMessages = previousMessages.map(messageToAPIObject);
+
+  setStatus(currentChatId, "fetching");
+
+  try {
+    const response = await fetch(proxyURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-client-token": "publictoken",
+      },
+      body: JSON.stringify({
+        model: model.APIName,
+        messages: apiMessages,
+      }),
+    });
+
+    if (!response.ok) throw new Error("Network error");
+
+    const data = await response.json();
+    if (!data.choices) throw new Error("No answer generated");
+
+    updateMessage(currentChatId, messageID, data.choices[0].message.content);
+
+    setStatus(currentChatId, "idle");
+  } catch (error) {
+    console.error(error);
+    setStatus(currentChatId, "error");
+  }
+}
+
 export async function sendMessage(currentChatId: string) {
   const store = useChatsStore.getState();
   const { setStatus, addMessage, setDraftMessage, setDraftFiles, chats } =

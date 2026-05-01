@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import Markdown from "react-markdown";
-import { BiSolidTrashAlt, BiCopy } from "react-icons/bi";
+import { BiSolidTrashAlt, BiCopy, BiRevision } from "react-icons/bi";
 
 import FileItem from "./fileItem";
 import { Message } from "../types/chat";
 import useChatsStore from "../store/store";
 import { useCurrentChatId } from "../store/chatSelectors";
 import ConfirmModal from "./confirmModal";
+import { regenerateMessage } from "../services/chatService";
 
 function ChatMessage({ message }: { message: Message }) {
   const deleteMessage = useChatsStore((state) => state.deleteMessage);
@@ -95,6 +96,18 @@ function ChatMessage({ message }: { message: Message }) {
             title="Copy message"
           >
             <BiCopy size="1.1em" />
+          </button>
+
+          <button
+            className="text-[color:var(--muted)] hover:text-[color:var(--text)]"
+            onClick={(e) => {
+              e.stopPropagation();
+              regenerateMessage(currentChatId, message.id);
+            }}
+            aria-label="Regenerate"
+            title="Regenerate"
+          >
+            <BiRevision size="1.1em" />
           </button>
         </div>
       </div>

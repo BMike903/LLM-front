@@ -39,6 +39,12 @@ interface StoreState {
   setDraftFiles: (chatID: string, draftFiles: ChatFile[]) => void;
   deleteChat: (chatID: string) => void;
   deleteMessage: (chatID: string, messageID: string) => void;
+
+  updateMessage: (
+    chatID: string,
+    messageID: string,
+    MessageContent: string,
+  ) => void;
 }
 
 const useChatsStore = create<StoreState>()(
@@ -224,6 +230,16 @@ const useChatsStore = create<StoreState>()(
               state.chats.currentChatId = newChatId;
             }
           }
+        });
+      },
+      updateMessage(chatID, messageID, newContent) {
+        set((state) => {
+          const messages = state.chats.allChats[chatID]?.messages;
+          if (!messages) return;
+
+          const idx = messages.findIndex((m) => m.id === messageID);
+          if (idx === -1) return;
+          state.chats.allChats[chatID].messages[idx].content = newContent;
         });
       },
     })),
