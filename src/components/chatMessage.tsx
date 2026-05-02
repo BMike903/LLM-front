@@ -45,7 +45,7 @@ function ChatMessage({ message }: { message: Message }) {
           <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             {isEditing ? (
               <textarea
-                className="w-full rounded-xl border"
+                className="w-full rounded-2xl"
                 value={editedText}
                 onChange={(e) => setEditedText(e.target.value)}
                 autoFocus
