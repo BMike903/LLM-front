@@ -62,7 +62,7 @@ function ChatMessage({ message }: { message: Message }) {
             {isEditing ? (
               <textarea
                 ref={textareaRef}
-                className="block w-full rounded-2xl"
+                className="block w-full resize-none rounded-2xl p-1.5"
                 value={editedText}
                 onChange={(e) => {
                   setEditedText(e.target.value);
