@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Markdown from "react-markdown";
 import {
@@ -27,6 +27,22 @@ function ChatMessage({ message }: { message: Message }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(message.content);
 
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      handleTextareaResize();
+    }
+  }, [isEditing, editedText]);
+
+  const handleTextareaResize = () => {
+    const el = textareaRef.current;
+    if (!el) return;
+
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  };
+
   const handleSaveEdits = () => {
     updateMessage(currentChatId, message.id, editedText);
     setIsEditing(false);
@@ -45,9 +61,12 @@ function ChatMessage({ message }: { message: Message }) {
           <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             {isEditing ? (
               <textarea
+                ref={textareaRef}
                 className="w-full rounded-2xl"
                 value={editedText}
-                onChange={(e) => setEditedText(e.target.value)}
+                onChange={(e) => {
+                  setEditedText(e.target.value);
+                }}
                 autoFocus
               />
             ) : (
