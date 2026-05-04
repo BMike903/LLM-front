@@ -57,12 +57,12 @@ function ChatMessage({ message }: { message: Message }) {
   if (message.role === "user") {
     messageItem = (
       <div key={message.id} className="group flex w-full justify-end">
-        <div className="relative flex max-w-[85%] flex-col gap-2">
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
+        <div className="relative flex max-w-[85%] min-w-0 flex-1 flex-col gap-2">
+          <div className="w-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 shadow-sm">
             {isEditing ? (
               <textarea
                 ref={textareaRef}
-                className="w-full rounded-2xl"
+                className="block w-full rounded-2xl"
                 value={editedText}
                 onChange={(e) => {
                   setEditedText(e.target.value);
