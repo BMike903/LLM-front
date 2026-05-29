@@ -1,6 +1,12 @@
 import { ModelsList } from "../types/models";
 
 export const models: ModelsList = {
+  "nemotron-nano-9B-V2": {
+    name: "Nemotron Nano 9B V2",
+    APIName: "nvidia/nemotron-nano-9b-v2:free",
+    description:
+      "NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from scratch by NVIDIA, and designed as a unified model for both reasoning and non-reasoning tasks. It responds to user queries and tasks by first generating a reasoning trace and then concluding with a final response.",
+  },
   "llama-4": {
     name: "LLAMA-4 SCOUT",
     APIName: "meta-llama/llama-4-scout:free",
@@ -22,7 +28,7 @@ export const models: ModelsList = {
   },
   "gemma-3n": {
     name: "Google Gemma",
-    APIName: "google/gemma-3n-e4b-it:free",
+    APIName: "google/gemma-3-4b-it:free",
     description:
       "Gemma is a large language model created by Google DeepMind and released as an open-weights AI assistant. It processes both text and images to generate text-based responses, operating without access to external tools or real-time information.",
   },

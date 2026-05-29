@@ -66,7 +66,7 @@ const useChatsStore = create<StoreState>()(
           },
           "V1StGXR8_Z5jdHi6B-myT": {
             status: "idle",
-            modelKey: "mai-ds",
+            modelKey: "nemotron-nano-9B-V2",
             startDate: getRandomTimeFromPastDays(3).toISOString(),
             messages: [...planetsChatMessages],
             draftMessage: "Yes",
@@ -78,7 +78,7 @@ const useChatsStore = create<StoreState>()(
           },
           "fuhlDw1udJPnvznJB7tzN": {
             status: "idle",
-            modelKey: "Qwen-QwQ",
+            modelKey: "nemotron-nano-9B-V2",
             startDate: getRandomTimeFromPastDays(15).toISOString(),
             messages: [...zustandChatMessages],
             draftMessage: "",
@@ -90,7 +90,7 @@ const useChatsStore = create<StoreState>()(
           },
           "fV3CTpvaQfWfHIjMxfzUo": {
             status: "idle",
-            modelKey: "Kimi-K2",
+            modelKey: "nemotron-nano-9B-V2",
             startDate: getRandomTimeFromPastDays(2).toISOString(),
             messages: [...pancakeChatMessages],
             draftMessage: "",
@@ -102,7 +102,7 @@ const useChatsStore = create<StoreState>()(
           },
           "8BNMAhGSD5ulJUdgXdyZB": {
             status: "idle",
-            modelKey: "ds-r1",
+            modelKey: "nemotron-nano-9B-V2",
             startDate: getRandomTimeFromPastDays(1).toISOString(),
             messages: [...laptopChatMessages],
             draftMessage: "",
