@@ -5,7 +5,7 @@ import { Message } from "../types/chat";
 import { messageToAPIObject } from "../utils/api";
 import { nanoid } from "nanoid";
 
-const proxyURL = import.meta.env.VITE_PROXY_URL;
+const proxyURL = import.meta.env.VITE_PROXY_PY_URL;
 
 export async function regenerateMessage(
   currentChatId: string,
